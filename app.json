@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/login/login"
-    
+    "pages/login/login",
+    "pages/views/project-management/project-management"
   ],
   "window": {
     "backgroundTextStyle": "light",
