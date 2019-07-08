@@ -14,6 +14,31 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+//提示窗口(标题，内容, (错误提示=0 红色，普通提示=1，蓝色) )
+function TipModel(Title, content, level = 1) {
+  var mTitle = Title;
+  var mContent = content;
+  var mColor
+
+  if (level == 0) {
+    mColor = '#F21C2E'
+  } else {
+    mColor = '#075FA9'
+  }
+  wx.showModal({
+    title: mTitle,
+    content: mContent,
+    confirmColor: mColor,
+    showCancel: false,
+    success: function (res) {
+      if (res.confirm) {
+        console.log('用户点击确定')
+      }
+    }
+  });
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  TipModel: TipModel,
 }

@@ -1,17 +1,27 @@
-// pages/login/login.js
+var app = getApp();
+var utils = require('../../utils/util.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userAccount:'',  //用户
+    password:'',      //密码
+    loadingShow:false, //是否显示
+    loadtxt:'登录中'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取存放在本地的用户密码
+    this.setData({
+      userAccount: wx.getStorageSync('userAccount'),
+      password: wx.getStorageSync('password')
+    });
 
   },
 
@@ -61,6 +71,71 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+
+  /**
+   * 登录事件
+   */
+  loginTap: function () {
+    var that = this;
+    that.setData({
+      loadingShow: true
+    })
+    wx.request({
+      url: app.globalData.WebUrl + 'auth/', //接口地址 
+      method: 'post',  
+      data: {
+        userAccount: that.data.userAccount,
+        password: that.data.password
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+        //登录成功
+        if (res.statusCode == 200){
+          app.globalData.SignToken = res.data.token;
+          //登录成功保存用户密码
+          wx.setStorage({ userAccount: that.data.userAccount, password: that.data.password });
+          wx.navigateTo({
+            url: ''
+          });
+        }
+        //登录失败
+        else{
+          utils.TipModel('错误', res.data.message, 0);
+        }
+        
+      },
+      fail:function(){
+        utils.TipModel('错误', '网络异常' , 0);
+      },
+      complete:function(){
+        that.setData({
+          loadingShow:false
+        })
+      }
+    })
+  },
+
+  /*
+  *获取用户名
+  */
+  userAccountInput: function (e) {
+    this.setData({
+      userAccount: e.detail.value
+    });
+
+  },
+  /*
+  *获取密码
+  */
+  passwordInput: function (e) {
+    this.setData({
+      password: e.detail.value
+    });
 
   }
 })
