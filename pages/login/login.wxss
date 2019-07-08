@@ -1,0 +1,47 @@
+/* pages/login/login.wxss */
+
+.title{
+  color: green;
+  font-size: 27pt;
+}
+
+.formbody{
+  align-items: center;
+  vertical-align: center;
+  width: 80%;
+  margin-top: 140rpx;
+}
+
+.layout{
+  width: 100%;
+  margin-top: 10px;
+  height: 100rpx;
+  display: flex;
+  /*row 横向  column 列表  */
+  flex-direction: row;
+}
+
+.layout .titleinput{
+  line-height:85rpx;
+  width:20%;
+  text-align: center;
+  align-items: center;
+}
+
+.layout .btninput{
+  font-size: 18pt;
+  width: 100%;
+  line-height:75rpx;
+}
+
+input{
+  border: 1px solid #eee;
+  width: 100%;
+  height: 40px;
+}
+
+.button{
+  margin-left: 5%;
+  width: 90%;
+  margin-top: 25px;
+}
