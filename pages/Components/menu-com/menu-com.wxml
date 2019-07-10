@@ -1,0 +1,57 @@
+<!--pages/Components/menu-com/menu-com.wxml-->
+<!-- 左侧按钮 -->
+<view class="hearline">
+  <image class='menu' src='/images/more.png' bindtap="powerDrawer" data-statu="open"></image>
+  <image class='quit' src='/images/quit.png' bindtap="quitEvent"></image>
+</view>
+
+<!-- 左侧菜单 -->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+<view  class="drawer_attr_box" wx:if="{{showModalStatus}}" >
+
+  <view class="drawer_content" bindtap='closeModel'>
+    <navigator url='/view/index/index'>
+      <view class="drawer_title line" style='background: #cdddee;'>
+      <image src='/image/home.png'></image>
+      首页</view>
+    </navigator>
+    <ul>
+    <navigator url='/view/Tabs/About/about'>
+      <view class="drawer_title line">
+      <image src='/image/me.png'></image> 
+      关于我们</view>
+    </navigator>
+    </ul>
+    <li>
+    <navigator url='/view/Tabs/Business/business'>
+      <view class="drawer_title line">
+      <image src='/image/lie.png'></image> 
+      主营业务</view>
+    </navigator>
+    <navigator url='/view/Tabs/Solution/index/solution'>
+      <view class="drawer_title line">
+      <image src='/image/new2.png'></image> 
+      解决方案</view>
+    </navigator>
+    <navigator url='/view/Tabs/Success/success'>
+      <view class="drawer_title line">
+      <image src='/image/success.png'></image> 
+      成功案例</view>
+    </navigator>
+    </li>
+    <navigator url='/view/Tabs/News/NewsIndex/newsIndex'>
+      <view class="drawer_title line">
+      <image src='/image/new1.png'></image> 
+      新闻动态</view>
+    </navigator>
+    <navigator url='/view/Tabs/Contact/ContactIndex/contactIndex'>
+      <view class="drawer_title line">
+      <image src='/image/call.png'></image> 
+      联系我们</view>
+    </navigator>
+  </view>
+
+</view>
+

@@ -100,7 +100,7 @@ Page({
           //登录成功保存用户密码
           wx.setStorage({ userAccount: that.data.userAccount, password: that.data.password });
           wx.navigateTo({
-            url: ''
+            url: '../views/calendar/calendar'
           });
         }
         //登录失败

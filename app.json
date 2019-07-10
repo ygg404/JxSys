@@ -1,7 +1,10 @@
 {
   "pages": [
+    "pages/views/project-management/project-management",
     "pages/login/login",
-    "pages/views/project-management/project-management"
+    
+    "pages/views/calendar/calendar",
+    "pages/Components/menu-com/menu-com"
   ],
   "window": {
     "backgroundTextStyle": "light",
