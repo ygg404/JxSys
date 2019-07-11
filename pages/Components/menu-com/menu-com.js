@@ -96,10 +96,22 @@ Component({
     var pmcatelist = this.data.pmcate_list;
     var ppcatelist = this.data.ppcate_list;
     for (var pm of pmcatelist) {
-      if (pm.id == this.properties.urlId)pm.selected = true;
+      if (pm.id == this.properties.urlId){
+        pm.selected = true;
+        this.setData({
+          pmopen: true,
+          pmImgUrl: '/images/tridown.png',
+        });
+      }
     };
     for (var pp of ppcatelist){
-      if (pp.id == this.properties.urlId)pp.selected = true;
+      if (pp.id == this.properties.urlId){
+        pp.selected = true;
+        this.setData({
+          ppopen: true,
+          ppImgUrl: '/images/tridown.png',
+        });
+      }
     }
     this.setData({
       mcontent : pmcatelist,
@@ -214,7 +226,13 @@ Component({
      * 跳转事件
      */
     navtoEvent:function(e){
-      console.log(e.target)
+      if(e.target.id == this.properties.urlId)return;
+      else{
+        wx.navigateTo({
+          url: '../../views/' + e.target.id + '/' + e.target.id
+        });
+      }
+     // console.log(e.target)
     }
   }
 })

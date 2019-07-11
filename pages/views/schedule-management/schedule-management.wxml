@@ -1,0 +1,2 @@
+<!--pages/views/schedule-management/schedule-management.wxml-->
+<menu-component urlId="{{urlId}}"></menu-component>

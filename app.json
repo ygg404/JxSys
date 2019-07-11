@@ -1,10 +1,10 @@
 {
-  "pages": [
+  "pages": ["pages/views/calendar/calendar",
     "pages/views/project-management/project-management",
     "pages/login/login",
     
-    "pages/views/calendar/calendar",
-    "pages/Components/menu-com/menu-com"
+    "pages/Components/menu-com/menu-com",
+    "pages/views/schedule-management/schedule-management"
   ],
   "window": {
     "backgroundTextStyle": "light",
