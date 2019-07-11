@@ -28,23 +28,6 @@
 
 }
 
-.btn {
-  height: 64rpx;
-  width: 65rpx;
-  padding: 20rpx 0;
-  border-radius: 0rpx 20rpx 20rpx 0rpx;
-  text-align: center;
-  background-color: #0657a9;
-  color: #fff;
-  position: fixed;
-  z-index: 1000;
-  top: 220px;
-}
-.btn image{
-  height: 56rpx;
-  width: 56rpx;
-}
-
 /*mask*/
 .drawer_screen {
   width: 100%;
@@ -70,6 +53,8 @@
 }
 .drawer_content {
   height: 100%;
+  overflow-y: scroll;
+  overflow-x:hidden;
 }
 .drawer_title{
   padding:20rpx;
@@ -98,16 +83,25 @@
     border-bottom: 1px solid #d1d3d4;
     background: #fff;
     display: flex;
-    height: 40px;
+    height: 44px;
     align-items:center;
-    font-size: 18px;
+    font-size: 21px;
 }
-/* 下拉列表 下三角的样式 */
-.nav-son image{
+.nav-son .menuimg{
+  margin-left: 5rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+.nav-son .menutitle{
+  margin-left: 8rpx;
+}
+/* 
+下拉列表 下三角的样式 */
+.nav-son .menutri{
     position: absolute;
     right: 30rpx;
-    width: 50rpx;
-    height: 50rpx;
+    width: 60rpx;
+    height: 60rpx;
 }
  
 /* 下拉框的样式 */
@@ -116,8 +110,6 @@
     display:none;
     /* 下拉框的宽度， */
     width: 100%;
-    /* 下拉框的最大高度 */
-    max-height: 750rpx;
     overflow-y: scroll;
     padding: 0 0 0 20rpx;
     line-height:100rpx;
@@ -127,9 +119,15 @@
 /* 下拉框内容的样式 */
 .temp view{
     border-bottom: 1px solid #d1d3d4;
-    font-size: 14px;
+    font-size: 17px;
     color: #666;
 }
+/* 下拉框导航菜单选中的样式*/
+.temp .selectItem{
+    font-size: 18px;
+    color: #069930
+}
+
  
 /* 下拉动画 */
 /* @keyframes Css3 新标签，循环动画 */

@@ -1,3 +1,3 @@
 <!--pages/views/project-management/project-management.wxml-->
 <!-- 加载中窗口 -->
-<menu-component></menu-component>
+<menu-component urlId="{{urlId}}"></menu-component>

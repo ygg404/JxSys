@@ -1,5 +1,5 @@
 <!--pages/Components/menu-com/menu-com.wxml-->
-<!-- 左侧按钮 -->
+<!-- 头部 -->
 <view class="hearline">
   <image class='menu' src='/images/more.png' bindtap="powerDrawer" data-statu="open"></image>
   <image class='quit' src='/images/quit.png' bindtap="quitEvent"></image>
@@ -11,46 +11,31 @@
   <!--使用animation属性指定需要执行的动画-->
 <view  class="drawer_attr_box" wx:if="{{showModalStatus}}" >
 
-  <view class="drawer_content" bindtap='closeModel'>
-    <navigator url='/view/index/index'>
-      <view class="drawer_title line" style='background: #cdddee;'>
-      <image src='/image/home.png'></image>
-      首页</view>
-    </navigator>
-    <ul>
-    <navigator url='/view/Tabs/About/about'>
-      <view class="drawer_title line">
-      <image src='/image/me.png'></image> 
-      关于我们</view>
-    </navigator>
-    </ul>
-    <li>
-    <navigator url='/view/Tabs/Business/business'>
-      <view class="drawer_title line">
-      <image src='/image/lie.png'></image> 
-      主营业务</view>
-    </navigator>
-    <navigator url='/view/Tabs/Solution/index/solution'>
-      <view class="drawer_title line">
-      <image src='/image/new2.png'></image> 
-      解决方案</view>
-    </navigator>
-    <navigator url='/view/Tabs/Success/success'>
-      <view class="drawer_title line">
-      <image src='/image/success.png'></image> 
-      成功案例</view>
-    </navigator>
-    </li>
-    <navigator url='/view/Tabs/News/NewsIndex/newsIndex'>
-      <view class="drawer_title line">
-      <image src='/image/new1.png'></image> 
-      新闻动态</view>
-    </navigator>
-    <navigator url='/view/Tabs/Contact/ContactIndex/contactIndex'>
-      <view class="drawer_title line">
-      <image src='/image/call.png'></image> 
-      联系我们</view>
-    </navigator>
+  <view class="drawer_content" >
+    <view class="nav-son" bindtap="listpm">
+        <image src='/images/pmico.png' class='menuimg'></image>
+        <view class='menutitle'>项目管理</view>
+        <image src="{{pmImgUrl}}" class='menutri'></image>
+    </view>
+ 
+    <view class="temp {{pmopen ? 'slidown' : 'slidup'}}">
+        <view wx:for="{{mcontent}}" wx:for-item="pmcate" id="{{pmcate.id}}"bindtap='navtoEvent' 
+        class="{{pmcate.selected? 'selectItem':''}}">
+            {{pmcate.name}}
+        </view>
+    </view>
+    <view class="nav-son" bindtap="listpp">
+        <image src='/images/ppico.png' class='menuimg'></image>
+        <view>项目流程</view>
+        <image src="{{ppImgUrl}}" class='menutri'></image>
+    </view>
+    <view class="temp {{ppopen ? 'slidown' : 'slidup'}}">
+        <view wx:for="{{pcontent}}" wx:for-item="ppcate" id="{{ppcate.id}}"bindtap='navtoEvent'
+        class="{{ppcate.selected? 'selectItem':''}}">
+            {{ppcate.name}}
+        </view>
+    </view>
+
   </view>
 
 </view>

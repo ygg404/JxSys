@@ -4,7 +4,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    urlId: String
   },
 
   /**
@@ -12,6 +12,99 @@ Component({
    */
   data: {
     showModalStatus: false,
+    //项目管理列表
+    pmcate_list:[{
+      id:'project-management',
+      name:'项目处理',
+      url:'../../views/project-management/project-management',
+      selected:false
+    },{
+        id: 'schedule-management',
+        name: '项目进度',
+        url: '../../views/schedule-management/schedule-management',
+        selected: false
+    },{
+        id: 'project-output',
+        name: '项目产值',
+        url: '../../views/project-output/project-output',
+        selected: false
+    },{
+        id: 'recycle-management',
+        name: '项目回收站',
+        url: '../../views/recycle-management/recycle-management',
+        selected: false
+    }],
+    //项目流程列表
+    ppcate_list: [{
+      id: 'contract-management',
+      name: '合同管理',
+      url: '../../views/contract-management/contract-management',
+      selected: false
+    }, {
+        id: 'projectsetup-management',
+        name: '项目立项',
+        url: '../../views/projectsetup-management/projectsetup-management',
+      selected: false
+    }, {
+        id: 'allocation-management',
+        name: '项目安排',
+        url: '../../views/allocation-management/allocation-management',
+      selected: false
+    }, {
+        id: 'projectwork-management',
+        name: '项目作业',
+        url: '../../views/projectwork-management/projectwork-management',
+      selected: false
+      }, {
+        id: 'quality-management',
+        name: '质量检查',
+        url: '../../views/quality-management/quality-management',
+        selected: false
+      }, {
+        id: 'output-management',
+        name: '产值核算',
+        url: '../../views/output-management/output-management',
+        selected: false
+      }, {
+        id: 'authorize-management',
+        name: '项目审核',
+        url: '../../views/authorize-management/authorize-management',
+        selected: false
+      }, {
+        id: 'audited-management',
+        name: '已审定',
+        url: '../../views/audited-management/audited-management',
+        selected: false
+      }],
+    mcontent: [],
+    pcontent: [],
+    //项目管理列表是否展开
+    pmopen:false,
+    pmImgUrl: "/images/triup.png",
+    //项目流程列表是否展开
+    ppopen: false,
+    ppImgUrl: "/images/triup.png",
+    active: true,
+    
+
+  },
+
+  /**
+     * 生命周期函数--页面初始化
+     */
+  ready: function (options) {
+    var pmcatelist = this.data.pmcate_list;
+    var ppcatelist = this.data.ppcate_list;
+    for (var pm of pmcatelist) {
+      if (pm.id == this.properties.urlId)pm.selected = true;
+    };
+    for (var pp of ppcatelist){
+      if (pp.id == this.properties.urlId)pp.selected = true;
+    }
+    this.setData({
+      mcontent : pmcatelist,
+      pcontent : ppcatelist
+    })
   },
 
   /**
@@ -95,6 +188,33 @@ Component({
           showModalStatus: false
         });
       this.triggerEvent('showEvent', { showModalStatus: this.data.showModalStatus });
+    },
+
+    listpm: function (e) {
+      var _pmopen = this.data.pmopen;
+      this.setData({
+        pmopen: !_pmopen,
+        ppopen:false,
+        pmImgUrl: !_pmopen ? '/images/tridown.png' : '/images/triup.png',
+        ppImgUrl: '/images/triup.png'
+      });
+      console.log(e.target)
+    },
+    listpp: function (e) {
+      var _ppopen = this.data.ppopen;
+      this.setData({
+        ppopen: !_ppopen,
+        pmopen: false,
+        pmImgUrl: '/images/triup.png',
+        ppImgUrl: !_ppopen? '/images/tridown.png' : '/images/triup.png'
+      });
+      console.log(e.target)
+    },
+    /**
+     * 跳转事件
+     */
+    navtoEvent:function(e){
+      console.log(e.target)
     }
   }
 })
