@@ -81,6 +81,12 @@ Page({
         calendarShow: e.detail.showCalendar
       })
     }
+
+    if (e.type == 'setDateEvent'){
+      this.setData({
+        startDate: e.detail.dateInfo
+      })
+    }
   }
 
 })
