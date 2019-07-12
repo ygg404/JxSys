@@ -130,13 +130,13 @@ Component({
       });
       var DateInfo = this.data.currentYear + '-' + (Array(2).join(0) + this.data.currentMonth).slice(-2) 
         + '-' + (Array(2).join(0) + (e.currentTarget.id + 1 ,2) ).slice(-2) ;
-      this.triggerEvent('setDateEvent', { dateInfo: DateInfo });
+      this.triggerEvent('showEvent', { dateInfo: DateInfo });
     },
 
     //日历控件取消事件
     cancelEvent: function (e) {
       console.log(e);
-      //this.triggerEvent('showEvent', { showCalendar: false });
+      this.triggerEvent('showEvent', { showCalendar: false });
 
     }
   }
