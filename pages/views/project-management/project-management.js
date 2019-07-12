@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    urlId:'project-management'
+    urlId:'project-management',
+    calendarShow: false,    //日历显示
+    startDate: '', //开始日期
+    endDate:'' // 结束日期
   },
 
   /**
@@ -62,5 +65,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  calendarShowEvent:function(){
+    this.setData({
+      calendarShow:true
+    })
+  },
+
+  CalendarEvent:function(e){
+    console.log(e);
+    //关闭日历控件
+    if (e.type == 'showEvent'){
+      this.setData({
+        calendarShow: e.detail.showCalendar
+      })
+    }
   }
+
 })

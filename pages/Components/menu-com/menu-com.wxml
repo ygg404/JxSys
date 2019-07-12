@@ -5,38 +5,40 @@
   <image class='quit' src='/images/quit.png' bindtap="quitEvent"></image>
 </view>
 
-<!-- 左侧菜单 -->
-<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
-  <!--content-->
-  <!--使用animation属性指定需要执行的动画-->
-<view  class="drawer_attr_box" wx:if="{{showModalStatus}}" >
+<view wx:if="{{showModalStatus}}">
+  <!-- 左侧菜单 -->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" ></view>
+    <!--content-->
+    <!--使用animation属性指定需要执行的动画-->
+  <view  class="drawer_attr_box" >
 
-  <view class="drawer_content" >
-    <view class="nav-son" bindtap="listpm">
-        <image src='/images/pmico.png' class='menuimg'></image>
-        <view class='menutitle'>项目管理</view>
-        <image src="{{pmImgUrl}}" class='menutri'></image>
-    </view>
- 
-    <view class="temp {{pmopen ? 'slidown' : 'slidup'}}">
-        <view wx:for="{{mcontent}}" wx:for-item="pmcate" id="{{pmcate.id}}"bindtap='navtoEvent' 
-        class="{{pmcate.selected? 'selectItem':''}}">
-            {{pmcate.name}}
-        </view>
-    </view>
-    <view class="nav-son" bindtap="listpp">
-        <image src='/images/ppico.png' class='menuimg'></image>
-        <view>项目流程</view>
-        <image src="{{ppImgUrl}}" class='menutri'></image>
-    </view>
-    <view class="temp {{ppopen ? 'slidown' : 'slidup'}}">
-        <view wx:for="{{pcontent}}" wx:for-item="ppcate" id="{{ppcate.id}}"bindtap='navtoEvent'
-        class="{{ppcate.selected? 'selectItem':''}}">
-            {{ppcate.name}}
-        </view>
+    <view class="drawer_content" >
+      <view class="nav-son" bindtap="listpm">
+          <image src='/images/pmico.png' class='menuimg'></image>
+          <view class='menutitle'>项目管理</view>
+          <image src="{{pmImgUrl}}" class='menutri'></image>
+      </view>
+  
+      <view class="temp {{pmopen ? 'slidown' : 'slidup'}}">
+          <view wx:for="{{mcontent}}" wx:for-item="pmcate" id="{{pmcate.id}}"bindtap='navtoEvent' 
+          class="{{pmcate.selected? 'selectItem':''}}">
+              {{pmcate.name}}
+          </view>
+      </view>
+      <view class="nav-son" bindtap="listpp">
+          <image src='/images/ppico.png' class='menuimg'></image>
+          <view>项目流程</view>
+          <image src="{{ppImgUrl}}" class='menutri'></image>
+      </view>
+      <view class="temp {{ppopen ? 'slidown' : 'slidup'}}">
+          <view wx:for="{{pcontent}}" wx:for-item="ppcate" id="{{ppcate.id}}"bindtap='navtoEvent'
+          class="{{ppcate.selected? 'selectItem':''}}">
+              {{ppcate.name}}
+          </view>
+      </view>
+
     </view>
 
   </view>
 
 </view>
-

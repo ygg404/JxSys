@@ -1,0 +1,122 @@
+/* pages/Components/calendar-com/calendar-com.wxss */
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+}
+
+.gradient{
+  margin-top: 150rpx;
+  z-index: 1001;
+  margin-left: 7.5%;
+  width: 85%;
+  background: #fff;
+  position: fixed;
+}
+
+/*日历控件标题*/
+.spaceAroundBetween{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 80rpx;
+  background: green;
+}
+.spaceAroundBetween text{
+  color: white;
+  font-weight: 900;
+  margin-left: 10rpx;
+}
+
+.spaceAroundBetween image{
+  width: 90rpx;
+  height: 90rpx;
+  margin-right: -40rpx;
+  margin-top: -70rpx;
+}
+
+.spaceAroundCenter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  line-height: 40rpx;
+}
+
+.box {
+  margin: 0rpx;
+  border:1px solid rgb(40, 133, 4)
+}
+ 
+.flex-item {
+  /* flex-flow: nowrap;
+  flex-grow: 1;
+  flex-shrink: 1; */
+  width: 14.2%;
+}
+ 
+.item-content {
+  padding: 25rpx 0;
+  text-align: center;
+}
+
+.item-content .glyphicon{
+  color: #18b610;
+
+}
+
+ /* 当前日期 */
+.bk-color-day {
+  color: #fff;
+  border-radius: 50%;
+  background-color: #18b610;
+}
+
+/* 当前选中日期 */
+.bk-color-dayClick {
+  color: #fff;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+}
+ 
+.item-content-current-day {
+  flex-grow: 2;
+}
+
+/* 下拉动画 */
+/* @keyframes Css3 新标签，循环动画 */
+@keyframes slidown{
+    from{
+        transform:  translateY(-100%);
+    }
+    to{
+        transform:  translateY(0%);
+    }
+}
+.slidown{
+    display: block;
+    animation: slidown .2s ease-in both;
+}
+
+/* 上拉动画 */
+@keyframes slidup{
+    from{
+        transform:  translateY(0%);
+    }
+    to{
+        transform:  translateY(-100%);
+    }
+}
+
+.slidup{
+    display: block;
+    animation: slidup .2s ease-in both;
+    height: 0px;
+}

@@ -228,6 +228,9 @@ Component({
     navtoEvent:function(e){
       if(e.target.id == this.properties.urlId)return;
       else{
+        this.setData({
+          showModalStatus : false
+        });
         wx.navigateTo({
           url: '../../views/' + e.target.id + '/' + e.target.id
         });

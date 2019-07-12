@@ -1,1 +1,40 @@
 /* pages/views/project-management/project-management.wxss */
+
+.mycontain{
+  margin-top: 130rpx;
+}
+
+.box{
+  margin:20rpx;
+}
+
+.spaceAroundCenter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 65rpx;
+  font-size: 16pt;
+}
+
+.spaceAroundCenter .inputdate{
+  height: 70rpx;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  border:1px solid rgb(40, 133, 4)
+}
+
+.spaceAroundCenter .inputsearch{
+  width: 95%;
+  height: 70rpx;
+  text-align: center;
+  align-items: center;
+  border-bottom:1px solid rgb(40, 133, 4)
+}
+
+.spaceAroundCenter .searchview{
+  width: 45%;
+  display: flex;
+  flex-flow: row wrap;
+}

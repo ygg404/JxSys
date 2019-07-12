@@ -1,3 +1,25 @@
 <!--pages/views/project-management/project-management.wxml-->
 <!-- 加载中窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
+<calendar-component wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent"></calendar-component>
+
+<view class='mycontain'>
+  <view class='box'>
+    <view class='spaceAroundCenter'>
+      <view style='width:45%;' >
+        <input placeholder="开始日期" disabled='true' value='{{startDate}}' bindtap='calendarShowEvent' class='inputdate'></input>
+      </view>
+      -
+      <view style='width:45%;' >
+        <input placeholder="结束日期" disabled='true' value='{{endDate}}' bindtap='calendarShowEvent' class='inputdate'></input>
+      </view>
+    </view>
+  </view>
+  <view class='spaceAroundCenter'>
+    <Select prop-array='{{selectArray}}' bind:myget='getDate'></Select>
+    <view class='searchview' >
+      <input class='inputsearch' placeholder='关键词搜索'></input>
+      <icon type='search' style='margin-left:-32px;margin-top:15rpx;'></icon>
+    </view>
+  </view>
+</view>

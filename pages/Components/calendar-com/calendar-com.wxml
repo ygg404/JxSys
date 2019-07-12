@@ -1,6 +1,13 @@
+<!--pages/Components/calendar-com/calendar-com.wxml-->
 <!-- 日历 -->
+<view class='drawer_screen'></view>
 <view class="gradient">
   <view class="box">
+    <view class='spaceAroundBetween'> 
+      <text>日期选择</text>
+       <image src='/images/cancel.png' bindtap='cancelEvent'></image>
+    </view>
+
     <view class="spaceAroundCenter">
       <view class="flex-item">
         <view class="item-content" bindtap="doDay" data-key='left'>
@@ -29,8 +36,8 @@
 
     <view class="spaceAroundCenter">
       <view class="flex-item" wx:for="{{currentDayList}}" wx:for-index='key' wx:for-item="vo" wx:key="{{key}}">
-        <view id='{{key}}' class="item-content bk-color-day" wx:if="{{vo == currentDay}}">{{vo}}</view>
-        <view id='{{key}}' class="item-content bk-color-dayClick" wx:elif="{{key == currentClickKey && currentClickKey != '' && vo != ''}}">{{vo}}</view>
+        <view id='{{key}}' class="item-content bk-color-day" wx:if="{{vo == currentDay && currentYear == nowYear && currentMonth == nowMonth}}" bindtap='onClickItem' >{{vo}}</view>
+        <!-- <view id='{{key}}' class="item-content bk-color-dayClick" wx:elif="{{key == currentClickKey && currentClickKey != '' && vo != ''}}">{{vo}}</view> -->
         <view id='{{key}}' class="item-content" bindtap='onClickItem' wx:else>{{vo}}</view>
       </view>
     </view>

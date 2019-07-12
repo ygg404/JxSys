@@ -1,9 +1,7 @@
 {
-  "pages": ["pages/views/calendar/calendar",
+  "pages": [
     "pages/views/project-management/project-management",
     "pages/login/login",
-    
-    "pages/Components/menu-com/menu-com",
     "pages/views/schedule-management/schedule-management"
   ],
   "window": {
