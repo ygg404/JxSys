@@ -119,13 +119,17 @@ Component({
       })
     },
 
+    PrefixInteger:function(num, n) {
+      return(Array(n).join(0) + num).slice(-n);
+    },
+
     // 设置点击事件
     onClickItem: function (e) {
       this.setData({
         currentClickKey: e.currentTarget.id
       });
-      var DateInfo = this.currentYear + '-' + this.currentMonth 
-        + '-' + (e.currentTarget.id + 1) ;
+      var DateInfo = this.data.currentYear + '-' + (Array(2).join(0) + this.data.currentMonth).slice(-2) 
+        + '-' + (Array(2).join(0) + (e.currentTarget.id + 1 ,2) ).slice(-2) ;
       this.triggerEvent('setDateEvent', { DateInfo: DateInfo });
     },
 
