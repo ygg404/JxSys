@@ -36,10 +36,14 @@
 
     <view class="spaceAroundCenter">
       <view class="flex-item" wx:for="{{currentDayList}}" wx:for-index='key' wx:for-item="vo" wx:key="{{key}}">
-        <view id='{{key}}' class="item-content bk-color-day" wx:if="{{vo == currentDay && currentYear == nowYear && currentMonth == nowMonth}}" bindtap='onClickItem' >{{vo}}</view>
+        <view id='{{vo}}' class="item-content bk-color-day" wx:if="{{vo == currentDay && currentYear == nowYear && currentMonth == nowMonth}}" bindtap='onClickItem' >{{vo}}</view>
         <!-- <view id='{{key}}' class="item-content bk-color-dayClick" wx:elif="{{key == currentClickKey && currentClickKey != '' && vo != ''}}">{{vo}}</view> -->
-        <view id='{{key}}' class="item-content" bindtap='onClickItem' wx:else>{{vo}}</view>
+        <view id='{{vo}}' class="item-content" bindtap='onClickItem' wx:else>{{vo}}</view>
       </view>
     </view>
+  </view>
+
+  <view class='spaceAroundEnd'>
+    <button bindtap='clearDateEvent'>清 空</button>
   </view>
 </view>

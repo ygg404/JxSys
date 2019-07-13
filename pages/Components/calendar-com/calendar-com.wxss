@@ -90,6 +90,22 @@
   flex-grow: 2;
 }
 
+
+.spaceAroundEnd {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-end;
+  line-height: 40rpx;
+}
+
+.spaceAroundEnd button{
+  margin: 10rpx;
+  font-size: 12pt;
+  width: 140rpx;
+  height: 69rpx;
+}
+
 /* 下拉动画 */
 /* @keyframes Css3 新标签，循环动画 */
 @keyframes slidown{

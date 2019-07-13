@@ -7,7 +7,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    dateInfo: String
   },
 
   /**
@@ -30,8 +30,17 @@ Component({
      * 生命周期函数--页面初始化
      */
   ready: function (options) {
-    var currentObj = this.getCurrentDayString();
+    var currentObj;
     var now = new Date();
+    if(this.properties.dateInfo != ''){
+      var dateSet = this.properties.dateInfo.replace(/-/g, '\/')
+      currentObj = new Date(dateSet);
+      now = new Date(dateSet);
+    }else{
+      currentObj = this.getCurrentDayString();
+      now = new Date();
+    }
+    
     this.setData({
       currentDate: currentObj.getFullYear() + '年' + (currentObj.getMonth() + 1) + '月',
       currentDay: currentObj.getDate(),
@@ -118,19 +127,17 @@ Component({
         currentDayList: currentDayList
       })
     },
-
-    PrefixInteger:function(num, n) {
-      return(Array(n).join(0) + num).slice(-n);
-    },
-
     // 设置点击事件
     onClickItem: function (e) {
+      if(e.currentTarget.id ==''){
+        return;
+      }
       this.setData({
         currentClickKey: e.currentTarget.id
       });
       var DateInfo = this.data.currentYear + '-' + (Array(2).join(0) + this.data.currentMonth).slice(-2) 
-        + '-' + (Array(2).join(0) + (e.currentTarget.id + 1 ,2) ).slice(-2) ;
-      this.triggerEvent('showEvent', { dateInfo: DateInfo });
+        + '-' + (Array(2).join(0) + e.currentTarget.id ).slice(-2) ;
+      this.triggerEvent('setEvent', { dateInfo: DateInfo });
     },
 
     //日历控件取消事件
@@ -138,6 +145,10 @@ Component({
       console.log(e);
       this.triggerEvent('showEvent', { showCalendar: false });
 
+    },
+
+    clearDateEvent:function(e){
+      this.triggerEvent('setEvent', {dateInfo : ''})
     }
   }
 })
