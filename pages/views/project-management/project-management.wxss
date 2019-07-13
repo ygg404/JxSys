@@ -135,3 +135,9 @@
   border-right: 1px solid #dadada;
   text-align: left;
 }
+
+.tr .detail{
+  background: #dadada;
+  width: 100%;
+  font-size: 9pt;
+}

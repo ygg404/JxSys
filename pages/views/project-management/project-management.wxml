@@ -37,14 +37,19 @@
           <view class="th th2">项目名称</view>
           <view class="th th3">操作</view>
       </view>
-      <view class="tr" wx:for="{{15}}">
-          <view class='td0'>></view>
-          <view class="td td1">20190735</view>
-          <view class="td td2">11:30</view>
-          <view class="td td3">
-            <view><text>修改阶段</text></view>
-            <view><text>查看</text></view>
-          </view>
+      <view wx:for="{{15}}" >
+        <view class="tr" >
+            <view class='td0'>></view>
+            <view class="td td1">20190735</view>
+            <view class="td td2">11:30</view>
+            <view class="td td3">
+              <view><text>修改阶段</text></view>
+              <view><text>查看</text></view>
+            </view>
+        </view>
+        <view class='tr'>
+          <view class='detail'>1`1</view>
+        </view>
       </view>
     </view>
 
