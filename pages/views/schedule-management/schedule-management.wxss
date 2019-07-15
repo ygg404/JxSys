@@ -42,7 +42,7 @@
 .spaceAroundCenter picker{
   display: flex;
   flex-flow: row wrap;
-  text-align: center;
+  /* text-align: center; */
   justify-content: flex-start;
   /* padding-left: 10rpx; */
   border-bottom: 1rpx solid rgb(40, 133, 4);

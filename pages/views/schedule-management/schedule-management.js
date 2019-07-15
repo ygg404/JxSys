@@ -185,7 +185,7 @@ Page({
    */
   StateChangeEvent: function (e) {
     this.setData({
-      stageID: e.detail.value,
+      projectTypeID: e.detail.value,
     })
     this.getProjectsFromApi();
   },
