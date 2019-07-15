@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userAccount:'',  //用户
-    password:'',      //密码
+    userAccount:'admin',  //用户
+    password:'123456',      //密码
     loadingShow:false, //是否显示
     loadtxt:'登录中'
   },
@@ -18,10 +18,10 @@ Page({
    */
   onLoad: function (options) {
     //获取存放在本地的用户密码
-    this.setData({
-      userAccount: wx.getStorageSync('userAccount'),
-      password: wx.getStorageSync('password')
-    });
+    // this.setData({
+    //   userAccount: wx.getStorageSync('userAccount'),
+    //   password: wx.getStorageSync('password')
+    // });
 
   },
 
@@ -68,9 +68,28 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 获取用户权限
    */
-  onShareAppMessage: function () {
+  getPermissions:function(){
+    wx.request({
+      url: app.globalData.WebUrl + 'users/permissions/', //接口地址 
+      method: 'get',
+      header: {
+        Authorization: 'Bearer ' + app.globalData.SignToken,
+      },
+      success: function (res) {
+        console.log(res.data);
+        //获取权限成功
+        if (res.statusCode == 200) {
+          app.globalData.permissions = res.data;
+        }
+        //获取失败
+        else {
+          utils.TipModel('错误', res.data.message, 0);
+        }
+
+      }
+    })
 
   },
 
@@ -99,8 +118,10 @@ Page({
           app.globalData.SignToken = res.data.token;
           //登录成功保存用户密码
           wx.setStorage({ userAccount: that.data.userAccount, password: that.data.password });
+          //获取权限
+          that.getPermissions();
           wx.navigateTo({
-            url: '../views/calendar/calendar'
+            url: '../views/project-management/project-management'
           });
         }
         //登录失败
