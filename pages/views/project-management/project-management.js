@@ -130,6 +130,10 @@ Page({
         calendarShow: false
       })
     }
+  },
+
+  detailClickEvent:function(e){
+    console.log(e.currentTarget.id);
   }
 
 })

@@ -38,7 +38,7 @@
           <view class="th th3">操作</view>
       </view>
       <view wx:for="{{15}}" >
-        <view class="tr" >
+        <view class="tr" bindtap='detailClickEvent' id='1'>
             <view class='td0'>></view>
             <view class="td td1">20190735</view>
             <view class="td td2">11:30</view>
