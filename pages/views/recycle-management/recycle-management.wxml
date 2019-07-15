@@ -1,0 +1,2 @@
+<!--pages/views/recycle-management/recycle-management.wxml-->
+<menu-component urlId="{{urlId}}"></menu-component>

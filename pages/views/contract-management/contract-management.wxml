@@ -1,0 +1,2 @@
+<!--pages/views/contract-management/contract-management.wxml-->
+<menu-component urlId="{{urlId}}"></menu-component>

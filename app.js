@@ -42,5 +42,7 @@ App({
     WebUrl: 'http://localhost:8002/jx/api/',
     //获取到的Token
     SignToken: '',
+    //权限
+    permissions:[]
   }
 })

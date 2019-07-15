@@ -1,4 +1,6 @@
-// pages/views/project-management/project-management.js
+var utils = require('../../../utils/util.js');
+var app = getApp();
+
 Page({
 
   /**
@@ -7,27 +9,28 @@ Page({
   data: {
     urlId:'project-management',
     calendarShow: false,    //日历显示
-    startDate: '', //开始日期
-    endDate:'' ,// 结束日期
     setStartflag: false, //设置开始日期标志
     dateInfo:'',
-    stages: ['项目立项',
-      '项目安排',
-      '项目作业',
-      '质量检查',
-      '产值核算',
-      '项目审定',
-      '财务操作',
-      '项目处理',
-      '已审定  '],  //阶段选择
-    stageID : 0
+    stages: [],  //阶段选择
+    stageID : 0,
+    pagination: {
+      'page': 1,
+      'rowsPerPage':25,
+      'sortBy': 'id',
+      'startDate': '', //开始日期
+      'endDate': '',// 结束日期
+      'search':'',
+      'p_stage':1,
+      'descending':true
+    },  //分页参数
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getStagesInfo();
+    this.getProjectsFromApi();
   },
 
   /**
@@ -66,24 +69,89 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * 获取项目阶段
    */
-  onReachBottom: function () {
+  getStagesInfo: function () {
+    var that = this;
+    //加载阶段选项
+    wx.request({
+      url: app.globalData.WebUrl + "stage/",
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+      // 设置请求的 header  
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          var stagesInfo = ['所有阶段'];
+          for (var stage of res.data) {
+            stagesInfo.push(stage.name);
+          }
+          that.setData({
+            stages: stagesInfo
+          })
+        }
 
+      },
+      fail: function (res) {
+
+      }
+    })
   },
 
   /**
-   * 用户点击右上角分享
+   * 项目处理列表
    */
-  onShareAppMessage: function () {
+  getProjectsFromApi: function () {
+    var pagination = this.data.pagination;
+    var that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "projectSetUp/",
+      method: 'GET', 
+      data: {
+        page: pagination.page,
+        rowsPerPage: pagination.rowsPerPage,
+        sortBy: pagination.sortBy,
+        descending: pagination.descending,
+        search: pagination.search,
+        startDate: pagination.startDate,
+        endDate: pagination.endDate,
+        p_stage: pagination.p_stage,
+        stageId: that.data.stageID==0?'':that.data.stageID,
+        account: ''
+      },
+      // 设置请求的 header  
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          ;
+        }
 
+      },
+      fail: function (res) {
+
+      }
+    })
+  },
+
+  /**
+   * 搜索关键字事件
+   */
+  searchInputEvent:function(e){
+    var pagination = this.data.pagination;
+    pagination.search = e.detail.value;
+    this.setData({
+      pagination : pagination
+    })
   },
 
   /**
    * 设置开始时间
    */
   setStartDateEvent:function(){
-    var startDate = this.data.startDate;
+    var startDate = this.data.pagination.startDate;
     this.setData({
       calendarShow:true,
       setStartflag: true,
@@ -95,7 +163,7 @@ Page({
    * 设置结束时间
    */
   setEndDateEvent: function () {
-    var endDate = this.data.endDate;
+    var endDate = this.data.pagination.endDate;
     this.setData({
       calendarShow: true,
       setStartflag: false,
@@ -118,15 +186,19 @@ Page({
     }
 
     if (e.type == 'setEvent' && this.data.setStartflag){
+      var pagination = this.data.pagination;
+      pagination.startDate = e.detail.dateInfo;
       this.setData({
-        startDate: e.detail.dateInfo,
+        pagination: pagination,
         calendarShow: false
       })
     }
 
     if (e.type == 'setEvent' && !(this.data.setStartflag)) {
+      var pagination = this.data.pagination;
+      pagination.endDate = e.detail.dateInfo;
       this.setData({
-        endDate: e.detail.dateInfo,
+        pagination: pagination,
         calendarShow: false
       })
     }

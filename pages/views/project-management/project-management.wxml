@@ -7,11 +7,11 @@
   <view class='box'>
     <view class='spaceAroundCenter'>
       <view style='width:45%;' >
-        <input placeholder="开始日期" disabled='true' value='{{startDate}}' bindtap='setStartDateEvent' class='inputdate'></input>
+        <input placeholder="开始日期" disabled='true' value='{{pagination.startDate}}' bindtap='setStartDateEvent' class='inputdate'></input>
       </view>
       -
       <view style='width:45%;' >
-        <input placeholder="结束日期" disabled='true' value='{{endDate}}' bindtap='setEndDateEvent' class='inputdate'></input>
+        <input placeholder="结束日期" disabled='true' value='{{pagination.endDate}}' bindtap='setEndDateEvent' class='inputdate'></input>
       </view>
     </view>
   </view>
@@ -26,7 +26,7 @@
       <image src='/images/down.png'></image>
     </view>
     <view class='searchview' >
-      <input class='inputsearch' placeholder='关键词搜索'></input>
+      <input class='inputsearch' placeholder='关键词搜索' bindinput="searchInputEvent"></input>
       <icon type='search' style='margin-left:-32px;margin-top:15rpx;'></icon>
     </view>
 

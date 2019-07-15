@@ -1,8 +1,11 @@
 {
   "pages": [
-    "pages/views/project-management/project-management",
     "pages/login/login",
-    "pages/views/schedule-management/schedule-management"
+    "pages/views/project-management/project-management",
+    "pages/views/schedule-management/schedule-management",
+    "pages/views/project-output/project-output",
+    "pages/views/recycle-management/recycle-management",
+    "pages/views/contract-management/contract-management"
   ],
   "window": {
     "backgroundTextStyle": "light",

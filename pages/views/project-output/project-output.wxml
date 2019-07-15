@@ -1,0 +1,2 @@
+<!--pages/views/project-output/project-output.wxml-->
+<menu-component urlId="{{urlId}}"></menu-component>
