@@ -38,7 +38,15 @@ function TipModel(Title, content, level = 1) {
   });
 }
 
+//列表初始化（未选中）
+function tableListInit(data){
+  for (var table of data) {
+    table['selected'] = false;
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   TipModel: TipModel,
+  tableListInit: tableListInit,
 }

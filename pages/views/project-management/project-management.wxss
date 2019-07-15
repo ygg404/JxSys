@@ -92,6 +92,7 @@
   font-size: 23rpx;
   width: 3%;
   padding: 5rpx;
+  color: #0ab133;
 }
 .th0{
   background-color: #0ab133;
@@ -136,8 +137,33 @@
   text-align: left;
 }
 
-.tr .detail{
+.detail{
   background: #dadada;
   width: 100%;
   font-size: 9pt;
+  text-align: left;
+  justify-content: flex-start;
+  word-break: normal; 
+}
+
+.tr button{
+  margin: 20rpx;
+  width: 210rpx;
+  height: 86rpx;
+}
+
+.tr .btnfont_has{
+  background: #0ab133;
+  color: whitesmoke;
+}
+
+.tr .btnfont_no{
+  background: gainsboro;
+  color: white;
+}
+
+.trtext{
+  font-size: 10pt;
+  color: grey;
+  margin-top: 40rpx;
 }

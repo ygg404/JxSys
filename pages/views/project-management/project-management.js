@@ -15,7 +15,7 @@ Page({
     stageID : 0,
     pagination: {
       'page': 1,
-      'rowsPerPage':25,
+      'rowsPerPage':10,
       'sortBy': 'id',
       'startDate': '', //开始日期
       'endDate': '',// 结束日期
@@ -23,6 +23,9 @@ Page({
       'p_stage':1,
       'descending':true
     },  //分页参数
+    has_next:false,  //是否有上下页
+    has_pre:false,
+    tableList:[]  //列表数据
   },
 
   /**
@@ -126,7 +129,12 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          ;
+          utils.tableListInit(res.data['data']);
+          that.setData({
+            has_next: res.data.has_next,  //是否有上下页
+            has_pre: res.data.has_prev,
+            tableList:  res.data['data']
+          });
         }
 
       },
@@ -144,7 +152,8 @@ Page({
     pagination.search = e.detail.value;
     this.setData({
       pagination : pagination
-    })
+    });
+    this.getProjectsFromApi();
   },
 
   /**
@@ -156,7 +165,7 @@ Page({
       calendarShow:true,
       setStartflag: true,
       dateInfo: startDate
-    })
+    });
   },
 
   /**
@@ -168,14 +177,20 @@ Page({
       calendarShow: true,
       setStartflag: false,
       dateInfo: endDate
-    })
+    });
   },
+  /**
+   * 阶段改变
+   */
   StateChangeEvent: function(e){
     this.setData({
       stageID: e.detail.value,
-
     })
+    this.getProjectsFromApi();
   },
+  /**
+   * 日历事件
+   */
   CalendarEvent:function(e){
     console.log(e);
     //关闭日历控件
@@ -183,6 +198,7 @@ Page({
       this.setData({
         calendarShow: e.detail.showCalendar
       })
+      return;
     }
 
     if (e.type == 'setEvent' && this.data.setStartflag){
@@ -202,10 +218,51 @@ Page({
         calendarShow: false
       })
     }
+
+    this.getProjectsFromApi();
   },
 
+  /**
+   * 点击选中弹出详情
+   */
   detailClickEvent:function(e){
     console.log(e.currentTarget.id);
+    let tableList = this.data.tableList;
+    for(let table of tableList){
+      if(table['id'] == e.currentTarget.id){
+        table['selected'] = !table['selected'];
+      }
+      else{
+        table['selected'] = false;
+      }
+    }
+    this.setData({
+      tableList: tableList
+    })
+  },
+
+  /**
+   * 下一页
+   */
+  prePage: function (e) {
+    let pagination = this.data.pagination;
+    pagination.page -= 1;
+    this.setData({
+      pagination: pagination
+    });
+    this.getProjectsFromApi();
+  },
+
+  /**
+   * 下一页
+   */
+  nextPage:function(e){
+    let pagination = this.data.pagination;
+    pagination.page += 1;
+    this.setData({
+      pagination: pagination
+    });
+    this.getProjectsFromApi();
   }
 
 })
