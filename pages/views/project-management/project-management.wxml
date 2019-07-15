@@ -1,5 +1,5 @@
 <!--pages/views/project-management/project-management.wxml-->
-<!-- 加载中窗口 -->
+<!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
 
