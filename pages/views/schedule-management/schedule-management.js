@@ -110,7 +110,7 @@ Page({
     var pagination = this.data.pagination;
     var that = this;
     wx.request({
-      url: app.globalData.WebUrl + "projectSetUp/",
+      url: app.globalData.WebUrl + "project/schedule/",
       method: 'GET',
       data: {
         page: pagination.page,
@@ -120,9 +120,7 @@ Page({
         search: pagination.search,
         startDate: pagination.startDate,
         endDate: pagination.endDate,
-        p_stage: pagination.p_stage,
-        stageId: that.data.stageID == 0 ? '' : that.data.stageID,
-        account: ''
+        userAccount: ''
       },
       // 设置请求的 header  
       header: {
@@ -131,6 +129,15 @@ Page({
       success: function (res) {
         if (res.statusCode == 200) {
           utils.tableListInit(res.data['data']);
+          for(let contractInfo of res.data['data']){
+            let days = contractInfo['projectWorkDate'] + contractInfo['projectQualityDate'];
+            let beginDate = new Date(contractInfo['projectStartDate']);
+            beginDate.setDate(beginDate.getDate() + days);
+            //获取当前时间
+            let now = new Date();
+            let diffDay = (beginDate - new Date())/1000/60/60/24;
+            contractInfo['time'] = Math.trunc(diffDay);
+          }
           that.setData({
             has_next: res.data.has_next,  //是否有上下页
             has_pre: res.data.has_prev,
@@ -181,11 +188,18 @@ Page({
     });
   },
   /**
-   * 阶段改变
+   * 类型改变
    */
-  StateChangeEvent: function (e) {
+  ProTypeChangeEvent: function (e) {
+    var pagination = this.data.pagination;
+    if(e.detail.value == 0){
+      pagination.search = '';
+    }else{
+      pagination.search = this.data.projectTypes[e.detail.value];
+    }
     this.setData({
       projectTypeID: e.detail.value,
+      pagination: pagination
     })
     this.getProjectsFromApi();
   },

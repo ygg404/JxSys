@@ -1,4 +1,4 @@
-<!--pages/views/project-output/project-output.wxml-->
+<!--pages/views/projectsetup-management/projectsetup-management.wxml-->
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
@@ -30,24 +30,35 @@
       <icon type='search' style='margin-left:-32px;margin-top:15rpx;'></icon>
     </view>
 
+    <view class='searchview' >
+      <button class='addbtn'>添加项目</button>
+    </view>
+    <view class='searchview' >
+      <button class='addbtn'>查看项目</button>
+    </view>
   <view class="table">
       <view class="tr">
           <view class='th0'></view>
           <view class="th th1">合同编号</view>
-          <view class="th th2">项目名称</view>
-          <view class="th th3">项目启动时间</view>
+          <view class="th th2">合同名称</view>
+          <view class="th th3">操作</view>
       </view>
       <view wx:for="{{tableList}}" wx:for-item="project" >
         <view class="tr" bindtap='detailClickEvent' id="{{project.id}}">
             <view class='td0'>{{project.selected?'v':'>'}}</view>
             <view class="td td1">{{project.contractNo==null?'':project.contractNo}}</view>
             <view class="td td2">{{project.projectName}}</view>
-            <view class="td td3">{{project.projectStartTime}}</view>
+            <view class="td td3">
+              <view><button class='resbtn'>编辑</button></view>
+              <view><button class='delbtn'>删除</button></view>
+            </view>
         </view>
         <view wx:if="{{project.selected}}">
-          <view class='tr detail'><text>作业组：</text><text>{{project.workName}}</text></view>
-          <view class='tr detail'><text>预算产值：</text><text>{{project.projectOutPut}}</text></view>
-          <view class='tr detail'><text>实际产值：</text><text>{{project.projectActuallyOutput}}</text></view>
+          <view class='tr detail'><text>委托单位：</text><text>{{project.projectAuthorize}}</text></view>
+          <view class='tr detail'><text>项目类型：</text><text>{{project.projectType}}</text></view>
+          <!-- <view class='tr detail'><text>合同类型：</text><text>{{project.typeId == 0? "合同委托" : "一般合同"}}</text></view> -->
+          <view class='tr detail'><text>项目阶段：</text><text>{{project.projectStage}}</text></view>
+          <view class='tr detail'><text>启动时间：</text><text>{{project.projectStartTime}}</text></view>
         </view>
       </view>
       <view class="tr">
@@ -59,4 +70,3 @@
 
   </view>
 </view>
-

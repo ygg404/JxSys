@@ -1,4 +1,4 @@
-// pages/views/project-output/project-output.js
+// pages/views/projectwork-management/projectwork-management.js
 var utils = require('../../../utils/util.js');
 var app = getApp();
 
@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    urlId:'project-output',
+    urlId: 'projectwork-management',
     calendarShow: false,    //日历显示
     setStartflag: false, //设置开始日期标志
     dateInfo: '',
@@ -22,7 +22,8 @@ Page({
       'endDate': '',// 结束日期
       'search': '',
       'p_stage': 1,
-      'descending': true
+      'descending': true,
+      'stageId': 3
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,
@@ -33,8 +34,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getProjectTypesInfo();
-    this.getProjectsFromApi();
+      this.getProjectTypesInfo();
+      this.getProjectsFromApi();
   },
 
   /**
@@ -78,10 +79,9 @@ Page({
   onReachBottom: function () {
 
   },
-
   /**
-   * 获取项目类型
-   */
+ * 获取项目类型
+ */
   getProjectTypesInfo: function () {
     var that = this;
     //加载阶段选项
@@ -109,15 +109,14 @@ Page({
       }
     })
   },
-
   /**
-   * 项目产值列表
+   * 项目立项列表
    */
   getProjectsFromApi: function () {
     var pagination = this.data.pagination;
     var that = this;
     wx.request({
-      url: app.globalData.WebUrl + "projectOutPut/",
+      url: app.globalData.WebUrl + "projectByWork/",
       method: 'GET',
       data: {
         page: pagination.page,
@@ -127,8 +126,9 @@ Page({
         search: pagination.search,
         startDate: pagination.startDate,
         endDate: pagination.endDate,
-        userGroup:'',
-        userAccount: ''
+        p_stage: pagination.p_stage,
+        stageId: pagination.stageId,
+        account: ''
       },
       // 设置请求的 header  
       header: {
@@ -256,7 +256,7 @@ Page({
   },
 
   /**
-   * 下一页
+   * 上一页
    */
   prePage: function (e) {
     let pagination = this.data.pagination;

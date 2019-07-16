@@ -1,1 +1,186 @@
 /* pages/views/recycle-management/recycle-management.wxss */
+.mycontain{
+  margin-top: 130rpx;
+}
+
+.box{
+  margin:20rpx;
+}
+
+.spaceAroundCenter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 65rpx;
+  font-size: 16pt;
+}
+
+.spaceAroundCenter .inputdate{
+  height: 70rpx;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  border:1px solid rgb(40, 133, 4)
+}
+
+.spaceAroundCenter .inputsearch{
+  width: 95%;
+  height: 70rpx;
+  text-align: left;
+  align-items: center;
+  border-bottom:1px solid rgb(40, 133, 4)
+}
+
+.spaceAroundCenter .searchview{
+  width: 45%;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 13pt;
+}
+
+.spaceAroundCenter picker{
+  display: flex;
+  flex-flow: row wrap;
+  /* text-align: center; */
+  justify-content: flex-start;
+  /* padding-left: 10rpx; */
+  border-bottom: 1rpx solid rgb(40, 133, 4);
+  margin-left: 8%;
+  width: 90%;
+
+}
+
+.spaceAroundCenter image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: -50rpx;
+  margin-top: 10rpx;
+}
+
+.spaceAroundCenter icon{
+  margin-left: -70rpx;
+  margin-top: 20rpx;
+  z-index: -1
+}
+
+.table{
+  border:1px solid #098305;
+  margin-top: 25rpx;
+  width: 98%;
+  margin-left: 1%;
+}
+
+.tr{
+  text-align: left;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.th,.td{
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+  
+}
+
+.th0,.td0{
+  border-bottom: 1px solid #dadada;
+  font-size: 23rpx;
+  width: 3%;
+  padding: 5rpx;
+  color: #0ab133;
+}
+.th0{
+  background-color: #0ab133;
+}
+
+
+.th1,.td1{
+  width: 20%;
+}
+
+.th2,.td2{
+  width: 40%;
+}
+
+.th3,.td3{
+  width: 37%;
+
+}
+
+.td3 text{
+  font-size: 11pt;
+  color: #15aef5;
+  text-decoration:underline;
+}
+
+.td3 .delbtn{
+  line-height: 180%;
+  width: 80%;
+  height: 55rpx;
+  color: whitesmoke;
+  background: red;
+  font-size: 9pt;
+}
+
+.td3 .resbtn{
+  line-height: 180%;
+  width: 80%;
+  height: 55rpx;
+  color: whitesmoke;
+  background: #15aef5;
+  font-size: 9pt;
+}
+
+.th{
+  font-weight: 800;
+  background-color: #0ab133;
+  font-size: 28rpx;
+  color: whitesmoke;
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: left;
+}
+.td{
+  font-size: 22rpx;
+  color: black;
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: left;
+}
+
+.detail{
+  background: #dadada;
+  width: 100%;
+  font-size: 9pt;
+  text-align: left;
+  justify-content: flex-start;
+  word-break: normal; 
+}
+
+.tr button{
+  margin: 20rpx;
+  width: 210rpx;
+  height: 86rpx;
+}
+
+.tr .btnfont_has{
+  background: #0ab133;
+  color: whitesmoke;
+}
+
+.tr .btnfont_no{
+  background: gainsboro;
+  color: white;
+}
+
+.trtext{
+  font-size: 10pt;
+  color: grey;
+  margin-top: 40rpx;
+}

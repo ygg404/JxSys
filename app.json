@@ -5,7 +5,14 @@
     "pages/views/schedule-management/schedule-management",
     "pages/views/project-output/project-output",
     "pages/views/recycle-management/recycle-management",
-    "pages/views/contract-management/contract-management"
+    "pages/views/contract-management/contract-management",
+    "pages/views/projectsetup-management/projectsetup-management",
+    "pages/views/allocation-management/allocation-management",
+    "pages/views/projectwork-management/projectwork-management",
+    "pages/views/quality-management/quality-management",
+    "pages/views/output-management/output-management",
+    "pages/views/authorize-management/authorize-management",
+    "pages/views/audited-management/audited-management"
   ],
   "window": {
     "backgroundTextStyle": "light",

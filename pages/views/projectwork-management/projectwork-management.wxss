@@ -1,4 +1,4 @@
-/* pages/views/project-output/project-output.wxss */
+/* pages/views/projectwork-management/projectwork-management.wxss */
 .mycontain{
   margin-top: 130rpx;
 }
@@ -37,6 +37,12 @@
   display: flex;
   flex-flow: row wrap;
   font-size: 13pt;
+}
+
+.spaceAroundCenter .searchview .addbtn{
+  width:66%;
+  background: #0ab133;
+  color: whitesmoke;
 }
 
 .spaceAroundCenter picker{
@@ -103,11 +109,11 @@
 }
 
 .th2,.td2{
-  width: 40%;
+  width: 47%;
 }
 
 .th3,.td3{
-  width: 37%;
+  width: 30%;
 
 }
 
@@ -115,6 +121,24 @@
   font-size: 11pt;
   color: #15aef5;
   text-decoration:underline;
+}
+
+.td3 .delbtn{
+  line-height: 180%;
+  width: 80%;
+  height: 55rpx;
+  color: whitesmoke;
+  background: red;
+  font-size: 9pt;
+}
+
+.td3 .resbtn{
+  line-height: 180%;
+  width: 80%;
+  height: 55rpx;
+  color: whitesmoke;
+  background: #15aef5;
+  font-size: 9pt;
 }
 
 .th{
