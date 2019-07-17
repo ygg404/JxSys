@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "进度处理",
+    "navigationBarTitleText": "项目进度",
     "usingComponents": {
       "loading-component": "/pages/Components/loading-com/loading-com",
       "menu-component": "/pages/Components/menu-com/menu-com",

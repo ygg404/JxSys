@@ -231,7 +231,7 @@ Component({
         this.setData({
           showModalStatus : false
         });
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../../views/' + e.target.id + '/' + e.target.id
         });
       }

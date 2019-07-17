@@ -35,9 +35,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    //Toekn用户名密钥
-    StaffId: '801001',
-    AppSecret: '7944616D0CA1095B39D8A97166975D19D3727B5200924F68B5EC28E8AA3427F8',
     //request域名
     WebUrl: 'http://localhost:8002/jx/api/',
     //获取到的Token

@@ -279,5 +279,96 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+
+  /**
+   * 删除
+   */
+  deleteEvent:function(e){
+    console.log(e.currentTarget.id)
+    //获取项目编号
+    let projectNo =''
+    for(let info of this.data.tableList){
+      if(info['id'] == e.currentTarget.id){
+        projectNo = info['projectNo'];
+      }
+    }
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除编号为' + projectNo  +'的项目吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          // 用户点击了确定 可以调用删除方法了
+          wx.request({
+            url: app.globalData.WebUrl + "project/?projectNo=" + projectNo,
+            // 设置请求的 header  
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              'Authorization': "Bearer " + app.globalData.SignToken
+            },
+            method: 'DELETE',
+            dataType: 'json',
+            success: function (res) {
+              if (res.statusCode == 200) {
+                utils.TipModel('删除成功！');
+              }else{
+                utils.TipModel(res.data.message,level = 0);
+              }
+
+            },
+            fail: function (res) {
+
+            }
+          })
+        } else if (sm.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  /**
+   * 恢复
+   */
+  restoreEvent:function(e){
+    //获取项目编号
+    let projectNo = ''
+    for (let info of this.data.tableList) {
+      if (info['id'] == e.currentTarget.id) {
+        projectNo = info['projectNo'];
+        break;
+      }
+    }
+    wx.showModal({
+      title: '提示',
+      content: '确定要恢复编号为' + projectNo + '的项目吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          // 用户点击了确定
+          wx.request({
+            url: app.globalData.WebUrl + "project/recycle/",
+            method: 'POST',
+            data: {
+              projectNo: projectNo,
+              stageId: 1
+            },
+            // 设置请求的 header  
+            header: {
+              'Authorization': "Bearer " + app.globalData.SignToken
+            },
+            success: function (res) {
+              if (res.statusCode == 200) {
+                utils.TipModel('恢复成功！');
+              }
+
+            },
+            fail: function (res) {
+
+            }
+          });
+        } else if (sm.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   }
 })

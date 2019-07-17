@@ -11,6 +11,7 @@ Page({
     urlId : 'schedule-management',
     calendarShow: false,    //日历显示
     setStartflag: false, //设置开始日期标志
+    scheduleShow: false, //进度是否显示
     dateInfo: '',
     projectTypes: [],  //阶段选择
     projectTypeID: 0,
@@ -26,7 +27,8 @@ Page({
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,
-    tableList: []  //列表数据
+    tableList: [],  //列表数据
+    detailList: [] //进度详情
   },
 
   /**
@@ -278,5 +280,50 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+
+/**
+ * 查看项目进度
+ */
+  viewScheduleEvent:function(e){
+    console.log(e.currentTarget.id);
+    for(let info of this.data.tableList){
+      if(info['id'] == e.currentTarget.id){
+        console.log(info['projectNo']);
+        var that = this;
+        //加载项目进度
+        wx.request({
+          url: app.globalData.WebUrl + "project/schedule/"+ info['projectNo'] + "/",
+          method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+          // 设置请求的 header  
+          header: {
+            'Authorization': "Bearer " + app.globalData.SignToken
+          },
+          success: function (res) {
+            if (res.statusCode == 201) {
+              
+              that.setData({
+                detailList:res.data,
+                scheduleShow: true
+              })
+            }
+
+          },
+          fail: function (res) {
+
+          }
+        })
+      }
+    }
+
+  },
+  /**
+   * 查看详情返回
+   */
+  returnDetail:function(e){
+    this.setData({
+      scheduleShow: false
+    })
   }
+
 })

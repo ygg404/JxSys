@@ -38,12 +38,12 @@
           <view class="th th3">操作</view>
       </view>
       <view wx:for="{{tableList}}" wx:for-item="project" >
-        <view class="tr" bindtap='detailClickEvent' id="{{project.id}}">
+        <view class="tr">
             <view class='td0'>{{project.selected?'v':'>'}}</view>
-            <view class="td td1">{{project.contractNo==null?'':project.contractNo}}</view>
+            <view class="td td1" bindtap='detailClickEvent' id="{{project.id}}" >{{project.contractNo==null?'':project.contractNo}}</view>
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
-              <view><text>查看进度</text></view>
+              <button class='resbtn' bindtap='viewScheduleEvent' id="{{project.id}}">查看进度</button>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
@@ -59,6 +59,30 @@
           <button class="{{has_pre?'btnfont_has':'btnfont_no'}}" disabled="{{has_pre?false:true}}" bindtap='prePage' >上一页</button>
           <text class='trtext'>第{{pagination.page}}页</text>
           <button class="{{has_next?'btnfont_has':'btnfont_no'}}" disabled="{{has_next?false:true}}" bindtap='nextPage'>下一页</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{scheduleShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail' >
+      <view class='tr'>
+        <text style='padding:20rpx;'>项目进度</text>
+      </view>
+      <view class='tr' >
+          <view class="tdh tdh1">日期</view>
+          <view class="tdh tdh2">当前进度</view>
+          <view class="tdh tdh3">进度内容</view>
+      </view>
+         <view class="tr" wx:for="{{detailList}}" wx:for-item="detail">
+            <view class="tdd tdd1">{{detail.scheduleCreateTime}}</view>
+            <view class="tdd tdd2">{{detail.projectRate}}</view>
+            <view class="tdd tdd3">{{detail.projectNote}}</view>
+         </view>
+      <view class="tr">
+        <button bindtap='returnDetail'>返回</button>
       </view>
     </view>
 
