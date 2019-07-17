@@ -67,7 +67,7 @@ Component({
         selected: false
       }, {
         id: 'authorize-management',
-        name: '项目审核',
+        name: '项目审定',
         url: '../../views/authorize-management/authorize-management',
         selected: false
       }, {
