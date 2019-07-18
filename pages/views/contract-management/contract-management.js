@@ -43,6 +43,7 @@ Page({
     this.getBusinessInfo();
     this.getProjectTypesInfo();
     this.getProjectsFromApi();
+    this.wxValidateInit();
   },
 
   /**
@@ -74,10 +75,46 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * 表单验证的初始化函数
    */
-  onReachBottom: function () {
-
+  wxValidateInit: function () {
+    this.WxValidate = app.WxValidate(
+      {
+        name: {
+          required: true,
+          minlength: 2,
+          maxlength: 10,
+        },
+        mobile: {
+          required: true,
+          tel: true,
+        },
+        company: {
+          required: true,
+          minlength: 2,
+          maxlength: 100,
+        },
+        client: {
+          required: true,
+          minlength: 2,
+          maxlength: 100,
+        }
+      }
+      , {
+        name: {
+          required: '请填写您的姓名姓名',
+        },
+        mobile: {
+          required: '请填写您的手机号',
+        },
+        company: {
+          required: '请输入公司名称',
+        },
+        client: {
+          required: '请输入绑定客户',
+        }
+      }
+    )
   },
   /**
   * 获取业务负责人列表
