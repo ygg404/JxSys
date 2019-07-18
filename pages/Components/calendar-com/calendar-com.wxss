@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1002;
   background: #000;
   opacity: 0.2;
   overflow: hidden;
@@ -13,7 +13,7 @@
 
 .gradient{
   margin-top: 150rpx;
-  z-index: 1001;
+  z-index: 1003;
   margin-left: 7.5%;
   width: 85%;
   background: #fff;
@@ -102,8 +102,9 @@
 .spaceAroundEnd button{
   margin: 10rpx;
   font-size: 12pt;
-  width: 140rpx;
-  height: 69rpx;
+  width: 160rpx;
+  height: 70rpx;
+  line-height: 200%;
 }
 
 /* 下拉动画 */

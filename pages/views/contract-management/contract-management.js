@@ -10,7 +10,9 @@ Page({
   data: {
     urlId:'contract-management',
     calendarShow: false,    //日历显示
+    contractCalendarShow:false, //合同日历
     setStartflag: false, //设置开始日期标志
+    addContractShow: false , //合同管理表单
     dateInfo: '',
     pagination: {
       'page': 1,
@@ -24,13 +26,22 @@ Page({
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,
-    tableList: []  //列表数据
+    tableList: [],  //列表数据
+    contractNo: '', //合同编号
+    contractAddTime: '', //日期
+    projectTypes: [],  //类型选择
+    projectTypeID: 0 ,
+    business:[], //业务负责人列表
+    businessId:0,
+    businessName:[] 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getBusinessInfo();
+    this.getProjectTypesInfo();
     this.getProjectsFromApi();
   },
 
@@ -68,7 +79,64 @@ Page({
   onReachBottom: function () {
 
   },
+  /**
+  * 获取业务负责人列表
+  */
+  getBusinessInfo: function () {
+    var that = this;
+    //加载阶段选项
+    wx.request({
+      url: app.globalData.WebUrl + "user/business/",
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+      // 设置请求的 header  
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        let businessName = [];
+        if (res.statusCode == 201) {
+          for (let bInfo of res.data){
+             businessName.push(bInfo['userName']);
+          }
+          that.setData({
+            businessName: businessName,
+            business: res.data
+          })
+        }
 
+      }
+    })
+  },
+  /**
+  * 获取项目类型
+  */
+  getProjectTypesInfo: function () {
+    var that = this;
+    //加载阶段选项
+    wx.request({
+      url: app.globalData.WebUrl + "projectTypes/",
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+      // 设置请求的 header  
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          let ptypeInfo = [];
+          for (var ptype of res.data) {
+            ptypeInfo.push(ptype.name);
+          }
+          that.setData({
+            projectTypes: ptypeInfo
+          })
+        }
+
+      },
+      fail: function (res) {
+
+      }
+    })
+  },
   /**
    * 合同管理列表
    */
@@ -236,5 +304,83 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+
+  /***
+   *添加合同 
+   */
+  addContract:function(e){
+    var that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "contract/getContractNumMax/",
+      method: 'GET',
+      // 设置请求的 header  
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setData({
+            contractNo: res.data,
+            addContractShow: true
+          });
+        }
+
+      },
+      fail: function (res) {
+
+      }
+    });
+  },
+  /**
+   * 选择文件
+   */
+  chooseFile: function(e){
+    wx.chooseFile({
+      count: 1,
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths
+      }
+    });
+
+  },
+  /**
+   * 合同签订时间
+   */
+  contractAddTimeEvent:function(e){
+    console.log(e);
+    this.setData({
+      contractCalendarShow:true
+    })  
+  },
+  /**
+ * 合同日历事件
+ */
+  contractAddCalendarEvent: function (e) {
+    console.log(e);
+    //关闭日历控件
+    if (e.type == 'showEvent') {
+      this.setData({
+        contractCalendarShow: false
+      })
+      return;
+    }
+
+    if (e.type == 'setEvent') {
+      this.setData({
+        contractCalendarShow: false,
+        contractAddTime: e.detail.dateInfo
+      })
+    }
+  },
+  /**
+   *添加合同取消
+   */
+  returnDetail:function(e){
+    this.setData({
+      addContractShow: false
+    })
   }
+
 })

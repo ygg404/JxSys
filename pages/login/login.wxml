@@ -4,7 +4,7 @@
 
 <view class='container'>
   <view class='title'>
-    <text>杰信后台管理系统</text>
+    <text>测绘项目管理系统</text>
   </view>
   <form bindsubmit="formSubmit" class='formbody'>
     <view class='layout'>

@@ -40,7 +40,7 @@
 }
 
 .spaceAroundCenter .searchview .addbtn{
-  width:66%;
+  width:70%;
   background: #0ab133;
   color: whitesmoke;
 }
@@ -152,7 +152,7 @@
   text-align: left;
 }
 .td{
-  font-size: 22rpx;
+  font-size: 25rpx;
   color: black;
   padding: 5px;
   border-bottom: 1px solid #dadada;
@@ -172,7 +172,8 @@
 .tr button{
   margin: 20rpx;
   width: 210rpx;
-  height: 86rpx;
+  height: 80rpx;
+  line-height: 200%;
 }
 
 .tr .btnfont_has{
@@ -189,4 +190,96 @@
   font-size: 10pt;
   color: grey;
   margin-top: 40rpx;
+}
+
+/* 合同添加 */
+/*mask*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+}
+
+.form {
+  max-height: 85%;
+  width: 100%;
+  display: flex;
+  top: 0rpx;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100rpx 0;
+  z-index: 1001;
+  
+
+} 
+
+.form .tabledetail{
+  background: whitesmoke;
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  padding:20rpx;
+  overflow-y:scroll; 
+}
+
+.form .tabledetail .tdh1{
+  width: 30%;
+  color: gray;
+  font-size: 11pt;
+  word-break:break-all;
+  line-height: 200%;
+}
+
+.form .tabledetail .tdh2{
+  width: 70%;
+  color: black;
+  font-size: 10pt;
+  line-height: 200%;
+}
+
+.form .tabledetail .tdh2 input{
+  width: 90%;
+  border-bottom:1px solid #0ab133;
+}
+
+.tr .radio-group{
+  line-height: 200%;
+  font-size: 11pt;
+  padding: 10rpx;
+  color: gray;
+}
+
+.form .tabledetail .returnbtn{
+    color: #15aef5;
+    line-height: 200%;
+    font-size: 12pt;
+    height: 70rpx;
+}
+
+.form .tabledetail .surebtn{
+  color: whitesmoke;
+  line-height: 200%;
+  font-size: 12pt;
+  background: #15aef5;
+  height: 70rpx;
+}
+
+.form .tabledetail .filebtn{
+  background: rgb(196, 192, 192);
+  border: 1px solid #0ab133;
+  color: #0ab133;
+  line-height: 200%;
+  font-size: 12pt;
+  width: 40%;
+  height: 80rpx;
+  text-align: center;
+  align-items: center;
 }

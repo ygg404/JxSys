@@ -2,6 +2,7 @@
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
+<calendar-component dateInfo="{{contractAddTime}}" wx:if="{{contractCalendarShow}}" bindshowEvent="contractAddCalendarEvent" bindsetEvent="contractAddCalendarEvent"></calendar-component>
 
 <view class='mycontain'>
   <view class='box'>
@@ -23,7 +24,7 @@
     </view>
 
     <view class='searchview' >
-      <button class='addbtn'>添加合同</button>
+      <button class='addbtn' bindtap='addContract'>添加合同</button>
     </view>
 
   <view class="table">
@@ -59,3 +60,82 @@
   </view>
 </view>
 
+<view wx:if="{{addContractShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail' >
+      <view class='tr'>
+        <text style='padding:20rpx;'>添加合同</text>
+      </view>
+      <view class='tr' style='margin-top:40rpx;' >
+          <view class="tdh1">合同名称:</view>
+          <view class="tdh2"><input></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">合同编号:</view>
+          <view class="tdh2">{{contractNo}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目类型:</view>
+          <view class="tdh2">
+            <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+              <view style='width:50%;border:1px solid green'>
+                {{projectTypes[projectTypeID]}}
+              </view>
+              <!-- <icon type='download' ></icon> -->
+            </picker>
+          </view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">合同金额:</view>
+          <view class="tdh2"><input type='number'></input></view>
+      </view>
+      <view class='tr'>
+        <radio-group class="radio-group" bindchange="radioChange">
+            <radio value="{{item.name}}" checked="{{item.checked}}"/>合同委托
+            <radio value="{{item.name}}" checked="{{item.checked}}"/>一般委托
+        </radio-group>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">委托单位:</view>
+          <view class="tdh2"><input></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">委托要求:</view>
+          <view class="tdh2"><input></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">联系人:</view>
+          <view class="tdh2"><input></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">联系电话:</view>
+          <view class="tdh2"><input></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">业务负责人:</view>
+          <view class="tdh2">            
+            <picker bindchange="BusinessChangeEvent"   value="{{businessId}}" range="{{businessName}}">
+              <view style='width:50%;border:1px solid green'>
+                {{business[businessId]['userName']}}
+              </view>
+              <!-- <icon type='download' ></icon> -->
+            </picker>
+          </view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">签订时间:</view>
+          <view class="tdh2"><input style='width:60%;border:1px solid green' 
+           value='{{contractAddTime}}' bindtap='contractAddTimeEvent' disabled='true' bindtap='contractAddTimeEvent'></input></view>
+      </view>
+      <view class='tr'>
+          <button class='filebtn' bindtap='chooseFile'>选择文件</button>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnDetail'>取消</button>
+        <button class='surebtn' bindtap='sureDetail'>确认</button>
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -285,7 +285,7 @@ Page({
    * 删除
    */
   deleteEvent:function(e){
-    console.log(e.currentTarget.id)
+    var that = this;
     //获取项目编号
     let projectNo =''
     for(let info of this.data.tableList){
@@ -311,6 +311,7 @@ Page({
             success: function (res) {
               if (res.statusCode == 200) {
                 utils.TipModel('删除成功！');
+                that.getProjectsFromApi();
               }else{
                 utils.TipModel(res.data.message,level = 0);
               }
@@ -330,6 +331,7 @@ Page({
    * 恢复
    */
   restoreEvent:function(e){
+    var that = this;
     //获取项目编号
     let projectNo = ''
     for (let info of this.data.tableList) {
@@ -345,21 +347,19 @@ Page({
         if (sm.confirm) {
           // 用户点击了确定
           wx.request({
-            url: app.globalData.WebUrl + "project/recycle/",
+            url: app.globalData.WebUrl + "project/recycle/?projectNo=" + projectNo + "&stageId=1",
             method: 'POST',
-            data: {
-              projectNo: projectNo,
-              stageId: 1
-            },
             // 设置请求的 header  
             header: {
               'Authorization': "Bearer " + app.globalData.SignToken
             },
             success: function (res) {
               if (res.statusCode == 200) {
-                utils.TipModel('恢复成功！');
+                utils.TipModel('提示', res.data.message);
+                that.getProjectsFromApi();
+              }else{
+                utils.TipModel('错误', res.data.message,0);
               }
-
             },
             fail: function (res) {
 
