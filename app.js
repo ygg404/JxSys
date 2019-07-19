@@ -1,4 +1,6 @@
 //app.js
+import wxValidate from 'utils/wxValidate'
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -41,5 +43,6 @@ App({
     SignToken: '',
     //权限
     permissions:[]
-  }
+  },
+  wxValidate: (rules, messages) => new wxValidate(rules, messages)
 })

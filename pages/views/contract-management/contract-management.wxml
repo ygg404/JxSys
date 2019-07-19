@@ -35,13 +35,13 @@
           <view class="th th3">操作</view>
       </view>
       <view wx:for="{{tableList}}" wx:for-item="project" >
-        <view class="tr" bindtap='detailClickEvent' id="{{project.id}}">
+        <view class="tr" >
             <view class='td0'>{{project.selected?'v':'>'}}</view>
-            <view class="td td1">{{project.contractNo==null?'':project.contractNo}}</view>
-            <view class="td td2">{{project.contractName}}</view>
+            <view class="td td1" bindtap='detailClickEvent' id="{{project.id}}" >{{project.contractNo==null?'':project.contractNo}}</view>
+            <view class="td td2" >{{project.contractName}}</view>
             <view class="td td3">
-              <view><button class='resbtn'>编辑</button></view>
-              <view><button class='delbtn'>删除</button></view>
+              <view><button class='resbtn' bindtap='editEvent' id="{{project.id}}">编辑</button></view>
+              <view><button class='delbtn' bindtap='delEvent' id="{{project.id}}">删除</button></view>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
@@ -63,17 +63,18 @@
 <view wx:if="{{addContractShow}}">
   <view class='drawer_screen'></view>
   <view class='form'>
-    <view class='tabledetail' >
+    <view class='tabledetail'>
+      <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
       <view class='tr'>
         <text style='padding:20rpx;'>添加合同</text>
       </view>
       <view class='tr' style='margin-top:40rpx;' >
           <view class="tdh1">合同名称:</view>
-          <view class="tdh2"><input></input></view>
+          <view class="tdh2"><input name="contractName"  value="{{contractDetail.contractName}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">合同编号:</view>
-          <view class="tdh2">{{contractNo}}</view>
+          <view class="tdh2">{{contractDetail.contractNo}}</view>
       </view>
       <view class='tr'>
           <view class="tdh1">项目类型:</view>
@@ -88,29 +89,29 @@
       </view>
       <view class='tr'>
           <view class="tdh1">合同金额:</view>
-          <view class="tdh2"><input type='number'></input></view>
+          <view class="tdh2"><input name='contractMoney' value="{{contractDetail.contractMoney}}" type='number'></input></view>
       </view>
       <view class='tr'>
-        <radio-group class="radio-group" bindchange="radioChange">
-            <radio value="{{item.name}}" checked="{{item.checked}}"/>合同委托
-            <radio value="{{item.name}}" checked="{{item.checked}}"/>一般委托
+        <radio-group name="typeId" class="radio-group" bindchange="radioChange">
+            <radio value="0" checked="{{typeId==0}}" />合同委托
+            <radio value="1" checked="{{typeId==1}}"/>一般委托
         </radio-group>
       </view>
       <view class='tr'>
           <view class="tdh1">委托单位:</view>
-          <view class="tdh2"><input></input></view>
+          <view class="tdh2"><input name='contractAuthorize' value="{{contractDetail.contractAuthorize}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">委托要求:</view>
-          <view class="tdh2"><input></input></view>
+          <view class="tdh2"><input name='contractNote' value="{{contractDetail.contractNote}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">联系人:</view>
-          <view class="tdh2"><input></input></view>
+          <view class="tdh2"><input  value="{{contractDetail.contractUserName}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">联系电话:</view>
-          <view class="tdh2"><input></input></view>
+          <view class="tdh2"><input value="{{contractDetail.contractUserPhone}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">业务负责人:</view>
@@ -125,17 +126,17 @@
       </view>
       <view class='tr'>
           <view class="tdh1">签订时间:</view>
-          <view class="tdh2"><input style='width:60%;border:1px solid green' 
-           value='{{contractAddTime}}' bindtap='contractAddTimeEvent' disabled='true' bindtap='contractAddTimeEvent'></input></view>
+          <view class="tdh2"><input name='contractAddTime' style='width:60%;border:1px solid green' 
+           value='{{contractAddTime}}' bindtap='contractAddTimeEvent' disabled='true' ></input></view>
       </view>
       <view class='tr'>
           <button class='filebtn' bindtap='chooseFile'>选择文件</button>
       </view>
       <view class="tr" style='margin-top:20rpx;'>
         <button class='returnbtn' bindtap='returnDetail'>取消</button>
-        <button class='surebtn' bindtap='sureDetail'>确认</button>
+        <button class='surebtn' formType="submit">{{btnName}}</button>
       </view>
+       </form>
     </view>
-
   </view>
 </view>

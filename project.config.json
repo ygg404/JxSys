@@ -20,7 +20,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
+	"libVersion": "2.7.5",
 	"appid": "wx96b5e93c6b9d7441",
 	"projectname": "jxchat",
 	"debugOptions": {
