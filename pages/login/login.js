@@ -92,7 +92,32 @@ Page({
     })
 
   },
+  /**
+   * 获取用户ID
+   */
+  getUserId:function(){
+    let that = this;
+    wx.request({
+      url: app.globalData.WebUrl + 'user/' + that.data.userAccount + "/", //接口地址 
+      method: 'get',
+      header: {
+        Authorization: 'Bearer ' + app.globalData.SignToken,
+      },
+      success: function (res) {
+        console.log(res.data);
+        //获取权限成功
+        if (res.statusCode == 201) {
+          app.globalData.userId = res.data['id'];
+          console.log(app.globalData.userId);
+        }
+        //获取失败
+        else {
+          utils.TipModel('错误', res.data.message, 0);
+        }
 
+      }
+    })
+  },
   /**
    * 登录事件
    */
@@ -120,6 +145,7 @@ Page({
           wx.setStorage({ userAccount: that.data.userAccount, password: that.data.password });
           //获取权限
           that.getPermissions();
+          that.getUserId();
           wx.navigateTo({
             url: '../views/project-management/project-management'
           });

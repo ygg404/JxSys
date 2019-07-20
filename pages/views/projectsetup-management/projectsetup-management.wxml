@@ -2,6 +2,7 @@
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
+<calendar-component dateInfo="{{projectStartDateTime}}" wx:if="{{projectDateShow}}" bindshowEvent="ProjectDateEvent" bindsetEvent="ProjectDateEvent"></calendar-component>
 
 <view class='mycontain'>
   <view class='box'>
@@ -31,10 +32,10 @@
     </view>
 
     <view class='searchview' >
-      <button class='addbtn'>添加项目</button>
+      <button class='addbtn' bindtap='addProjectEvent'>添加项目</button>
     </view>
     <view class='searchview' >
-      <button class='addbtn'>查看项目</button>
+      <button class='addbtn' bindtap='viewProjectEvent'>查看项目</button>
     </view>
   <view class="table">
       <view class="tr">
@@ -44,13 +45,13 @@
           <view class="th th3">操作</view>
       </view>
       <view wx:for="{{tableList}}" wx:for-item="project" >
-        <view class="tr" bindtap='detailClickEvent' id="{{project.id}}">
+        <view class="tr">
             <view class='td0'>{{project.selected?'v':'>'}}</view>
-            <view class="td td1">{{project.contractNo==null?'':project.contractNo}}</view>
+            <view class="td td1" id="{{project.id}}" bindtap='detailClickEvent'>{{project.contractNo==null?'':project.contractNo}}</view>
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
-              <view><button class='resbtn'>编辑</button></view>
-              <view><button class='delbtn'>删除</button></view>
+              <view><button class='resbtn' bindtap='editEvent' id="{{project.id}}">编辑</button></view>
+              <view><button class='delbtn' bindtap='delEvent' id="{{project.id}}">删除</button></view>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
@@ -68,5 +69,131 @@
       </view>
     </view>
 
+  </view>
+</view>
+
+<view wx:if="{{addProjectShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
+      <view class='tr'>
+        <text style='padding:20rpx;'>添加项目</text>
+      </view>
+      <view class='tr' style='margin-top:40rpx;' >
+          <view class="tdh1">生产负责人:</view>
+          <view class="tdh2">
+            <picker name="projectProduce" bindchange="userChangeEvent"   value="{{userIndex}}" range="{{userNameList}}">
+              <view style='width:50%;border:1px solid green'>
+                {{userList[userIndex]['userName']}}
+              </view>
+            </picker>
+          </view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">选择合同:</view>
+          <view class="tdh2">            
+          <picker name="contractNo" bindchange="contractNoChangeEvent"   value="{{contractId}}" range="{{contractNameList}}">
+              <view style='width:70%;border:1px solid green'>
+                {{contractList[contractId]['contractName']}}
+              </view>
+            </picker>
+          </view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目名称:</view>
+          <view class="tdh2gray">{{contractDetail.contractName}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目类型:</view>
+          <view class="tdh2gray">{{contractDetail.projectType}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">委托单位:</view>
+          <view class="tdh2gray">{{contractDetail.contractAuthorize}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">联系人姓名:</view>
+          <view class="tdh2gray">{{contractDetail.contractUserName}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">联系人电话:</view>
+          <view class="tdh2gray">{{contractDetail.contractUserPhone}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">委托要求:</view>
+          <view class="tdh2gray">{{contractDetail.contractNote}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">业务负责人:</view>
+          <view class="tdh2gray">{{contractDetail.contractBusiness}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目启动时间:</view>
+          <view class="tdh2"><input name='projectStartDateTime' style='width:70%;border:1px solid green' 
+           value='{{projectStartDateTime}}' bindtap='projectStartDateTimeEvent' disabled='true' ></input></view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnEvent'>取消</button>
+        <button class='postbtn' bindtap='postEvent'>提交至项目安排</button>
+        <button class='surebtn' formType="submit">新增</button>
+      </view>
+       </form>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{viewProjectShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
+      <view class='tr'>
+        <text style='padding:20rpx;'>查看项目</text>
+      </view>
+      <view class='tr' style='margin-top:40rpx;' >
+          <view class="tdh1">生产负责人:</view>
+          <view class="tdh2gray">{{contractDetail.projectProduce}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目名称:</view>
+          <view class="tdh2gray">{{contractDetail.projectName}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目编号:</view>
+          <view class="tdh2gray">{{contractDetail.projectNo}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">委托单位:</view>
+          <view class="tdh2gray">{{contractDetail.projectAuthorize}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">联系人姓名:</view>
+          <view class="tdh2gray">{{contractDetail.contractUserName}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">联系人电话:</view>
+          <view class="tdh2gray">{{contractDetail.contractUserPhone}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">委托要求:</view>
+          <view class="tdh2gray">{{contractDetail.contractNote}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">业务负责人:</view>
+          <view class="tdh2gray">{{contractDetail.contractBusiness}}</view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">项目启动时间:</view>
+          <view class="tdh2"><input name='projectStartDateTime' style='width:70%;border:1px solid green' 
+           value='{{projectStartDateTime}}' bindtap='projectStartDateTimeEvent' disabled='true' ></input></view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnEvent'>取消</button>
+        <button class='postbtn' bindtap='postEvent'>提交至项目安排</button>
+        <!-- <button class='surebtn' formType="submit">新增</button> -->
+      </view>
+       </form>
+    </view>
   </view>
 </view>

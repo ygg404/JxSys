@@ -36,6 +36,7 @@ App({
     })
   },
   globalData: {
+    userId:'',
     userInfo: null,
     //request域名
     WebUrl: 'http://localhost:8002/jx/api/',
