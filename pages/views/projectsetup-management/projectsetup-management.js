@@ -396,7 +396,41 @@ Page({
    * 删除事件
    */
   deleteEvent:function(e){
+    let projectNo = '';
+    for (let contract of this.data.tableList) {
+      if (contract['id'] == e.currentTarget.id) {
+        projectNo = contract['projectNo'];
+        break;
+      }
+    }
 
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除编号为' + projectNo + '的合同吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          wx.request({
+            url: app.globalData.WebUrl + 'project/recycle/?projectNo=' + projectNo +'&stageId=2',
+            header: {
+              'Authorization': "Bearer " + app.globalData.SignToken
+            },
+            method: 'DELETE',
+            success: function (res) {
+              //添加修改成功
+              if (res.statusCode == 200) {
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'success',
+                  duration: 2000
+                });
+                that.getProjectsFromApi();
+              }
+            }
+          });
+        }
+      }
+
+    });
   },
   /**
    * 项目启动时间
@@ -549,6 +583,10 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 201) {
+          cDetail['projectNo'] = res.data;
+          that.setData({
+            contractDetail : cDetail
+          });
 
         }
       }

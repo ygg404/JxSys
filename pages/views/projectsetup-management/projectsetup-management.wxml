@@ -51,7 +51,7 @@
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
               <view><button class='resbtn' bindtap='editEvent' id="{{project.id}}">编辑</button></view>
-              <view><button class='delbtn' bindtap='delEvent' id="{{project.id}}">删除</button></view>
+              <view><button class='delbtn' bindtap='deleteEvent' id="{{project.id}}">删除</button></view>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
