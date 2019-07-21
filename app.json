@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/paging/editwork/editwork",
     "pages/login/login",
     "pages/views/project-management/project-management",
     "pages/views/schedule-management/schedule-management",
@@ -12,7 +13,8 @@
     "pages/views/quality-management/quality-management",
     "pages/views/output-management/output-management",
     "pages/views/authorize-management/authorize-management",
-    "pages/views/audited-management/audited-management"
+    "pages/views/audited-management/audited-management",
+    "pages/paging/editauthorize/editauthorize"
   ],
   "window": {
     "backgroundTextStyle": "light",

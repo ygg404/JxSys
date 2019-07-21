@@ -1,0 +1,70 @@
+<!--paging/editwork/editwork.wxml-->
+<view class='box'>
+  <view class='spaceAroundCenter'>
+    <view class="tr" bindtap='viewPtWorkEvent'>
+      <text>项目基本信息</text>
+      <image src="{{ptworkSelected ? '/images/tridown.png' :'/images/triup.png'}}"></image>
+    </view>
+    <view class="table"   wx:if="{{ptworkSelected}}">
+      <view class='tr detail'><text>项目名称：</text><text>{{ptwork.projectName}}</text></view>
+      <view class='tr detail'><text>业务负责人：</text><text>{{ptwork.projectBusiness}}</text></view>
+      <view class='tr detail'><text>联系人：</text><text>{{ptwork.projectPlan.userName}}</text></view>
+      <view class='tr detail'><text>联系电话：</text><text>{{ptwork.projectPlan.userPhone}}</text></view>
+      <view class='tr detail'><text>委托单位：</text><text>{{ptwork.projectPlan.projectAuthorize}}</text></view>
+      <view class='tr detail'><text>委托要求：</text><text>{{ptwork.projectPlan.projectNote}}</text></view>
+      <view class='tr detail'><text>作业内容：</text><text>{{ptwork.projectPlan.projectWorkNote}}</text></view>
+      <view class='tr detail'><text>技术要求：</text><text>{{ptwork.projectPlan.projectWorkRequire}}</text></view>
+      <view class='tr detail'><text>项目开工时间：</text><text>{{ptwork.projectBegunDate}}</text></view>
+    </view>
+    <view class="tr" bindtap='viewScheduleEvent'>
+      <text>进度记录</text>
+      <image src="{{schedSelected ? '/images/tridown.png' :'/images/triup.png'}}"></image>
+    </view>
+    <view class="table"  wx:if="{{schedSelected}}">
+       <view class="tr">
+          <view class="th th1">编号</view>
+          <view class="th th2">日期</view>
+          <view class="th th3">当前进度</view>
+          <view class="th th4">进度内容</view>
+      </view>
+      <view wx:for="{{scheduleList}}" wx:for-item="project" >
+        <view class="tr">
+            <view class='td td1'>{{project.selected?'v':'>'}}</view>
+            <view class="td td2">{{project.contractNo==null?'':project.contractNo}}</view>
+            <view class="td td3">{{project.projectName}}</view>
+            <view class="td td4">
+      
+            </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='box'>
+  <view class='spaceAroundCenter'>
+    <view class="tr" >
+        <text>项目作业信息</text>
+    </view>
+
+    <view class="tr" >
+      <textarea maxlength='-1' placeholder='技术交底内容' value='{{tshortcut}}'></textarea>
+    </view>
+
+        <view class="tr" >
+      <textarea maxlength='-1' placeholder='过程检查意见' value='{{pshortcut}}'></textarea>
+    </view>
+
+        <view class="tr" >
+      <textarea maxlength='-1' placeholder='上交资料' value='{{ishortcut}}'></textarea>
+    </view>
+
+        <view class="tr" >
+      <textarea maxlength='-1' placeholder='工作小结' value='{{wshortcut}}'></textarea>
+    </view>
+
+        <view class="tr" >
+      <textarea maxlength='-1' placeholder='工作量' value='{{ashortcut}}'></textarea>
+    </view>
+  </view>
+</view>
