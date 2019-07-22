@@ -322,6 +322,14 @@
   height: 65rpx;
 }
 
+.tr .setbtn{
+  background: #0850eb;
+  font-size: 9pt;
+  width: 22%;
+  color: whitesmoke;
+  height:65rpx;
+}
+
 /* 选择作业组 */
 /*mask*/
 .drawer_screen {
@@ -334,4 +342,26 @@
   background: #000;
   opacity: 0.2;
   overflow: hidden;
+}
+
+.form {
+  max-height: 85%;
+  width: 100%;
+  display: flex;
+  top: 0rpx;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100rpx 0;
+  z-index: 1001;
+} 
+
+.form .tabledetail{
+  background: whitesmoke;
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  padding:20rpx;
+  overflow-y:scroll; 
 }

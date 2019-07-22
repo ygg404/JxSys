@@ -146,21 +146,18 @@
   <view class='form'>
     <view class='tabledetail'>
       <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
-      <view class='tr'>
-        <text style='padding:20rpx;'>选择作业组</text>
-      </view>
-      <view wx:for="{{projectDetail.rateList}}" wx:for-item="project" >
         <view class='tr'>
-          <text>{{project.groupName}}:占比:{{project.output_rate}}%,产值:{{project.project_output}},
-            最短工期:{{project.shortDate}}天,最迟工期:{{project.lastDate}}天
-          </text>  
+          <text style='padding:20rpx;font-size:13pt;'>选择作业组</text>
         </view>
-      </view>
-      <view class="tr" style='margin-top:20rpx;'>
-        <button class='returnbtn' bindtap='returnEvent'>取消</button>
-        <button class='postbtn' bindtap='postEvent'>提交至项目安排</button>
-        <!-- <button class='surebtn' formType="submit">新增</button> -->
-      </view>
+        <view wx:for="{{projectDetail.rateList}}" wx:for-item="project" >
+          <view class='tr'>
+          </view>
+        </view>
+        <view class="tr" style='margin-top:20rpx;'>
+          <button class='returnbtn' bindtap='returnGroupEvent'>取消</button>
+          <button class='setbtn' bindtap='setGroupEvent'>确认</button>
+          <!-- <button class='surebtn' formType="submit">新增</button> -->
+        </view>
        </form>
     </view>
   </view>

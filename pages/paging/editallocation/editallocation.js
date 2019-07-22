@@ -350,7 +350,9 @@ Page({
    * 选择作业组按钮事件
    */
   chooseWorkEvent:function(e){
-
+    this.setData({
+      workGroupShow : true
+    });
   },
   /**
    *返回 
@@ -404,5 +406,19 @@ Page({
         }
       }
     });
+  },
+  /**
+   * 分组返回
+   */
+  returnGroupEvent:function(e){
+    this.setData({
+      workGroupShow:false
+    })
+  },
+  /**
+   * 确认分组
+   */
+  setGroupEvent:function(e){
+    
   }
 })
