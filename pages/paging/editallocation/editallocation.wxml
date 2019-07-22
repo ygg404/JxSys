@@ -1,0 +1,167 @@
+<!--pages/paging/editallocation/editallocation.wxml-->
+<calendar-component dateInfo="{{projectBegunDate}}" wx:if="{{dateShow}}" bindshowEvent="begunDateEvent" bindsetEvent="begunDateEvent"></calendar-component>
+<form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
+<view class='box'>
+  <view class='spaceAroundCenter'>
+    <view class='tr'>
+      项目安排信息 
+    </view>
+    
+      <view class='tr' style='margin-top:20rpx;'>
+          <view class="tdh1">项目开工时间:</view>
+          <view class="tdh2"><input name='projectBegunDate' style='width:70%;border:1px solid green' 
+            value='{{projectBegunDate}}' bindtap='begunDateShowEvent' disabled='true' ></input></view>
+      </view>
+      <!-- 执行短语 -->
+      <view class='tr'>
+        <picker bindchange="executeShortChangeEvent"   value="{{zIndex}}" range="{{zNameList}}">
+          <view style='width:200%;'>
+            {{zNameList[zIndex]}}
+          </view>
+        </picker>
+        <image src='/images/down.png'></image>
+      </view>
+      <view class='tr'>
+        <textarea placeholder='执行标准' name='projectExecuteStandard' value='{{projectDetail.projectExecuteStandard}}'   maxlength='-1' ></textarea>
+      </view>
+      <!-- 作业短语 -->
+      <view class='tr'>
+        <picker bindchange="workShortChangeEvent"   value="{{wIndex}}" range="{{wNameList}}">
+          <view style='width:200%;'>
+            {{wNameList[wIndex]}}
+          </view>
+        </picker>
+        <image src='/images/down.png'></image>
+      </view>
+      <view class='tr'>
+        <textarea placeholder='作业内容' name='projectWorkNote' value='{{projectDetail.projectWorkNote}}'  maxlength='-1' ></textarea>
+      </view>
+      <!-- 技术短语 -->
+      <view class='tr'>
+        <picker bindchange="requireShortChangeEvent"   value="{{tIndex}}" range="{{tNameList}}">
+          <view style='width:200%;'>
+            {{tNameList[tIndex]}}
+          </view>
+        </picker>
+        <image src='/images/down.png'></image>
+      </view>
+      <view class='tr'>
+        <textarea placeholder='技术要求' name='projectWorkRequire' value='{{projectDetail.projectWorkRequire}}' maxlength='-1' ></textarea>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">预计工作量:</view>
+          <view class="tdh2"><input name='projectWorkLoad' value='{{projectDetail.projectWorkLoad}}'  ></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">产值预算明细:</view>
+          <view class="tdh2"><input name='projectOutPutNote' value='{{projectDetail.projectOutPutNote}}'  ></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">预计产值:</view>
+          <view class="tdh2"><input name='projectOutPut' value='{{projectDetail.projectOutPut}}' bindinput="projectOutPutInputEvent" ></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">作业工期:</view>
+          <view class="tdh2"><input name='projectWorkDate' value='{{projectDetail.projectWorkDate}}'  ></input></view>
+      </view>
+      <view class='tr'>
+          <view class="tdh1">质检工期:</view>
+          <view class="tdh2"><input name='projectQualityDate' value='{{projectDetail.projectQualityDate}}'  ></input></view>
+      </view>
+
+  </view>
+</view>
+
+<view class='boxinfo'>
+  <view class='spaceAroundCenter'>
+    <view class='tr'>
+      项目基本信息 
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>项目名称:</view>
+      <view class='tdd2'>{{projectDetail.projectName}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>委托单位:</view>
+      <view class='tdd2'>{{projectDetail.projectAuthorize}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>业务负责人:</view>
+      <view class='tdd2'>{{projectDetail.projectBusiness}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>项目立项人:</view>
+      <view class='tdd2'>{{projectDetail.projectSetUp}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>联系电话:</view>
+      <view class='tdd2'>{{projectDetail.userPhone}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>联系人:</view>
+      <view class='tdd2'>{{projectDetail.userName}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>项目类型:</view>
+      <view class='tdd2'>{{projectDetail.projectType}}</view>
+    </view>
+    <view class='tr'>
+      <view class='tdd1'>委托要求:</view>
+      <view class='tdd2'>{{projectDetail.projectNote}}</view>
+    </view>
+  </view>
+</view>
+
+  <view class='spaceAroundCenter'>
+    <view class='tr'>
+      <button class='chooseWorkBtn' bindtap='chooseWorkEvent'>选择作业组</button>
+    </view>
+  </view>
+
+<view class='boxgroup' wx:if="{{projectDetail.rateList.length != 0}}">
+  <view class='spaceAroundCenter'>
+    <view class='tr'>作业组数据</view>
+    <view wx:for="{{projectDetail.rateList}}" wx:for-item="project" >
+        <view class='tr'>
+          <text>{{project.groupName}}:占比:{{project.output_rate}}%,产值:{{project.project_output}},
+            最短工期:{{project.shortDate}}天,最迟工期:{{project.lastDate}}天
+          </text>  
+        </view>
+    </view>
+  </view>
+</view>
+
+
+<view class='spaceAroundCenter'>
+  <view class='tr'>
+    <button class='returnbtn' bindtap='returnWorkEvent'>返回</button>
+    <button class='savebtn'  formType="submit">保存</button>
+    <button class='postbtn' bindtap='postWorkEvent'>提交至作业</button>
+  </view>
+</view>
+</form>
+
+<view wx:if="{{workGroupShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
+      <view class='tr'>
+        <text style='padding:20rpx;'>选择作业组</text>
+      </view>
+      <view wx:for="{{projectDetail.rateList}}" wx:for-item="project" >
+        <view class='tr'>
+          <text>{{project.groupName}}:占比:{{project.output_rate}}%,产值:{{project.project_output}},
+            最短工期:{{project.shortDate}}天,最迟工期:{{project.lastDate}}天
+          </text>  
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnEvent'>取消</button>
+        <button class='postbtn' bindtap='postEvent'>提交至项目安排</button>
+        <!-- <button class='surebtn' formType="submit">新增</button> -->
+      </view>
+       </form>
+    </view>
+  </view>
+</view>

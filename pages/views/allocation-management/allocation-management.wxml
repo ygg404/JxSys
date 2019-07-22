@@ -39,12 +39,12 @@
           <view class="th th3">操作</view>
       </view>
       <view wx:for="{{tableList}}" wx:for-item="project" >
-        <view class="tr" bindtap='detailClickEvent' id="{{project.id}}">
+        <view class="tr" >
             <view class='td0'>{{project.selected?'v':'>'}}</view>
-            <view class="td td1">{{project.contractNo==null?'':project.contractNo}}</view>
+            <view class="td td1"  bindtap='detailClickEvent' id="{{project.id}}">{{project.contractNo==null?'':project.contractNo}}</view>
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
-              <view><button class='resbtn'>编辑</button></view>
+              <view><button class='resbtn' id="{{project.id}}" bindtap='editEvent'>编辑</button></view>
             </view>
         </view>
         <view wx:if="{{project.selected}}">

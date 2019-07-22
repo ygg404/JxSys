@@ -1,7 +1,18 @@
-/* paging/editwork/editwork.wxss */
+/* pages/paging/editallocation/editallocation.wxss */
 .box{
   margin:20rpx;
   border: 1px solid #dadada
+}
+.boxinfo{
+  margin:20rpx;
+  background: #5f636b;
+  color: whitesmoke
+}
+.boxgroup{
+  margin: 20rpx;
+  background: #0ab133;
+  font-size: 10pt;
+  color: whitesmoke;
 }
 
 .spaceAroundCenter {
@@ -49,9 +60,10 @@
   justify-content: flex-start;
   /* padding-left: 10rpx; */
   border-bottom: 1rpx solid rgb(40, 133, 4);
-  margin-left: 8%;
+  margin-left: 5%;
   width: 90%;
-
+  font-size: 10pt;
+  color: grey;
 }
 
 .spaceAroundCenter image{
@@ -202,6 +214,10 @@
   margin-bottom: 10rpx;
 }
 
+.tr text{
+  font-size: 11pt;
+}
+
 .tr .returnbtn{
   background: #ebb608;
   font-size: 9pt;
@@ -232,4 +248,90 @@
   width: 25%;
   color: whitesmoke;
   height: 65rpx;
+}
+
+.tr .tdh1{
+  width: 35%;
+  text-align: left;
+  font-size: 11pt;
+  color: grey;
+  line-height: 200%;
+}
+
+.tr .tdh2{
+  width: 65%;
+  text-align: left;
+  font-size: 11pt;
+}
+
+.tr .tdh2 input{
+  width: 70%;
+  border-bottom: 1rpx solid #0ab133;
+}
+
+.tr .tdd1{
+  width: 35%;
+  text-align: left;
+  font-size: 11pt;
+  color: whitesmoke;
+  line-height: 200%;
+}
+
+.tr .tdd2{
+  width: 65%;
+  text-align: left;
+  font-size: 11pt;
+  color: whitesmoke;
+  line-height: 200%;
+}
+
+.tr textarea{
+  width:90%;
+  max-height: 150rpx;
+  margin-left: 5%;
+}
+
+.tr .chooseWorkBtn{
+  font-size: 11pt;
+  background: #15aef5;
+  color: whitesmoke;
+  width: 200rpx；
+}
+
+.tr .returnbtn{
+  background: #ebb608;
+  font-size: 9pt;
+  width: 22%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .savebtn{
+  background: #0850eb;
+  font-size: 9pt;
+  width: 22%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .postbtn{
+  background: #0dee20;
+  font-size: 9pt;
+  width: 40%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+/* 选择作业组 */
+/*mask*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
 }

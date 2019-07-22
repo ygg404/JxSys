@@ -249,4 +249,30 @@ Page({
       schedSelected: !selected
     })
   },
+  /**
+   * 返回事件 
+   */
+  returnEvent:function(e){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  /**
+   * 保存事件
+   */
+  saveEvent:function(e){
+
+  },
+  /**
+   * 提交至质量检查
+   */
+  postEvent:function(e){
+
+  },
+  /**
+   * 添加进度
+   */
+  addEvent:function(e){
+    
+  }
 })

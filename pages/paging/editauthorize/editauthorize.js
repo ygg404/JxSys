@@ -1,4 +1,7 @@
 // pages/paging/editauthorize/editauthorize.js
+var utils = require('../../../utils/util.js');
+var app = getApp();
+
 Page({
 
   /**

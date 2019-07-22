@@ -270,5 +270,20 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+  /**
+   * 编辑
+   */
+  editEvent:function(e){
+    let projectNo = ''
+    for(let project of this.data.tableList){
+      if(project['id'] == e.currentTarget.id){
+        projectNo = project['projectNo'];
+        break;
+      }
+    }
+    wx.navigateTo({
+      url: '../../paging/editallocation/editallocation?p_no=' + projectNo
+    })
   }
 })

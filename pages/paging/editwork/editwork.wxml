@@ -46,25 +46,70 @@
     <view class="tr" >
         <text>项目作业信息</text>
     </view>
-
+    <view class='searchview'>
+      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+        <view style='width:200%;'>
+          {{projectTypes[projectTypeID]}}
+        </view>
+      </picker>
+      <image src='/images/down.png'></image>
+    </view>
     <view class="tr" >
       <textarea maxlength='-1' placeholder='技术交底内容' value='{{tshortcut}}'></textarea>
     </view>
-
-        <view class="tr" >
+    <view class='searchview'>
+      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+        <view style='width:200%;'>
+          {{projectTypes[projectTypeID]}}
+        </view>
+      </picker>
+      <image src='/images/down.png'></image>
+    </view>
+    <view class="tr" >
       <textarea maxlength='-1' placeholder='过程检查意见' value='{{pshortcut}}'></textarea>
     </view>
 
-        <view class="tr" >
+    <view class='searchview'>
+      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+        <view style='width:200%;'>
+          {{projectTypes[projectTypeID]}}
+        </view>
+      </picker>
+      <image src='/images/down.png'></image>
+    </view>
+    <view class="tr" >
       <textarea maxlength='-1' placeholder='上交资料' value='{{ishortcut}}'></textarea>
     </view>
 
-        <view class="tr" >
+    <view class='searchview'>
+      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+        <view style='width:200%;'>
+          {{projectTypes[projectTypeID]}}
+        </view>
+      </picker>
+      <image src='/images/down.png'></image>
+    </view>
+    <view class="tr" >
       <textarea maxlength='-1' placeholder='工作小结' value='{{wshortcut}}'></textarea>
     </view>
 
-        <view class="tr" >
+    <view class='searchview'>
+      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+        <view style='width:200%;'>
+          {{projectTypes[projectTypeID]}}
+        </view>
+      </picker>
+      <image src='/images/down.png'></image>
+    </view>
+    <view class="tr" >
       <textarea maxlength='-1' placeholder='工作量' value='{{ashortcut}}'></textarea>
     </view>
   </view>
+</view>
+
+<view class='tr'>
+  <button class='returnbtn' bindtap='returnEvent'>返回</button>
+  <button class='savebtn' bindtap='saveEvent'>保存</button>
+  <button class='postbtn' bindtap='postEvent'>提交至质量检查</button>
+  <button class='addbtn' bindtap='addEvent'>添加进度</button>
 </view>
