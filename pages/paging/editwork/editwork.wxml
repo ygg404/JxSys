@@ -14,6 +14,7 @@
       <view class='tr detail'><text>委托要求：</text><text>{{ptwork.projectPlan.projectNote}}</text></view>
       <view class='tr detail'><text>作业内容：</text><text>{{ptwork.projectPlan.projectWorkNote}}</text></view>
       <view class='tr detail'><text>技术要求：</text><text>{{ptwork.projectPlan.projectWorkRequire}}</text></view>
+      <view class='tr detail'><text>执行标准：</text><text>{{ptwork.projectPlan.projectExecuteStandard}}</text></view>
       <view class='tr detail'><text>项目开工时间：</text><text>{{ptwork.projectBegunDate}}</text></view>
     </view>
     <view class="tr" bindtap='viewScheduleEvent'>
@@ -29,87 +30,124 @@
       </view>
       <view wx:for="{{scheduleList}}" wx:for-item="project" >
         <view class="tr">
-            <view class='td td1'>{{project.selected?'v':'>'}}</view>
-            <view class="td td2">{{project.contractNo==null?'':project.contractNo}}</view>
-            <view class="td td3">{{project.projectName}}</view>
-            <view class="td td4">
-      
-            </view>
+            <view class='td td1'>{{project.id}}</view>
+            <view class="td td2">{{project.scheduleCreateTime}}</view>
+            <view class="td td3">{{project.projectRate}}</view>
+            <view class="td td4">{{project.projectNote}}</view>
         </view>
       </view>
     </view>
   </view>
 </view>
 
+<form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset">
 <view class='box'>
   <view class='spaceAroundCenter'>
     <view class="tr" >
         <text>项目作业信息</text>
     </view>
     <view class='searchview'>
-      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+      <picker bindchange="tshortChangeEvent"   value="{{tindex}}" range="{{tNameList}}">
         <view style='width:200%;'>
-          {{projectTypes[projectTypeID]}}
+          {{tNameList[tindex]}}
         </view>
       </picker>
       <image src='/images/down.png'></image>
     </view>
     <view class="tr" >
-      <textarea maxlength='-1' placeholder='技术交底内容' value='{{tshortcut}}'></textarea>
+      <textarea maxlength='-1' placeholder='技术交底内容' name='disclosureNote' value='{{disclosureNote}}'></textarea>
     </view>
     <view class='searchview'>
-      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+      <picker bindchange="pshortChangeEvent"   value="{{pindex}}" range="{{pNameList}}">
         <view style='width:200%;'>
-          {{projectTypes[projectTypeID]}}
+          {{pNameList[pindex]}}
         </view>
       </picker>
       <image src='/images/down.png'></image>
     </view>
     <view class="tr" >
-      <textarea maxlength='-1' placeholder='过程检查意见' value='{{pshortcut}}'></textarea>
+      <textarea maxlength='-1' placeholder='过程检查意见' name='checkSuggestion' value='{{checkSuggestion}}'></textarea>
     </view>
 
     <view class='searchview'>
-      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+      <picker bindchange="ishortChangeEvent"   value="{{iindex}}" range="{{iNameList}}">
         <view style='width:200%;'>
-          {{projectTypes[projectTypeID]}}
+          {{iNameList[iindex]}}
         </view>
       </picker>
       <image src='/images/down.png'></image>
     </view>
     <view class="tr" >
-      <textarea maxlength='-1' placeholder='上交资料' value='{{ishortcut}}'></textarea>
+      <textarea maxlength='-1' placeholder='上交资料' name='dataName' value='{{dataName}}'></textarea>
     </view>
 
     <view class='searchview'>
-      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+      <picker bindchange="wshortChangeEvent"   value="{{windex}}" range="{{wNameList}}">
         <view style='width:200%;'>
-          {{projectTypes[projectTypeID]}}
+          {{wNameList[windex]}}
         </view>
       </picker>
       <image src='/images/down.png'></image>
     </view>
     <view class="tr" >
-      <textarea maxlength='-1' placeholder='工作小结' value='{{wshortcut}}'></textarea>
+      <textarea maxlength='-1' placeholder='工作小结' name='briefSummary' value='{{briefSummary}}'></textarea>
     </view>
 
     <view class='searchview'>
-      <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
+      <picker bindchange="ashortChangeEvent"   value="{{aindex}}" range="{{aNameList}}">
         <view style='width:200%;'>
-          {{projectTypes[projectTypeID]}}
+          {{aNameList[aindex]}}
         </view>
       </picker>
       <image src='/images/down.png'></image>
     </view>
     <view class="tr" >
-      <textarea maxlength='-1' placeholder='工作量' value='{{ashortcut}}'></textarea>
+      <textarea maxlength='-1' placeholder='工作量' name='workLoad' value='{{workLoad}}'></textarea>
     </view>
   </view>
 </view>
 
 <view class='tr'>
   <button class='returnbtn' bindtap='returnEvent'>返回</button>
-  <button class='savebtn' bindtap='saveEvent'>保存</button>
+  <button class='savebtn' formType="submit">保存</button>
   <button class='postbtn' bindtap='postEvent'>提交至质量检查</button>
   <button class='addbtn' bindtap='addEvent'>添加进度</button>
+</view>
+</form>
+
+
+<view wx:if="{{addScheduleShow}}">
+  <view class='drawer_screen'></view>
+    <view class='form'> 
+      <view class='tabledetail' >
+        <view class='tr'>
+          <text style='padding:20rpx;font-size:18pt;'>添加项目进度</text>
+        </view>
+        <view class='tr' >
+            <view class="tdd1">项目编号:</view>
+            <view class="tdd2gray">{{p_no}}</view>
+        </view>
+        <view class='tr' >
+            <view class="tdd1">项目名称:</view>
+            <view class="tdd2gray">{{p_name}}</view>
+        </view>
+        <view class='tr' >
+            <view class="tdd1" style='line-height:200%;margin-top:10rpx;'>进度条:</view>
+            <view class="tdd2">
+              <slider bindchange="sliderchangeEvent" value='{{projectRate}}' min='0' max='100' step="1" show-value/>
+            </view>
+        </view>
+
+        <view class='tr' >
+            <view class="tdd1">进度内容:</view>
+        </view>
+        <view class='tr' >
+            <textarea placeholder='进度内容' value='{{projectNote}}' bindinput='projectNoteEvent' ></textarea>
+        </view>
+        <view class="tr">
+          <button class='returncls' bindtap='schedReturnEvent'>取消</button>
+          <button class='addcls' bindtap='schedAddEvent'>添加</button>
+        </view>
+      </view>
+    </view>
 </view>

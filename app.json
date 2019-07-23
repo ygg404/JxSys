@@ -15,7 +15,8 @@
     "pages/views/audited-management/audited-management",
     "pages/paging/editwork/editwork",
     "pages/paging/editauthorize/editauthorize",
-    "pages/paging/editallocation/editallocation"
+    "pages/paging/editallocation/editallocation",
+    "pages/paging/showprojectsetup/showprojectsetup"
   ],
   "window": {
     "backgroundTextStyle": "light",

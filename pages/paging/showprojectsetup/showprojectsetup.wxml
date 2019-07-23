@@ -1,9 +1,7 @@
-<!--pages/views/projectwork-management/projectwork-management.wxml-->
-<!-- 菜单窗口 -->
-<menu-component urlId="{{urlId}}"></menu-component>
+<!--pages/paging/showprojectsetup/showprojectsetup.wxml-->
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
 
-<view class='mycontain'>
+
   <view class='box'>
     <view class='spaceAroundCenter'>
       <view style='width:45%;' >
@@ -16,6 +14,15 @@
     </view>
   </view>
   <view class='spaceAroundCenter' >
+    <view class='searchview'>
+      <picker bindchange="stageChangeEvent"   value="{{stageIndex}}" range="{{stageList}}">
+        <view style='width:200%;'>
+          {{stageList[stageIndex]}}
+        </view>
+      </picker>
+      <image src='/images/down.png'></image>
+    </view>
+
      <view class='searchview'>
       <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
         <view style='width:200%;'>
@@ -25,34 +32,31 @@
       </picker>
       <image src='/images/down.png'></image>
     </view>
-    <view class='searchview' >
+
+    <view class='searchview' style='margin-left:20rpx;'>
       <input class='inputsearch' placeholder='关键词搜索' bindinput="searchInputEvent" value='{{pagination.search}}'></input>
       <icon type='search' style='margin-left:-32px;margin-top:15rpx;'></icon>
     </view>
+
 
   <view class="table">
       <view class="tr">
           <view class='th0'></view>
           <view class="th th1">合同编号</view>
-          <view class="th th2">合同名称</view>
-          <view class="th th3">操作</view>
+          <view class="th th2">项目名称</view>
+          <view class="th th3">项目阶段</view>
       </view>
       <view wx:for="{{tableList}}" wx:for-item="project" >
-        <view class="tr" >
+        <view class="tr" bindtap='detailClickEvent' id="{{project.id}}">
             <view class='td0'>{{project.selected?'v':'>'}}</view>
-            <view class="td td1" bindtap='detailClickEvent' id="{{project.id}}">{{project.contractNo==null?'':project.contractNo}}</view>
+            <view class="td td1" >{{project.contractNo==null?'':project.contractNo}}</view>
             <view class="td td2">{{project.projectName}}</view>
-            <view class="td td3">
-              <view><button class='resbtn' bindtap='editClickEvent' id="{{project.id}}">编辑</button></view>
-              <view><button class='resbtn' bindtap='saveClickEvent' id="{{project.id}}">修改状态</button></view>
-            </view>
+            <view class="td td3">{{project.projectStage}}</view>
         </view>
         <view wx:if="{{project.selected}}">
-          <view class='tr detail'><text>委托单位：</text><text>{{project.projectAuthorize}}</text></view>
-          <view class='tr detail'><text>项目状态：</text><text>{{project.workStage == 0? "开始" : "暂停"}}</text></view>
           <view class='tr detail'><text>项目类型：</text><text>{{project.projectType}}</text></view>
-          <view class='tr detail'><text>项目阶段：</text><text>{{project.projectStage}}</text></view>
-          <view class='tr detail'><text>启动时间：</text><text>{{project.projectStartTime}}</text></view>
+          <view class='tr detail'><text>委托单位：</text><text>{{project.projectAuthorize}}</text></view>
+          <view class='tr detail'><text>开始时间：</text><text>{{project.projectStartTime}}</text></view>
         </view>
       </view>
       <view class="tr">
@@ -63,4 +67,4 @@
     </view>
 
   </view>
-</view>
+

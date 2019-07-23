@@ -374,7 +374,9 @@ Page({
    * 查看项目
    */
   viewProjectEvent: function(e){
-
+    wx.navigateTo({
+      url: '../../paging/showprojectsetup/showprojectsetup',
+    })
 
   },
   /**

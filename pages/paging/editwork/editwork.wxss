@@ -51,6 +51,8 @@
   border-bottom: 1rpx solid rgb(40, 133, 4);
   margin-left: 8%;
   width: 90%;
+  color: gray;
+  font-size: 10pt;
 
 }
 
@@ -232,4 +234,74 @@
   width: 25%;
   color: whitesmoke;
   height: 65rpx;
+}
+
+/* 添加进度 */
+/*mask*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+}
+.form {
+  max-height: 85%;
+  width: 100%;
+  display: flex;
+  top: 0rpx;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100rpx 0;
+  z-index: 1001;
+  
+
+} 
+
+.form .tabledetail{
+  background: whitesmoke;
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  padding:20rpx;
+  overflow-y:scroll; 
+}
+.tr .tdd1{
+  width: 35%;
+  color: gray;
+  font-size: 12pt;
+}
+
+.tr .tdd2gray{
+  width: 65%;
+  color: gray;
+  font-size: 12pt;
+}
+
+.tr .tdd2{
+  width: 65%;
+  font-size: 12pt;
+}
+
+.tr .returncls{
+  font-size: 11pt;
+  line-height: 200%;
+  color: #15aef5;
+  width:20%;
+  height:70rpx;
+}
+
+.tr .addcls{
+  font-size: 11pt;
+  line-height: 200%;
+  background: #15aef5;
+  color: whitesmoke;
+  width: 20%;
+  height:65rpx;
 }

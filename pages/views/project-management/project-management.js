@@ -25,7 +25,11 @@ Page({
     },  //分页参数
     has_next:false,  //是否有上下页
     has_pre:false,
-    tableList:[]  //列表数据
+    tableList:[],  //列表数据
+    stageShow: false,   //修改阶段窗口
+    contractDetail: {},  //当前项目详情
+    currentStageId: 0,
+    currentStageList:[]
   },
 
   /**
@@ -87,11 +91,14 @@ Page({
       success: function (res) {
         if (res.statusCode == 200) {
           var stagesInfo = ['所有阶段'];
+          var stagesInfoModel = []
           for (var stage of res.data) {
             stagesInfo.push(stage.name);
+            stagesInfoModel.push(stage.name);
           }
           that.setData({
-            stages: stagesInfo
+            stages: stagesInfo,
+            currentStageList: stagesInfoModel
           })
         }
 
@@ -188,6 +195,7 @@ Page({
     })
     this.getProjectsFromApi();
   },
+
   /**
    * 日历事件
    */
@@ -263,6 +271,66 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+  /**
+ * 修改项目阶段
+ */
+  curStageChangeEvent: function (e) {
+    this.setData({
+      currentStageId:e.detail.value
+    })
+  },
+  /**
+   * 阶段改变
+   */
+  changeStageEvent:function(e){
+    for (let project of this.data.tableList) {
+      if (project['id'] == e.currentTarget.id) {
+        let index = this.data.currentStageList.indexOf(project['projectStage'])
+        this.setData({
+          contractDetail: project,
+          stageShow:true,
+          currentStageId: index 
+        });
+        break;
+      }
+    }
+  },
+  /**
+   * 取消
+   */
+  returnEvent:function(e){
+    this.setData({
+      stageShow:false
+    })
+  },
+  /**
+   * 保存
+   */
+  saveEvent:function(e){
+    var that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "project/stage/",
+      method: 'POST',
+      data: {
+        projectNo: that.data.contractDetail.projectNo,
+        projectStage: parseInt(that.data.currentStageId) + 1
+      },
+      // 设置请求的 header  
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示',res.data.message);
+          that.setData({
+            stageShow: false
+          })
+          that.getProjectsFromApi();
+        }
+
+      }
+    })
   }
 
 })

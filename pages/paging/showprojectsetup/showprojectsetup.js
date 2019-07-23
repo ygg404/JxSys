@@ -1,4 +1,4 @@
-// pages/views/projectwork-management/projectwork-management.js
+// pages/paging/showprojectsetup/showprojectsetup.js
 var utils = require('../../../utils/util.js');
 var app = getApp();
 
@@ -8,22 +8,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    urlId: 'projectwork-management',
     calendarShow: false,    //日历显示
     setStartflag: false, //设置开始日期标志
-    dateInfo: '',
-    projectTypes: [],  //阶段选择
+    projectTypes: [],  //类型选择
     projectTypeID: 0,
+    stageList:[],   //阶段选择
+    stageIndex:0, 
+    dateInfo: '',
     pagination: {
       'page': 1,
       'rowsPerPage': 10,
-      'sortBy': 'id',
+      'sortBy': 'projectNo',
       'startDate': '', //开始日期
       'endDate': '',// 结束日期
       'search': '',
       'p_stage': 1,
-      'descending': true,
-      'stageId': 3
+      'stageId': '',
+      'descending': true
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,
@@ -34,8 +35,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.getProjectTypesInfo();
-      this.getProjectsFromApi();
+    this.getProjectsFromApi();
+    this.getStageInfo();
+    this.getProjectTypesInfo();
   },
 
   /**
@@ -49,7 +51,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad();
+
   },
 
   /**
@@ -80,8 +82,33 @@ Page({
 
   },
   /**
- * 获取项目类型
- */
+  * 获取阶段类型
+  */
+  getStageInfo: function () {
+    var that = this;
+    //加载阶段选项
+    wx.request({
+      url: app.globalData.WebUrl + "stage/",
+      method: 'GET', 
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          var stagesInfo = ['所有阶段'];
+          for (var stage of res.data) {
+            stagesInfo.push(stage.name);
+          }
+          that.setData({
+            stageList : stagesInfo
+          })
+        }
+      }
+    })
+  },
+  /**
+* 获取项目类型
+*/
   getProjectTypesInfo: function () {
     var that = this;
     //加载阶段选项
@@ -110,13 +137,13 @@ Page({
     })
   },
   /**
-   * 项目立项列表
+   * 合同管理列表
    */
   getProjectsFromApi: function () {
     var pagination = this.data.pagination;
     var that = this;
     wx.request({
-      url: app.globalData.WebUrl + "projectByWork/",
+      url: app.globalData.WebUrl + "projectSetUp/",
       method: 'GET',
       data: {
         page: pagination.page,
@@ -185,6 +212,18 @@ Page({
       setStartflag: false,
       dateInfo: endDate
     });
+  },
+  /**
+   * 阶段改变
+   */
+  stageChangeEvent:function(e){
+    let pagination = this.data.pagination;
+    pagination.stageId = e.detail.value == 0?'':e.detail.value;
+    this.setData({
+      stageIndex : e.detail.value,
+      pagination : pagination
+    });
+    this.getProjectsFromApi();
   },
   /**
    * 类型改变
@@ -277,20 +316,5 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
-  },
-  /**
-   *编辑事件 
-   */
-  editClickEvent:function(e){
-    let curPro = {};
-    for(let project of this.data.tableList){
-      if(project['id'] == e.currentTarget.id){
-        curPro = project;
-        wx.navigateTo({
-          url: '../../paging/editwork/editwork?p_no=' + curPro['projectNo'] + '&p_group=' + curPro['groupId'] + '&p_name=' + curPro['projectName'],
-        });
-        break;
-      }
-    }
-  },
+  }
 })
