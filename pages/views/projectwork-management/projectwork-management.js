@@ -293,4 +293,36 @@ Page({
       }
     }
   },
+  /**
+ *修改状态事件 
+ */
+  saveClickEvent: function (e) {
+    let curPro = {};
+    for (let project of this.data.tableList) {
+      if (project['id'] == e.currentTarget.id) {
+        curPro = project;
+        break;
+      }
+    }
+    var that = this;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'projectWork/update/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectStage: curPro.workStage == 0? 1:0,
+        projectNo: curPro.projectNo
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示', res.data.message);
+          that.getProjectsFromApi();
+        }
+      }
+    });   
+
+  },
 })
