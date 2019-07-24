@@ -14,32 +14,24 @@
       <view class='tr detail'><text>作业内容：</text><text>{{ptwork.projectPlan.projectWorkNote}}</text></view>
       <view class='tr detail'><text>工作小结：</text><text>{{ptwork.projectWork.briefSummary}}</text></view>
     </view>
-    <view class="tr" bindtap='viewScheduleEvent'>
+    <view class="tr" bindtap='viewBackEvent'>
       <text>返修记录</text>
       <image src="{{backSelected ? '/images/tridown.png' :'/images/triup.png'}}"></image>
     </view>
     <view class="table"  wx:if="{{backSelected}}">
-       <view class="tr">
-          <view class="th th1">编号</view>
-          <view class="th th2">日期</view>
-          <view class="th th3">当前进度</view>
-          <view class="th th4">进度内容</view>
-      </view>
-      <view wx:for="{{scheduleList}}" wx:for-item="project" >
-        <view class="tr">
-            <view class='td td1'>{{project.id}}</view>
-            <view class="td td2">{{project.scheduleCreateTime}}</view>
-            <view class="td td3">{{project.projectRate}}</view>
-            <view class="td td4">{{project.projectNote}}</view>
+      <view wx:for="{{backList}}" wx:for-item="back" >
+        <view class="tr detail" style='font-size:10pt;'>
+          {{back.backNote}}
         </view>
       </view>
     </view>
   </view>
 </view>
 
+<form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
 <view class='box'>
   <view class='spaceAroundCenter'>
-
+    
     <view class="tr">
       <text>质量检查信息</text>
     </view>
@@ -59,9 +51,9 @@
 
     <view class='tr'>
       <input placeholder='内容评分' type='number' name='qualityScore' value='{{qualityScore}}' bindinput='qualityScoreEvent'
-       style='border-bottom:1px solid green;margin:20rpx;'></input>
+       style='border-bottom:1px solid green;margin:20rpx;font-size:12pt;'></input>
     </view>
-
+    
   </view>
 </view>
 
@@ -71,3 +63,4 @@
   <button class='postbtn' bindtap='postEvent'>提交至质量核算</button>
   <button class='addbtn' bindtap='addEvent'>退回返修</button>
 </view>
+</form>

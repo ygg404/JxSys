@@ -83,7 +83,7 @@
          <view class="tr" wx:for="{{curPro.backWorkList}}" wx:for-item="detail">
             <view class="tdd tdd1">{{detail.backcreatedtime}}</view>
             <view class="tdd tdd2">{{detail.backNote}}</view>
-            <view class="tdd tdd3">{{detail.projectNote}}</view>
+            <view class="tdd tdd3">{{detail.note}}</view>
             <view class="tdd tdd4"><button id='{{detail.id}}' bindtap='backEditEvent'>编辑</button></view>
          </view>
       <view class="tr" style='margin-top:40rpx;'>
@@ -113,7 +113,7 @@
         </view>
       </view>
       <view class='tr'>
-        <textarea placeholder='回复内容' value='{{executes}}'></textarea>
+        <textarea placeholder='回复内容' value='{{executes}}' bindinput='executesInputEvent'></textarea>
       </view>
       <view class="tr" style='margin-top:40rpx;'>
         <button bindtap='returnShortCutEvent' class='backResBtn'>取消</button>

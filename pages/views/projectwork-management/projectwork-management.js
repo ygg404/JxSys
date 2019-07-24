@@ -411,6 +411,14 @@ Page({
     })
   },
   /**
+   * 回复短语输入
+   */
+  executesInputEvent:function(e){
+    this.setData({
+      executes:e.detail.value
+    })
+  },
+  /**
    * 提交回复短语
    */
   postShortCutEvent:function(e){
@@ -433,9 +441,10 @@ Page({
       success: function (res) {
         if (res.statusCode == 200) {
           utils.TipModel('提示', res.data.message);
-          taht.setData({
+          that.setData({
             backEditShow:false,
-            backShow:false
+            backShow:false,
+            executes:''
           })
           that.getProjectsFromApi();
         }

@@ -11,6 +11,7 @@ Page({
     ptworkSelected:false,
     backSelected:false,
     ptwork:{},
+    backList:[],  //返修记录
     cshortcutList:[], //质量检查
     cNameList:[],
     cindex:0,
@@ -32,6 +33,8 @@ Page({
     })
     this.getProjectinfo();
     this.getShortCutList();
+    this.getBackListInfo();
+    this.wxValidateInit();
   },
 
   /**
@@ -75,37 +78,19 @@ Page({
   wxValidateInit: function () {
     this.WxValidate = app.wxValidate(
       {
-        disclosureNote: {
+        qualityNote: {
           required: true,
         },
-        checkSuggestion: {
-          required: true,
-        },
-        dataName: {
-          required: true,
-        },
-        briefSummary: {
-          required: true,
-        },
-        workLoad: {
+        qualityScore: {
           required: true,
         }
       }
       , {
-        disclosureNote: {
-          required: '请填写技术交底',
+        qualityNote: {
+          required: '请填写质量综述',
         },
-        checkSuggestion: {
-          required: '请填写过程检查',
-        },
-        dataName: {
-          required: '请填写上交资料',
-        },
-        briefSummary: {
-          required: '请填写工作小结',
-        },
-        workLoad: {
-          required: '请填写工作量',
+        qualityScore: {
+          required: '请填写质量评分',
         }
       }
     )
@@ -189,6 +174,27 @@ Page({
     })
   },
   /**
+   * 获取返修记录
+   */
+  getBackListInfo:function(){
+    let that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "project/back/?projectNo=" + that.data.p_no + "&groupId=" + that.data.p_group,
+      method: 'GET',
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.statusCode == 201) {
+          that.setData({
+            backList: res.data
+          })
+        }
+      }
+    });
+  },
+  /**
    * 获取项目基本信息
    */
   getProjectinfo: function () {
@@ -236,6 +242,15 @@ Page({
     })
   },
   /**
+   * 查看返修记录
+   */
+  viewBackEvent:function(e){
+    let selected = this.data.backSelected;
+    this.setData({
+      backSelected: !selected
+    })
+  },
+  /**
    * 退回返修
    */
   returnEvent:function(e){
@@ -243,4 +258,41 @@ Page({
       detla:1
     });
   },
+  /**
+  * 保存项目
+  */
+  formSubmit: function (e) {
+    //提交错误描述
+    if (!this.WxValidate.checkForm(e)) {
+      const error = this.WxValidate.errorList[0];
+      wx.showToast({
+        title: `${error.msg} `,
+        image: '/images/warn.png',
+        duration: 2000
+      })
+      return false;
+    }
+    var that = this;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'projectQuality/update/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        checkSuggestion: null,
+        groupId: that.data.p_group,
+        projectNo: that.data.p_no,
+        qualityNote: e.detail.value.qualityNote,
+        qualityScore: e.detail.value.qualityScore,
+        userAccount: app.globalData.userAccount
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示', res.data.message);
+        }
+      }
+    });
+  }
 })

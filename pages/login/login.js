@@ -146,6 +146,7 @@ Page({
           //获取权限
           that.getPermissions();
           that.getUserId();
+          app.globalData.userAccount = that.data.userAccount;
           wx.navigateTo({
             url: '../views/project-management/project-management'
           });
