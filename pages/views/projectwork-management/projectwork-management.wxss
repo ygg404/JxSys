@@ -190,3 +190,189 @@
   color: grey;
   margin-top: 40rpx;
 }
+
+/* 返修 */
+/*mask*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+}
+.form {
+  max-height: 85%;
+  width: 100%;
+  display: flex;
+  top: 0rpx;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100rpx 0;
+  z-index: 1001;
+  
+
+} 
+
+.form .tabledetail{
+  background: whitesmoke;
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  padding:20rpx;
+  overflow-y:scroll; 
+}
+
+.tr .title{
+  font-size: 17pt;
+  font-weight: 700;
+
+}
+
+.tr .tdh{
+  font-size: 9pt;
+  color: gray
+}
+
+.tr .tdh1{
+  border-bottom: 1px solid gray;
+  width: 25%;
+}
+
+.tr .tdh2{
+  border-bottom: 1px solid gray;
+  width: 25%;
+}
+
+.tr .tdh3{
+  border-bottom: 1px solid gray;
+  width: 30%;
+}
+
+.tr .tdh4{
+  border-bottom: 1px solid gray;
+  width: 20%;
+}
+
+.tr .tdd{
+  font-size: 9pt;
+}
+
+.tr .tdd1{
+  width: 25%;
+}
+
+.tr .tdd2{
+  width: 25%;
+}
+
+.tr .tdd3{
+  width: 30%;
+}
+
+.tr .tdd4{
+  width: 20%;
+}
+
+.tr .tdd4 button{
+  width: 90%;
+  font-size: 9pt;
+  color: #15aef5;
+  line-height: 200%;
+  max-height: 55rpx;
+}
+
+.tr .backResBtn{
+  margin-right: 0px;
+  color: #15aef5;
+  font-size: 12pt;
+  line-height: 200%;
+  width: 200rpx;
+  height: 70rpx;
+}
+
+/* 回复短语 */
+/*mask*/
+.back_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1002;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+}
+.rform {
+  max-height: 85%;
+  width: 100%;
+  display: flex;
+  top: 0rpx;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100rpx 0;
+  z-index: 1003;
+
+} 
+
+.rform .tabledetail{
+  background: whitesmoke;
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  padding:20rpx;
+  overflow-y:scroll; 
+}
+
+.space {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 65rpx;
+  font-size: 10pt;
+  width: 100%;
+}
+
+.space .searchview{
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.space picker{
+  display: flex;
+  flex-flow: row wrap;
+  /* text-align: center; */
+  justify-content: flex-start;
+  /* padding-left: 10rpx; */
+  border-bottom: 1rpx solid rgb(40, 133, 4);
+  margin-left: 8%;
+  width: 90%;
+  color: gray;
+
+}
+
+.space image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: -50rpx;
+  margin-top: 10rpx;
+}
+
+.tr textarea{
+  margin-top: 10rpx;
+  font-size: 10pt;
+  max-height: 200rpx;
+  width: 100%;
+  border: 1px solid #0ab133;
+  margin-bottom: 12rpx;
+}

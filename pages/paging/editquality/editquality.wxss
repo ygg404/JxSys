@@ -1,10 +1,18 @@
-/* pages/views/quality-management/quality-management.wxss */
-.mycontain{
-  margin-top: 130rpx;
-}
-
+/* pages/paging/editquality/editquality.wxss */
 .box{
   margin:20rpx;
+  border: 1px solid #dadada
+}
+.boxinfo{
+  margin:20rpx;
+  background: #5f636b;
+  color: whitesmoke
+}
+.boxgroup{
+  margin: 20rpx;
+  background: #0ab133;
+  font-size: 10pt;
+  color: whitesmoke;
 }
 
 .spaceAroundCenter {
@@ -33,7 +41,7 @@
 }
 
 .spaceAroundCenter .searchview{
-  width: 45%;
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   font-size: 13pt;
@@ -52,9 +60,10 @@
   justify-content: flex-start;
   /* padding-left: 10rpx; */
   border-bottom: 1rpx solid rgb(40, 133, 4);
-  margin-left: 8%;
+  margin-left: 5%;
   width: 90%;
-
+  font-size: 10pt;
+  color: grey;
 }
 
 .spaceAroundCenter image{
@@ -109,10 +118,15 @@
 }
 
 .th2,.td2{
-  width: 47%;
+  width: 30%;
 }
 
 .th3,.td3{
+  width: 20%;
+
+}
+
+.th4,.td4{
   width: 30%;
 
 }
@@ -191,8 +205,132 @@
   margin-top: 40rpx;
 }
 
+.tr textarea{
+  margin-top: 10rpx;
+  font-size: 10pt;
+  max-height: 200rpx;
+  width: 100%;
+  border: 1px solid #0ab133;
+  margin-bottom: 10rpx;
+}
 
-/* 进度详情 */
+.tr text{
+  font-size: 11pt;
+}
+
+.tr .returnbtn{
+  background: #ebb608;
+  font-size: 9pt;
+  width: 18%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .savebtn{
+  background: #0850eb;
+  font-size: 9pt;
+  width: 18%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .postbtn{
+  background: #0dee20;
+  font-size: 9pt;
+  width: 35%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .addbtn{
+  background: #e74c4c;
+  font-size: 9pt;
+  width: 27%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .tdh1{
+  width: 35%;
+  text-align: left;
+  font-size: 11pt;
+  color: grey;
+  line-height: 200%;
+}
+
+.tr .tdh2{
+  width: 65%;
+  text-align: left;
+  font-size: 11pt;
+}
+
+.tr .tdh2 input{
+  width: 70%;
+  border-bottom: 1rpx solid #0ab133;
+}
+
+.tr .tdd1{
+  width: 35%;
+  text-align: left;
+  font-size: 11pt;
+  color: whitesmoke;
+  line-height: 200%;
+}
+
+.tr .tdd2{
+  width: 65%;
+  text-align: left;
+  font-size: 11pt;
+  color: whitesmoke;
+  line-height: 200%;
+}
+
+.tr textarea{
+  width:90%;
+  max-height: 150rpx;
+  margin-left: 5%;
+}
+
+.tr .chooseWorkBtn{
+  font-size: 11pt;
+  background: #15aef5;
+  color: whitesmoke;
+  width: 200rpx；
+}
+
+.tr .returnbtn{
+  background: #ebb608;
+  font-size: 9pt;
+  width: 22%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .savebtn{
+  background: #0850eb;
+  font-size: 9pt;
+  width: 22%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .postbtn{
+  background: #0dee20;
+  font-size: 9pt;
+  width: 40%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .setbtn{
+  background: #0850eb;
+  font-size: 9pt;
+  width: 22%;
+  color: whitesmoke;
+  height:65rpx;
+}
+
+/* 选择作业组 */
 /*mask*/
 .drawer_screen {
   width: 100%;
@@ -207,7 +345,7 @@
 }
 
 .form {
-  height: 100%;
+  max-height: 85%;
   width: 100%;
   display: flex;
   top: 0rpx;
@@ -215,8 +353,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
+  padding: 100rpx 0;
   z-index: 1001;
 } 
 
@@ -226,54 +363,5 @@
   flex-flow: row wrap;
   width: 90%;
   padding:20rpx;
-}
-
-.form .tabledetail .tdh{
-  background: #a8a5a5;
-  font-size: 28rpx;
-  color: whitesmoke;
-  padding: 5px;
-  text-align: left;
-}
-
-.tdh1{
-  width: 25%;
-  border-right: 1px solid #fffdfd;
-}
-
-.tdh2{
-  width: 35%;
-  border-right: 1px solid #fffdfd;
-}
-
-.tdh3{
-  width: 40%;
-}
-
-.form .tabledetail .tdd{
-  font-size: 20rpx;
-  padding: 5px;
-  text-align: left;
-}
-
-.tdd1{
-  width: 25%;
-}
-
-.tdd2{
-  width: 35%;
-}
-
-.tdd3{
-  width: 40%;
-}
-
-.form .tabledetail button{
-  color: #15aef5;
-  width: 150rpx;
-  height: 60rpx;
-  margin-top: 64rpx;
-  margin-left: 70%;
-  font-size: 12pt;
-  line-height: 185%;
+  overflow-y:scroll; 
 }

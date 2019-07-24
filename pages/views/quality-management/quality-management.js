@@ -27,7 +27,9 @@ Page({
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,
-    tableList: []  //列表数据
+    tableList: [],  //列表数据
+    curPro:{}, //当前项目
+    backShow:false //返修记录显示
   },
 
   /**
@@ -278,5 +280,42 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+  /**
+   * 编辑事件
+   */
+  editEvent:function(e){
+    for(let project of this.data.tableList){
+      if(project['id'] == e.currentTarget.id){
+        wx.navigateTo({
+          url: '../../paging/editquality/editquality?p_no=' + project['projectNo']  +'&p_group=' + project['groupId'],
+        });
+        break;
+      }
+    }
+  },
+  /**
+   * 返修记录
+   */
+  backClickEvent:function(e){
+    for(let project of this.data.tableList){
+      if(project['id'] == e.currentTarget.id){
+        this.setData({
+          curPro : project,
+          backShow:true
+        });
+        break;
+      }
+    }
+  },
+
+  /**
+   * 返修记录取消
+   */
+  returnDetailEvent:function(e){
+    this.setData({
+      backShow: false
+    });
   }
+
 })

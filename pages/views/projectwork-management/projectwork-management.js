@@ -11,6 +11,8 @@ Page({
     urlId: 'projectwork-management',
     calendarShow: false,    //日历显示
     setStartflag: false, //设置开始日期标志
+    backShow:false,  //返修显示
+    backEditShow:false, //返修编辑显示
     dateInfo: '',
     projectTypes: [],  //阶段选择
     projectTypeID: 0,
@@ -27,7 +29,13 @@ Page({
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,
-    tableList: []  //列表数据
+    tableList: [],  //列表数据
+    curPro:{}, //当期项目
+    rshortcutList:[], //回复短语
+    rNameList:[],
+    rindex:0,
+    backId:'',
+    executes:''  //回复内容
   },
 
   /**
@@ -36,6 +44,7 @@ Page({
   onLoad: function (options) {
       this.getProjectTypesInfo();
       this.getProjectsFromApi();
+      this.getShortCutList();
   },
 
   /**
@@ -78,6 +87,42 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  /**
+   *获取快捷短语 
+   */
+  getShortCutList:function()
+  {
+    var that =this;
+      wx.request({
+      url: app.globalData.WebUrl + "shortcut/13/",
+      method: 'GET',
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          let nameList = ['回复短语快捷输入'];
+          for (let shortcut of res.data) {
+            nameList.push(shortcut.shortNote);
+          }
+          that.setData({
+            rshortcutList: res.data,
+            rNameList: nameList
+          })
+        }
+      }
+    });
+  },
+  /**
+   * 回复短语快捷输入
+   */
+  rshotrcutChangeEvent:function(e){
+    let executes = e.detail.value==0?'':this.data.rNameList[e.detail.value];
+    this.setData({
+      tindex:e.detail.value,
+      executes: executes
+    })
   },
   /**
  * 获取项目类型
@@ -325,4 +370,77 @@ Page({
     });   
 
   },
+  /**
+   * 返修事件
+   */
+  backClickEvent:function(e){
+    for(let pro of this.data.tableList){
+      if(pro['id'] == e.currentTarget.id){
+        this.setData({
+          curPro: pro,
+          backShow: true
+        });
+        break;
+      }
+    }
+
+  },
+  /**
+   * 返修编辑事件
+   */
+  backEditEvent:function(e){
+    this.setData({
+      backId: e.currentTarget.id,
+      backEditShow:true
+    });
+  },
+  /**
+   * 取消
+   */
+  returnBackEvent:function(e){
+    this.setData({
+      backShow:false
+    })
+  },
+  /**
+   * 取消恢复短语
+   */
+  returnShortCutEvent:function(e){
+    this.setData({
+      backEditShow:false
+    })
+  },
+  /**
+   * 提交回复短语
+   */
+  postShortCutEvent:function(e){
+    var that = this;
+    if(that.data.executes == ''){
+      utils.TipModel('错误', '请填写回复短语',0);
+      return;
+    }
+    //提交短语
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'addNote/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        back_id: that.data.backId,
+        note: that.data.executes
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示', res.data.message);
+          taht.setData({
+            backEditShow:false,
+            backShow:false
+          })
+          that.getProjectsFromApi();
+        }
+      }
+    });  
+  }
+
 })

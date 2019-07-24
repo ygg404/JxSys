@@ -76,7 +76,7 @@
           <view class="tdh tdh2">当前进度</view>
           <view class="tdh tdh3">进度内容</view>
       </view>
-         <view class="tr" wx:for="{{detailList}}" wx:for-item="detail">
+         <view class="tr" wx:for="{{curPro.backWorkList}}" wx:for-item="detail">
             <view class="tdd tdd1">{{detail.scheduleCreateTime}}</view>
             <view class="tdd tdd2">{{detail.projectRate}}</view>
             <view class="tdd tdd3">{{detail.projectNote}}</view>

@@ -388,7 +388,7 @@ Page({
         dataName: e.detail.value.dataName,
         disclosureNote: e.detail.value.disclosureNote,
         workLoad: e.detail.value.workLoad,
-        finishDateTime: null,
+        finishDateTime: that.data.ptwork.finishDateTime,
         groupId: that.data.p_group,
         projectNo: that.data.p_no,
         

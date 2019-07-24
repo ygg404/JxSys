@@ -45,6 +45,7 @@
             <view class="td td3">
               <view><button class='resbtn' bindtap='editClickEvent' id="{{project.id}}">编辑</button></view>
               <view><button class='resbtn' bindtap='saveClickEvent' id="{{project.id}}">修改状态</button></view>
+              <view><button class='resbtn' wx:if='{{project.backWorkList!=null}}' bindtap='backClickEvent' id="{{project.id}}">返修</button></view>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
@@ -59,6 +60,64 @@
           <button class="{{has_pre?'btnfont_has':'btnfont_no'}}" disabled="{{has_pre?false:true}}" bindtap='prePage' >上一页</button>
           <text class='trtext'>第{{pagination.page}}页</text>
           <button class="{{has_next?'btnfont_has':'btnfont_no'}}" disabled="{{has_next?false:true}}" bindtap='nextPage'>下一页</button>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+<view wx:if="{{backShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail' >
+      <view class='tr'>
+        <text style='padding:20rpx;' class='title'>项目返修内容</text>
+      </view>
+      <view class='tr' >
+          <view class="tdh tdh1">返修日期</view>
+          <view class="tdh tdh2">返修内容</view>
+          <view class="tdh tdh3">提交内容</view>
+          <view class="tdh tdh4"></view>
+      </view>
+         <view class="tr" wx:for="{{curPro.backWorkList}}" wx:for-item="detail">
+            <view class="tdd tdd1">{{detail.backcreatedtime}}</view>
+            <view class="tdd tdd2">{{detail.backNote}}</view>
+            <view class="tdd tdd3">{{detail.projectNote}}</view>
+            <view class="tdd tdd4"><button id='{{detail.id}}' bindtap='backEditEvent'>编辑</button></view>
+         </view>
+      <view class="tr" style='margin-top:40rpx;'>
+        <view></view>
+        <button bindtap='returnBackEvent' class='backResBtn'>取消</button>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view wx:if="{{backEditShow}}">
+  <view class='back_screen'></view>
+  <view class='rform'>
+    <view class='tabledetail' >
+      <view class='tr' >
+        <view class='space'  >
+        <view class='searchview' >
+              <picker bindchange="rshotrcutChangeEvent"   value="{{rindex}}" range="{{rNameList}}">
+                <view style='width:200%;'>
+                  {{rNameList[rindex]}}
+                </view>
+                <!-- <icon type='download'   ></icon> -->
+              </picker>
+              <image src='/images/down.png'></image>
+        </view>
+        </view>
+      </view>
+      <view class='tr'>
+        <textarea placeholder='回复内容' value='{{executes}}'></textarea>
+      </view>
+      <view class="tr" style='margin-top:40rpx;'>
+        <button bindtap='returnShortCutEvent' class='backResBtn'>取消</button>
+        <button bindtap='postShortCutEvent' class='backResBtn'>提交</button>
       </view>
     </view>
 
