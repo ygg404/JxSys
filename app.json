@@ -17,7 +17,8 @@
     "pages/paging/editauthorize/editauthorize",
     "pages/paging/editallocation/editallocation",
     "pages/paging/showprojectsetup/showprojectsetup",
-    "pages/paging/editquality/editquality"
+    "pages/paging/editquality/editquality",
+    "pages/paging/editoutput/editoutput"
   ],
   "window": {
     "backgroundTextStyle": "light",

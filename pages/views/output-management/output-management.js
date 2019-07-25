@@ -277,5 +277,18 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+  /**
+   * 产值核算编辑
+   */
+  editClickEvent:function(e){
+    for(let project of this.data.tableList){
+      if(project['id'] == e.currentTarget.id){
+        wx.navigateTo({
+          url: '../../paging/editoutput/editoutput?p_no=' + project['projectNo'],
+        });
+        break;
+      }
+    }
   }
 })

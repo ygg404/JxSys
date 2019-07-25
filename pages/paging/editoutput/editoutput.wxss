@@ -1,0 +1,181 @@
+/* pages/paging/editoutput/editoutput.wxss */
+.box{
+  margin:20rpx;
+  border: 1px solid #dadada
+}
+
+.spaceAroundCenter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 65rpx;
+  font-size: 16pt;
+}
+
+.spaceAroundCenter .inputdate{
+  height: 70rpx;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  border:1px solid rgb(40, 133, 4)
+}
+
+.spaceAroundCenter .inputsearch{
+  width: 95%;
+  height: 70rpx;
+  text-align: left;
+  align-items: center;
+  border-bottom:1px solid rgb(40, 133, 4)
+}
+
+.spaceAroundCenter .searchview{
+  width: 90%;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 13pt;
+}
+
+.spaceAroundCenter .searchview .addbtn{
+  width:66%;
+  background: #0ab133;
+  color: whitesmoke;
+}
+
+.spaceAroundCenter picker{
+  display: flex;
+  flex-flow: row wrap;
+  /* text-align: center; */
+  justify-content: flex-start;
+  /* padding-left: 10rpx; */
+  border-bottom: 1rpx solid rgb(40, 133, 4);
+  margin-left: 8%;
+  width: 90%;
+  color: gray;
+  font-size: 10pt;
+
+}
+
+.spaceAroundCenter image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: -50rpx;
+  margin-top: 10rpx;
+}
+
+.spaceAroundCenter icon{
+  margin-left: -70rpx;
+  margin-top: 20rpx;
+  z-index: -1
+}
+
+.table{
+  border:1px solid #098305;
+  margin-top: 10rpx;
+  width: 99%;
+}
+
+.th{
+  background: gray;
+  border: 1px solid gray;
+  font-size: 9pt;
+  border-right: 1px solid #0ab133;
+}
+
+.th1{
+  width: 23%;
+}
+
+.th2{
+  width: 17%;
+}
+
+.th3{
+  width: 15%;
+}
+
+.th4{
+  width: 15%;
+}
+
+.th5{
+  width: 15%;
+}
+
+.th6{
+  width: 15%;
+}
+
+.td{
+  background: whitesmoke;
+  border-bottom: 1px solid #0ab133;
+  border-right: 1px solid #0ab133;
+  font-size: 10pt;
+
+}
+
+.tr{
+  text-align: left;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail{
+  background: #dadada;
+  width: 100%;
+  font-size: 9pt;
+  text-align: left;
+  justify-content: flex-start;
+  word-break: normal; 
+}
+
+.outPutBox{
+  width: 100%;
+  font-size: 11pt;
+  text-align: left;
+  justify-content: flex-start;
+  word-break: normal; 
+}
+
+.checkBox{
+  max-height: 380rpx;
+  overflow-y: scroll;
+  border: 1px solid #0ab133;
+}
+
+.radio-group{
+  border: 1px solid #0ab133;
+}
+
+.groupclass{
+  margin-bottom: 20rpx;
+}
+
+.groupgray{
+  color: gray;
+}
+
+.rtbtn{
+  width: 25%;
+  background: #e4b416;
+  color: white;
+  font-size: 11pt;
+  line-height: 200%;
+}
+
+.savebtn{
+  width: 25%;
+  background: #129cdb;
+  color: whitesmoke;
+  font-size: 11pt;
+  line-height: 200%;
+}
+
+.postbtn{
+  width: 40%;
+  background: #0ab133;
+  color: whitesmoke;
+  font-size: 11pt;
+  line-height: 200%;
+}
