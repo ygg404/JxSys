@@ -259,7 +259,7 @@ Page({
   },
 
   /**
-   * 下一页
+   * 上一页
    */
   prePage: function (e) {
     let pagination = this.data.pagination;
@@ -268,6 +268,9 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
   },
 
   /**
@@ -280,6 +283,9 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
   },
 
 /**

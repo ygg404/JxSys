@@ -83,6 +83,7 @@ Page({
         //获取权限成功
         if (res.statusCode == 200) {
           app.globalData.permissions = res.data;
+          //要跳转的首页
           let index = first.firstLoad()
           wx.navigateTo({
             url: '../views/' + index + '/' + index

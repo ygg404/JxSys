@@ -310,6 +310,9 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
   },
 
   /**
@@ -322,6 +325,9 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
   },
   /**
    *编辑事件 
