@@ -278,5 +278,18 @@ Page({
       pagination: pagination
     });
     this.getProjectsFromApi();
+  },
+  /**
+   * 查看
+   */
+  viewClickEvent:function(e){
+    for (let project of this.data.tableList) {
+      if (project['id'] == e.currentTarget.id) {
+        wx.navigateTo({
+          url: '../../paging/editaudited/editaudited?p_no=' + project['projectNo'],
+        })
+        break;
+      }
+    }
   }
 })

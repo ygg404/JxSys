@@ -40,7 +40,7 @@ App({
     userAccount:'',
     userInfo: null,
     //request域名
-    WebUrl: 'http://192.168.0.175:8002/jx/api/',
+    WebUrl: 'http://192.168.0.171:8002/jx/api/',
     //获取到的Token
     SignToken: '',
     //权限

@@ -1,4 +1,4 @@
-/* pages/paging/editauthorize/editauthorize.wxss */
+/* pages/paging/editaudited/editaudited.wxss */
 .box{
   margin:20rpx;
   border: 1px solid #dadada
@@ -102,38 +102,9 @@
   word-break: normal; 
 }
 
-.tr textarea{
-  border: 1px solid #3fc40b;
-  font-size: 10pt;
-  width: 100%;
-}
-
-.btnLine{
-  width: 100%;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
-}
-
 .rtbtn{
-  background: #e6ae15;
+  background: #dfb914;
   color: whitesmoke;
-  font-size: 10pt;
+  font-size: 12pt;
   line-height: 200%;
-  width: 25%;
-}
-
-.savebtn{
-  background: #3fc40b;
-  color: whitesmoke;
-  font-size: 10pt;
-  line-height: 200%;
-  width: 25%;
-}
-
-.postbtn{
-  background: #36a2d4;
-  color: whitesmoke;
-  font-size: 10pt;
-  line-height: 200%;
-  width: 25%;
 }

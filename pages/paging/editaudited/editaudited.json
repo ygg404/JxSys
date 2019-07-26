@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "项目审定编辑",
+  "navigationBarTitleText": "查看已审定",
   "usingComponents": {
     "loading-component": "/pages/Components/loading-com/loading-com",
     "menu-component": "/pages/Components/menu-com/menu-com",

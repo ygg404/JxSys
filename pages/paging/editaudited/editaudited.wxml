@@ -1,4 +1,4 @@
-<!--pages/paging/editauthorize/editauthorize.wxml-->
+<!--pages/paging/editaudited/editaudited.wxml-->
 <view class='box'>
   <view class='spaceAroundCenter'>
     <view class="tr" bindtap='viewPtWorkEvent'>
@@ -28,17 +28,17 @@
 
 <view class='box'>
   <view class='spaceAroundCenter'>
-    <view class="tr">
-      <text>审定意见</text>
+    <view class="tr" bindtap='viewNoteEvent'>
+      <text>审定内容</text>
+      <image src="{{examineSelected ? '/images/tridown.png' :'/images/triup.png'}}"></image>
     </view>
-    <view class='tr'>
-      <textarea value='{{examineNote}}' bindinput='examineNoteEvent' placeholder='请输入审定意见'></textarea>
+    <view style='width:100%;' wx:if="{{examineSelected}}">
+      <view class='tr detail'><text>{{examineNote}}</text></view>
     </view>
   </view>
 </view>
 
-<view class='tr btnLine'>
-  <button class='rtbtn' bindtap='returnEvnet'>返回</button>
-  <button class='savebtn' bindtap='saveEvent'>保存</button>
-  <button class='postbtn' bindtap='postEvent'>审定完成</button>
+<view class='spaceAroundCenter'>
+  <view></view>
+  <button class='rtbtn' bindtap='returnEvent'>返回</button>
 </view>
