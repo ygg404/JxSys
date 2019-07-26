@@ -45,11 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getProjectTypesInfo();
-    this.getProjectsFromApi();
-    this.getUserList();
-    this.getContractList();
-    this.wxValidateInit();
+
   },
 
   /**
@@ -63,7 +59,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getProjectTypesInfo();
+    this.getProjectsFromApi();
+    this.getUserList();
+    this.getContractList();
+    this.wxValidateInit();
   },
 
   /**
@@ -404,6 +404,7 @@ Page({
    * 删除事件
    */
   deleteEvent:function(e){
+    var that = this;
     let projectNo = '';
     for (let contract of this.data.tableList) {
       if (contract['id'] == e.currentTarget.id) {
@@ -422,7 +423,7 @@ Page({
             header: {
               'Authorization': "Bearer " + app.globalData.SignToken
             },
-            method: 'DELETE',
+            method: 'POST',
             success: function (res) {
               //添加修改成功
               if (res.statusCode == 200) {
@@ -570,8 +571,8 @@ Page({
     //提交
     wx.request({
       method: 'POST',
-      url: 'project/' + app.globalData.userId + '/',
-      headers: {
+      url: app.globalData.WebUrl + 'project/' + app.globalData.userId + '/',
+      header: {
         Authorization: "Bearer " + app.globalData.SignToken
       },
       data: {
@@ -585,17 +586,45 @@ Page({
         projectNote: cDetail.contractNote,
         projectCharge: cDetail.contractBusiness,
         projectStartDateTime: that.data.projectStartDateTime,
-        projectType: that.data.projectTypes[that.data.projectTypeID],
-        projectStageId: that.data.stageId,
+        projectType: cDetail.projectType,
+        projectStageId: 1,
         projectProduce: that.data.userNameList[that.data.userIndex]
       },
       success: function (res) {
-        if (res.statusCode == 201) {
+        if (res.statusCode == 200) {
           cDetail['projectNo'] = res.data;
           that.setData({
+            addProjectShow : false,
             contractDetail : cDetail
           });
-
+          that.postProject();
+        }
+      }
+    });
+  },
+  /**
+   * 提交项目
+   */
+  postProject:function(){
+    var that = this;
+    let cDetail = this.data.contractDetail;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'contract/project/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        contractNo: cDetail.contractNo,
+        projectNum: cDetail.projectNo,
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setData({
+            addProjectShow: false,
+          });
+          that.onShow();
         }
       }
     });

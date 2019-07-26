@@ -107,11 +107,11 @@
       </view>
       <view class='tr'>
           <view class="tdh1">联系人:</view>
-          <view class="tdh2"><input  value="{{contractDetail.contractUserName}}"></input></view>
+          <view class="tdh2"><input name='contractUserName' value="{{contractDetail.contractUserName}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">联系电话:</view>
-          <view class="tdh2"><input value="{{contractDetail.contractUserPhone}}"></input></view>
+          <view class="tdh2"><input name='contractUserPhone' value="{{contractDetail.contractUserPhone}}"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">业务负责人:</view>
