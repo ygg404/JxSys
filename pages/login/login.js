@@ -1,5 +1,6 @@
 var app = getApp();
 var utils = require('../../utils/util.js');
+var first = require('../../utils/index.js');
 
 Page({
 
@@ -82,6 +83,10 @@ Page({
         //获取权限成功
         if (res.statusCode == 200) {
           app.globalData.permissions = res.data;
+          let index = first.firstLoad()
+          wx.navigateTo({
+            url: '../views/' + index + '/' + index
+          });
         }
         //获取失败
         else {
@@ -147,9 +152,8 @@ Page({
           that.getPermissions();
           that.getUserId();
           app.globalData.userAccount = that.data.userAccount;
-          wx.navigateTo({
-            url: '../views/project-management/project-management'
-          });
+
+
         }
         //登录失败
         else{

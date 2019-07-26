@@ -21,7 +21,7 @@
   
       <view class="temp {{pmopen ? 'slidown' : 'slidup'}}">
           <view wx:for="{{mcontent}}" wx:for-item="pmcate" id="{{pmcate.id}}"bindtap='navtoEvent' 
-          class="{{pmcate.selected? 'selectItem':''}}">
+          class="{{pmcate.selected? 'selectItem':''}}" wx:if='{{pmcate.visiable}}'>
               {{pmcate.name}}
           </view>
       </view>
@@ -32,7 +32,7 @@
       </view>
       <view class="temp {{ppopen ? 'slidown' : 'slidup'}}">
           <view wx:for="{{pcontent}}" wx:for-item="ppcate" id="{{ppcate.id}}"bindtap='navtoEvent'
-          class="{{ppcate.selected? 'selectItem':''}}">
+          class="{{ppcate.selected? 'selectItem':''}}" wx:if='{{ppcate.visiable}}'>
               {{ppcate.name}}
           </view>
       </view>

@@ -1,4 +1,7 @@
 // pages/Components/menu-com/menu-com.js
+var utils = require('../../../utils/util.js');
+var app = getApp();
+
 Component({
   /**
    * 组件的属性列表
@@ -17,64 +20,76 @@ Component({
       id:'project-management',
       name:'项目处理',
       url:'../../views/project-management/project-management',
-      selected:false
+      selected:false,
+      visiable: true
     },{
         id: 'schedule-management',
         name: '项目进度',
         url: '../../views/schedule-management/schedule-management',
-        selected: false
+        selected: false,
+        visiable: true
     },{
         id: 'project-output',
         name: '项目产值',
         url: '../../views/project-output/project-output',
-        selected: false
+        selected: false,
+        visiable: true
     },{
         id: 'recycle-management',
         name: '项目回收站',
         url: '../../views/recycle-management/recycle-management',
-        selected: false
+        selected: false,
+        visiable: true
     }],
     //项目流程列表
     ppcate_list: [{
       id: 'contract-management',
       name: '合同管理',
       url: '../../views/contract-management/contract-management',
-      selected: false
+      selected: false,
+      visiable: true
     }, {
         id: 'projectsetup-management',
         name: '项目立项',
         url: '../../views/projectsetup-management/projectsetup-management',
-      selected: false
+        selected: false,
+        visiable: true
     }, {
         id: 'allocation-management',
         name: '项目安排',
         url: '../../views/allocation-management/allocation-management',
-      selected: false
+        selected: false,
+        visiable: true
     }, {
         id: 'projectwork-management',
         name: '项目作业',
         url: '../../views/projectwork-management/projectwork-management',
-      selected: false
+        selected: false,
+        visiable: true
       }, {
         id: 'quality-management',
         name: '质量检查',
         url: '../../views/quality-management/quality-management',
-        selected: false
+        selected: false,
+        visiable: true
       }, {
         id: 'output-management',
         name: '产值核算',
         url: '../../views/output-management/output-management',
-        selected: false
+        selected: false,
+        visiable: true
       }, {
         id: 'authorize-management',
         name: '项目审定',
         url: '../../views/authorize-management/authorize-management',
-        selected: false
+        selected: false,
+        visiable: true
       }, {
         id: 'audited-management',
         name: '已审定',
         url: '../../views/audited-management/audited-management',
-        selected: false
+        selected: false,
+        visiable: true
       }],
     mcontent: [],
     pcontent: [],
@@ -93,6 +108,26 @@ Component({
      * 生命周期函数--页面初始化
      */
   ready: function (options) {
+    let pmcate_list = this.data.pmcate_list;
+    let ppcate_list = this.data.ppcate_list;
+    let permissionsList = app.globalData.permissions;
+    pmcate_list[0].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('project_stage') != -1);
+    pmcate_list[1].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('project_schedule') != -1);
+    pmcate_list[2].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('start_project') != -1);
+    pmcate_list[3].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('get_recycler') != -1);
+    ppcate_list[0].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('project_contract') != -1);
+    ppcate_list[1].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('put_project') != -1);
+    ppcate_list[2].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('make_project') != -1);
+    ppcate_list[3].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('start_project') != -1);
+    ppcate_list[4].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('inspect_quality') != -1);
+    ppcate_list[5].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('adjust_output') != -1);
+    ppcate_list[6].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('leader_authorize') != -1);
+    ppcate_list[7].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('authorized') != -1);
+    this.setData({
+      pmcate_list: pmcate_list,
+      ppcate_list: ppcate_list
+    })
+
     var pmcatelist = this.data.pmcate_list;
     var ppcatelist = this.data.ppcate_list;
     for (var pm of pmcatelist) {
@@ -236,6 +271,7 @@ Component({
         });
       }
      // console.log(e.target)
-    }
+    },
+
   }
 })
