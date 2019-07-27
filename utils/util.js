@@ -45,8 +45,19 @@ function tableListInit(data){
   }
 }
 
+function arrayRemove(arr,delIndex) {
+  var temArray = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (i != delIndex) {
+      temArray.push(arr[i]);
+    }
+  }
+  return temArray;
+}
+
 module.exports = {
   formatTime: formatTime,
   TipModel: TipModel,
   tableListInit: tableListInit,
+  arrayRemove: arrayRemove
 }

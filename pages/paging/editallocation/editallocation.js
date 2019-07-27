@@ -23,7 +23,9 @@ Page({
     projectDetail:{},  //项目基本信息
     alloItem:{}, //项目安排信息
     workGroupsList: [], //作业组列表
-    workGroupShow: false
+    workGroupShow: false,
+    headManList:[],  //项目负责人列表
+    headManIndex:0     
   },
 
   /**
@@ -33,10 +35,7 @@ Page({
       this.setData({
         p_no: options.p_no
       });
-      this.wxValidateInit();
-      this.getWorkGroups();
-      this.getProjectInfo();
-      this.getShortCutList();
+
   },
   /**
      * 表单验证的初始化函数
@@ -115,7 +114,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.wxValidateInit();
+    this.getWorkGroups();
+    this.getProjectInfo();
+    this.getShortCutList();
   },
 
   /**
@@ -185,6 +187,9 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
+          for(let group of res.data){
+            group['checked'] = false;
+          }
           that.setData({
             workGroupsList: res.data
           });
@@ -306,10 +311,12 @@ Page({
     }
     console.log(project_workDate);
     console.log(project_qualityDate);
+    let projectDetail = this.data.projectDetail;
+    projectDetail['projectOutPut'] = project_output;
+    projectDetail['projectWorkDate'] = project_workDate;
+    projectDetail['projectQualityDate'] = project_qualityDate;
     this.setData({
-      projectOutPut: project_output,
-      projectWorkDate: project_workDate,
-      projectQualityDate: project_qualityDate
+      projectDetail: projectDetail
     })
 
   },
@@ -350,6 +357,11 @@ Page({
    * 选择作业组按钮事件
    */
   chooseWorkEvent:function(e){
+    let projectDetail = this.data.projectDetail;
+    if (projectDetail.projectOutPut == null){
+      utils.TipModel('错误',"请先设置并保存项目安排信息！", 0);
+      return;
+    }
     this.setData({
       workGroupShow : true
     });
@@ -388,24 +400,87 @@ Page({
       data: {
         projectBegunDate: that.data.projectBegunDate,
         projectCharge: pDetail['projectCharge'],
-        projectExecuteStandard: pDetail['projectExecuteStandard'],
+        projectExecuteStandard: e.detail.value.projectExecuteStandard,
         projectNo: pDetail['projectNo'],
-        projectOutPut: pDetail['projectOutPut'],
-        projectOutPutNote: pDetail['projectOutPutNote'],
-        projectQualityDate: pDetail['projectQualityDate'],
-        projectWorkDate: pDetail['projectWorkDate'],
-        projectWorkLoad: pDetail['projectWorkLoad'],
-        projectWorkNote: pDetail['projectWorkNote'],
-        projectWorkRequire: pDetail['projectWorkRequire'],
+        projectOutPut: e.detail.value.projectOutPut,
+        projectOutPutNote: e.detail.value.projectOutPutNote,
+        projectQualityDate: e.detail.value.projectQualityDate,
+        projectWorkDate: e.detail.value.projectWorkDate,
+        projectWorkLoad: e.detail.value.projectWorkLoad,
+        projectWorkNote: e.detail.value.projectWorkNote,
+        projectWorkRequire: e.detail.value.projectWorkRequire,
         projectWriter: pDetail['projectWriter'],
         rateList: pDetail['rateList']
       },
       success: function (res) {
         if (res.statusCode == 200) {
           utils.TipModel('提示',res.data.message);
+          that.onShow();
         }
       }
     });
+  },
+  /**
+   * 提交至项目安排
+   */
+  postWorkEvent:function(e){
+    if(this.data.projectDetail.rateList.length == 0){
+      utils.TipModel('错误', '请确认好作业分组再提交至项目安排！',0);
+    }
+  },
+  /**
+   * 分组input输入变化
+   */
+  rateInputEvent:function(e){
+    console.log(e.detail.value);
+    let id = e.currentTarget.id.split('_')[1];
+    let name = e.currentTarget.id.split('_')[0];
+    let groupList = this.data.workGroupsList;
+    let pDetail = this.data.projectDetail;
+    //占比输入
+    if (name =='outputRate'){
+      for (let group of groupList){
+        if (group['id'] == id){
+          let rate = parseFloat(e.detail.value);
+          let projectOutPut = (e.detail.value / 100 * pDetail.projectOutPut).toFixed(2);
+          group['output_rate'] = e.detail.value;
+          group['project_output'] = projectOutPut;
+          group['shortDate'] = (Math.ceil(projectOutPut / 2400 * 0.7 / 0.5) * 0.5);
+          group['lastDate'] = (Math.ceil(projectOutPut / 2400 * 1.3 / 0.5) * 0.5);
+        }
+      }
+    }
+    //产值输入
+    if (name == 'projectOutput'){
+      for (let group of groupList) {
+        if (group['id'] == id) {
+          group['output_rate'] = (e.detail.value / pDetail.projectOutPut * 100).toFixed(2);
+          group['project_output'] = e.detail.value;
+          group['shortDate'] = (Math.ceil(e.detail.value / 2400 * 0.7 / 0.5) * 0.5);
+          group['lastDate'] = (Math.ceil(e.detail.value / 2400 * 1.3 / 0.5) * 0.5);
+        }
+      }
+    }
+    //最短工期输入
+    if (name == 'shortDate') {
+      for (let group of groupList) {
+        if (group['id'] == id) {
+          group['shortDate'] = e.detail.value;
+        }
+      }
+    }
+    //最迟工期输入
+    if (name == 'lastDate') {
+      for (let group of groupList) {
+        if (group['id'] == id) {
+          group['lastDate'] = e.detail.value;
+        }
+      }
+    }
+
+    this.setData({
+      workGroupsList: groupList
+    })
   },
   /**
    * 分组返回
@@ -419,6 +494,72 @@ Page({
    * 确认分组
    */
   setGroupEvent:function(e){
-    
-  }
+    let pDetail = this.data.projectDetail;
+    let rateList = [];
+    var totalrate = 0; //全占比
+    var totalOutput = 0; //全产值
+    for(let group of this.data.workGroupsList){
+      if(group['checked']){
+        let g = {
+          groupName: group['gName'],
+          group_id: group['id'],
+          lastDate: group['lastDate'],
+          output_rate: group['output_rate'],
+          project_output: group['project_output'],
+          shortDate: group['shortDate']
+        };
+        rateList.push(g);
+        totalOutput += parseFloat(group['project_output']);
+        totalrate += parseFloat(group['output_rate']);
+      }
+    }
+    if (totalrate > 100.01 || totalrate<99.99){
+      utils.TipModel('错误','产值占比不满足100%', 0);
+      return;
+    }
+    if (totalOutput > (pDetail.projectOutPut + 1) || totalOutput < (pDetail.projectOutPut - 1)){
+      utils.TipModel('错误', '总产值不等于预计总产值', 0);
+      return;
+    }
+
+    pDetail.rateList = rateList;
+    pDetail.projectCharge = this.data.headManList[this.data.headManIndex];
+    this.setData({
+      projectDetail : pDetail
+    })
+  },
+  /**
+   * 项目负责人改变
+   */
+  headManChangeEvent:function(e){
+    // let pDetail = this.data.projectDetail;
+    // pDetail.projectCharge = 
+    this.setData({
+      headManIndex : e.detail.value
+    })
+  },
+  /**
+   * 作业组勾选
+   */
+  groupCheckEvent: function(e){
+    var headMenlist = this.data.headManList;
+    let workGroupsList = this.data.workGroupsList;
+    for (let group of workGroupsList){
+      if (group['id'] == e.currentTarget.id){
+        group.checked = !group.checked;
+        if (group.checked){
+          headMenlist.push(group['headMan']);
+        }else{
+          let index = headMenlist.indexOf(group['headMan']);
+          headMenlist = utils.arrayRemove(headMenlist , index);
+        }
+      }
+    }
+    this.setData({
+      headManList: headMenlist,
+      workGroupsList : workGroupsList
+    })
+  },
+
+  
 })

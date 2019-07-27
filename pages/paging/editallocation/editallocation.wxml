@@ -141,6 +141,7 @@
 </view>
 </form>
 
+<!-- 选择作业组 -->
 <view wx:if="{{workGroupShow}}">
   <view class='drawer_screen'></view>
   <view class='form'>
@@ -149,10 +150,38 @@
         <view class='tr'>
           <text style='padding:20rpx;font-size:13pt;'>选择作业组</text>
         </view>
-        <view wx:for="{{projectDetail.rateList}}" wx:for-item="project" >
+        <view wx:for="{{workGroupsList}}" wx:for-item="group" class='{{group.checked?"checked":"notchecked"}}' disable='{{!group.checked}}'>
           <view class='tr'>
+            <checkbox checked='{{group.checked}}' id="{{group.id}}" bindtap='groupCheckEvent'>{{group.gName}}</checkbox>
+          </view>
+          <view class='tr'>
+            <view class='tgd'>占比(%):
+            <input id="{{'outputRate' + '_' + group.id}}" disabled='{{!group.checked}}' name='output_rate' value='{{group.output_rate}}' bindinput='rateInputEvent'/></view>
+            <view class='tgd'>产值：
+            <input  id="{{'projectOutput' + '_' + group.id}}" disabled='{{!group.checked}}' name='project_output' value='{{group.project_output}}' bindinput='rateInputEvent'/></view>
+            <view class='tgd'>最短工期:
+            <input id="{{'shortDate' + '_' + group.id}}" disabled='{{!group.checked}}' name='shortDate' value='{{group.shortDate}}' bindinput='rateInputEvent'/></view>
+            <view class='tgd'>最迟工期：
+            <input id="{{'lastDate' + '_' + group.id}}" disabled='{{!group.checked}}' name='lastDate' value='{{group.lastDate}}' bindinput='rateInputEvent'/></view>
           </view>
         </view>
+
+        <!-- 项目负责人 -->
+        <view class='spaceAroundCenter' style='margin-top:25rpx'>
+          <view class='tr' style='width:45%'>
+            <text>项目负责人:</text>
+          </view>
+          <view class='tr' style='width:45%'>
+            <picker bindchange="headManChangeEvent"   value="{{headManIndex}}" range="{{headManList}}" style='color:black;'>
+              <view style='width:200%;'>
+                {{headManList[headManIndex]}}
+              </view>
+              <!-- <icon type='download'   ></icon> -->
+            </picker>
+            <image src='/images/down.png'></image>
+          </view>
+        </view>
+
         <view class="tr" style='margin-top:20rpx;'>
           <button class='returnbtn' bindtap='returnGroupEvent'>取消</button>
           <button class='setbtn' bindtap='setGroupEvent'>确认</button>

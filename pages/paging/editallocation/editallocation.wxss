@@ -365,3 +365,21 @@
   padding:20rpx;
   overflow-y:scroll; 
 }
+
+/* 选择作业分组 */
+.checked{
+  color: black;
+}
+
+.notchecked{
+  color: gray;
+}
+
+.tr .tgd{
+  font-size:10pt;
+  width: 24%;
+}
+
+.tr .tgd input{
+  border-bottom: 1px solid #0ab133;
+}
