@@ -115,7 +115,7 @@ Page({
    */
   onShow: function () {
     this.wxValidateInit();
-    this.getWorkGroups();
+    
     this.getProjectInfo();
     this.getShortCutList();
   },
@@ -186,12 +186,28 @@ Page({
         'Authorization': "Bearer " + app.globalData.SignToken
       },
       success: function (res) {
+        let manList = [];
         if (res.statusCode == 200) {
           for(let group of res.data){
             group['checked'] = false;
+            for(let rate of that.data.projectDetail.rateList){
+              if (rate['group_id'] == group['id']){
+                group['output_rate'] = rate['output_rate'];
+                group['project_output'] = rate['project_output'];
+                group['shortDate'] = rate['shortDate'];
+                group['lastDate'] = rate['lastDate'];
+                group['checked'] = true;
+                manList.push(group['headMan']);
+              }
+            }
+            
           }
+
+          let index = manList.indexOf(that.data.projectDetail.projectCharge);
           that.setData({
-            workGroupsList: res.data
+            workGroupsList: res.data,
+            headManList: manList,
+            headManIndex: index
           });
         }
       }
@@ -213,7 +229,8 @@ Page({
           that.setData({
             projectDetail: res.data,
             projectBegunDate: res.data['projectBegunDate']
-        })
+        });
+          that.getWorkGroups();
       }
       }
     });
@@ -425,7 +442,7 @@ Page({
    */
   postWorkEvent:function(e){
     if(this.data.projectDetail.rateList.length == 0){
-      utils.TipModel('错误', '请确认好作业分组再提交至项目安排！',0);
+      utils.TipModel('错误', '请确认好作业分组再提交至作业！',0);
     }
   },
   /**
@@ -525,7 +542,8 @@ Page({
     pDetail.rateList = rateList;
     pDetail.projectCharge = this.data.headManList[this.data.headManIndex];
     this.setData({
-      projectDetail : pDetail
+      projectDetail : pDetail,
+      workGroupShow: false
     })
   },
   /**
