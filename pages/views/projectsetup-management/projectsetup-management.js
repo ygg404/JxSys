@@ -64,6 +64,10 @@ Page({
     this.getUserList();
     this.getContractList();
     this.wxValidateInit();
+    this.setData({
+      addProjectShow: false,
+      viewProjectShow: false, //查看项目
+    })
   },
 
   /**
@@ -521,11 +525,66 @@ Page({
       userIndex:0
     })
   },
+
   /**
    * 提交至项目安排
    */
   postEvent:function(e){
-
+    var that = this;
+    let cDetail = this.data.contractDetail;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'updateProject/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectAuthorize: cDetail.projectAuthorize,
+        projectCharge: cDetail.contractBusiness,
+        projectMoney: cDetail.contractMoney,
+        projectName: cDetail.projectName,
+        projectNo: cDetail.projectNo,
+        projectNote: cDetail.contractNote,
+        projectProduce: cDetail.projectProduce,
+        projectStageId: cDetail.projectStageId,
+        projectStartDateTime: cDetail.projectStartTime,
+        projectType: cDetail.projectType,
+        userName: cDetail.projectUserName,
+        userPhone: cDetail.projectUserPhone,
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          
+          that.stageUpdate();
+        }
+      }
+    });
+  },
+  /**
+   * 提交安排后 更新阶段
+   */
+  stageUpdate:function(e){
+    var that = this;
+    let cDetail = this.data.contractDetail;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'project/stage/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectNo: cDetail['projectNo'],
+        projectStage: 2
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示', res.data.message);
+          that.onShow();
+        }
+      }
+    });
   },
   /**
    * 
@@ -577,18 +636,18 @@ Page({
       },
       data: {
         contractNo: cDetail.contractNo,
-        projectName: cDetail.contractName,
-        projectNum: '',
-        projectMoney: cDetail.contractMoney,
-        projectAuthorize: cDetail.contractAuthorize,
-        userName: cDetail.contractUserName,
-        userPhone: cDetail.contractUserPhone,
-        projectNote: cDetail.contractNote,
+        projectAuthorize: app.globalData.userAccount,
         projectCharge: cDetail.contractBusiness,
+        projectMoney: cDetail.contractMoney,
+        projectName: cDetail.contractName,
+        projectNote: cDetail.contractNote,
+        projectNum: '',
+        projectProduce: that.data.userNameList[that.data.userIndex],
+        projectStageId: 1,
         projectStartDateTime: that.data.projectStartDateTime,
         projectType: cDetail.projectType,
-        projectStageId: 1,
-        projectProduce: that.data.userNameList[that.data.userIndex]
+        userName: cDetail.contractUserName,
+        userPhone: cDetail.contractUserPhone
       },
       success: function (res) {
         if (res.statusCode == 200) {
@@ -597,7 +656,8 @@ Page({
             addProjectShow : false,
             contractDetail : cDetail
           });
-          that.postProject();
+          let isputPlan = e.detail.target.id=='post'?true:false;
+          that.postProject(isputPlan);
         }
       }
     });
@@ -605,7 +665,7 @@ Page({
   /**
    * 提交项目
    */
-  postProject:function(){
+  postProject:function(isPutPlan){
     var that = this;
     let cDetail = this.data.contractDetail;
     //提交
@@ -617,10 +677,14 @@ Page({
       },
       data: {
         contractNo: cDetail.contractNo,
-        projectNum: cDetail.projectNo,
+        projectNo: cDetail.projectNo,
       },
       success: function (res) {
         if (res.statusCode == 200) {
+          if (isPutPlan){
+            that.postEvent();
+            return;
+          }
           that.setData({
             addProjectShow: false,
           });

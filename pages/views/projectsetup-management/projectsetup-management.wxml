@@ -135,7 +135,7 @@
       </view>
       <view class="tr" style='margin-top:20rpx;'>
         <button class='returnbtn' bindtap='returnEvent'>取消</button>
-        <button class='postbtn' bindtap='postEvent'>提交至项目安排</button>
+        <button class='postbtn' formType="submit" id='post'>提交至项目安排</button>
         <button class='surebtn' formType="submit">新增</button>
       </view>
        </form>
@@ -169,11 +169,11 @@
       </view>
       <view class='tr'>
           <view class="tdh1">联系人姓名:</view>
-          <view class="tdh2gray">{{contractDetail.contractUserName}}</view>
+          <view class="tdh2gray">{{contractDetail.projectUserName}}</view>
       </view>
       <view class='tr'>
           <view class="tdh1">联系人电话:</view>
-          <view class="tdh2gray">{{contractDetail.contractUserPhone}}</view>
+          <view class="tdh2gray">{{contractDetail.projectUserPhone}}</view>
       </view>
       <view class='tr'>
           <view class="tdh1">委托要求:</view>
