@@ -245,7 +245,7 @@
 .tr .addbtn{
   background: #e74c4c;
   font-size: 9pt;
-  width: 27%;
+  width: 30%;
   color: whitesmoke;
   height: 65rpx;
 }

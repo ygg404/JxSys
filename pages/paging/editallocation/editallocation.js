@@ -438,12 +438,75 @@ Page({
     });
   },
   /**
-   * 提交至项目安排
+   * 提交至项目作业
    */
   postWorkEvent:function(e){
     if(this.data.projectDetail.rateList.length == 0){
       utils.TipModel('错误', '请确认好作业分组再提交至作业！',0);
+      return;
     }
+    var that = this;
+    let pDetail = this.data.projectDetail;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'projectPlan/update/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectBegunDate: that.data.projectBegunDate,
+        projectCharge: pDetail['projectCharge'],
+        projectExecuteStandard: pDetail.projectExecuteStandard,
+        projectNo: pDetail['projectNo'],
+        projectOutPut: pDetail.projectOutPut,
+        projectOutPutNote: pDetail.projectOutPutNote,
+        projectQualityDate: pDetail.projectQualityDate,
+        projectWorkDate: pDetail.projectWorkDate,
+        projectWorkLoad: pDetail.projectWorkLoad,
+        projectWorkNote: pDetail.projectWorkNote,
+        projectWorkRequire: pDetail.projectWorkRequire,
+        projectWriter: pDetail['projectWriter'],
+        rateList: pDetail['rateList']
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.stageChange();
+        }
+      }
+    });
+  },
+  /**
+   * 修改项目阶段
+   */
+  stageChange:function(){
+    var that = this;
+    let pDetail = this.data.projectDetail;
+    let groupsId = [];
+    for(let rate of pDetail.rateList){
+      groupsId.push(rate.group_id);
+    }
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'project/stage/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        groupId: "",
+        groupsId: groupsId,
+        projectNo: pDetail.projectNo,
+        projectStage: 3
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          wx.navigateBack({
+            delta:1 
+          });
+        }
+      }
+    });
   },
   /**
    * 分组input输入变化
@@ -575,6 +638,7 @@ Page({
     }
     this.setData({
       headManList: headMenlist,
+      headManIndex:0,
       workGroupsList : workGroupsList
     })
   },

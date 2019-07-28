@@ -636,7 +636,7 @@ Page({
       },
       data: {
         contractNo: cDetail.contractNo,
-        // projectAuthorize: app.globalData.userAccount,
+        projectAuthorize: cDetail.contractAuthorize,
         projectCharge: cDetail.contractBusiness,
         projectMoney: cDetail.contractMoney,
         projectName: cDetail.contractName,

@@ -53,7 +53,9 @@
       <input placeholder='内容评分' type='number' name='qualityScore' value='{{qualityScore}}' bindinput='qualityScoreEvent'
        style='border-bottom:1px solid green;margin:20rpx;font-size:12pt;'></input>
     </view>
-    
+    <view class='tr'>
+      <button style='background:#0fdf1f;color:white;' bindtap='qualityScoreLoadEvent'>质量评分</button>
+    </view>
   </view>
 </view>
 

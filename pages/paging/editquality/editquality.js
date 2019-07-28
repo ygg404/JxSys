@@ -294,5 +294,11 @@ Page({
         }
       }
     });
+  },
+  //质量评分
+  qualityScoreLoadEvent:function(e){
+    wx.navigateTo({
+      url: '../addQualityScore/addQualityScore?p_no=' + this.data.p_no,
+    })
   }
 })

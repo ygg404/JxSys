@@ -19,7 +19,8 @@
     "pages/paging/showprojectsetup/showprojectsetup",
     "pages/paging/editquality/editquality",
     "pages/paging/editoutput/editoutput",
-    "pages/paging/editaudited/editaudited"
+    "pages/paging/editaudited/editaudited",
+    "pages/paging/addQualityScore/addQualityScore"
   ],
   "window": {
     "backgroundTextStyle": "light",

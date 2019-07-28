@@ -1,0 +1,82 @@
+<!--pages/paging/addQualityScore/addQualityScore.wxml-->
+<view wx:for="{{scoreDetailList}}" wx:for-item="scoreDetail" >
+  <view style='margin:0' wx:if='{{scoreDetail.type_id==1}}'>
+    <view class='tr'>
+      <view class='title'>
+        <text>空间基准质量(权:0.3)</text>
+      </view>
+    </view>
+    <view class='tr'>
+      <text class='trgray' style='font-size:11pt;'>质量扣分:{{kjScore}}</text>
+    </view>
+  </view>
+  <view style='margin:0' wx:if='{{scoreDetail.type_id==5}}'>
+    <view class='tr'>
+      <view class='title'>
+        <text>采集、定处理质量(权:0.4)</text>
+      </view>
+    </view>
+    <view class='tr'>
+      <text class='trgray' style='font-size:11pt;'>质量扣分:{{cjScore}}</text>
+    </view>
+  </view>
+  <view style='margin:0' wx:if='{{scoreDetail.type_id==11}}'>
+    <view class='tr'>
+      <view class='title'>
+        <text>成果质量(权:0.3)</text>
+      </view>
+    </view>
+    <view class='tr'>
+      <text class='trgray' style='font-size:11pt;'>质量扣分:{{cgScore}}</text>
+    </view>
+  </view>
+  <view class='tr'>
+    <view class='checkcontent1 trgray'> 
+      <text>检查内容:</text>
+      <text>{{scoreDetail.checkcontent}}</text>
+    </view>
+    <view class='checkcontent2 trnormal'>
+      <text>检查类型:</text>
+      <input value='{{scoreDetail.check_type}}' id='{{scoreDetail.type_id}}'  bindinput='checkTypeEvent'></input>
+    </view>
+    <view class='checkcontent3 trnormal'>
+      <text>检查结果:</text>
+      <input value='{{scoreDetail.check_result}}' id='{{scoreDetail.type_id}}'  bindinput='checkResultEvent'></input>  
+    </view>
+  </view>
+
+  <view class='tr'>
+    <view class='score1 trgray'> 
+      <text>错漏数量:</text>
+    </view>
+    <view class='score2 trnormal'>
+      <text>A类:</text>
+      <input id='{{scoreDetail.type_id}}' type='number' value='{{scoreDetail.check_a}}' bindinput='ascoreEvent'></input>
+    </view>
+    <view class='score2 trnormal'>
+      <text>B类:</text>
+      <input id='{{scoreDetail.type_id}}' type='number' value='{{scoreDetail.check_b}}' bindinput='bscoreEvent'></input>  
+    </view>
+    <view class='score2 trnormal'>
+      <text>C类:</text>
+      <input id='{{scoreDetail.type_id}}' type='number' value='{{scoreDetail.check_c}}' bindinput='cscoreEvent'></input>
+    </view>
+    <view class='score2 trnormal'>
+      <text>D类:</text>
+      <input id='{{scoreDetail.type_id}}' type='number' value='{{scoreDetail.check_d}}' bindinput='dscoreEvent'></input>  
+    </view>
+    <view class='score3 trgray'>
+      <text>检查项扣分:</text>
+      <input disabled='true' value='{{scoreDetail.score}}' ></input>  
+    </view>
+  </view>
+</view>
+
+<view class='tr'>
+  <text>质量总分：{{allScore}}</text>
+</view>
+
+<view class='spaceAroundCenter'>
+  <button class='resbtn' bindtap='returnEvent'>返回</button>
+  <button class='editbtn' bindtap='postEvent'>提交</button>
+</view>

@@ -1,0 +1,67 @@
+/* pages/paging/addQualityScore/addQualityScore.wxss */
+.tr{
+  text-align: left;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.trgray{
+  color: gray;
+  font-size: 10pt;
+}
+
+.trnormal{
+  color: black;
+  font-size: 10pt;
+}
+
+.title{
+  font-size: 13pt;
+}
+
+.tr input{
+  border-bottom: 1px solid greenyellow
+}
+
+.tr .checkcontent1{
+  width: 48%;
+}
+.tr .checkcontent2{
+  width: 24%;
+}
+
+.tr .checkcontent3{
+  width: 24%;
+}
+
+.tr .score1{
+  width:17%;
+}
+
+.tr .score2{
+  width:13%;
+}
+
+.tr .score3{
+  width:25%;
+}
+
+.spaceAroundCenter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 65rpx;
+  font-size: 16pt;
+}
+
+.spaceAroundCenter .resbtn{
+  background: #f7df06;
+  color: whitesmoke;
+}
+
+.spaceAroundCenter .editbtn{
+  background: #6586e2;
+  color: whitesmoke;
+}
