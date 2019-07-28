@@ -62,7 +62,7 @@
 <view class='tr'>
   <button class='returnbtn' bindtap='returnEvent'>返回</button>
   <button class='savebtn' formType="submit">保存</button>
-  <button class='postbtn' bindtap='postEvent'>提交至质量核算</button>
+  <button class='postbtn' formType="submit" id='post'>提交至质量核算</button>
   <button class='addbtn' bindtap='addEvent'>退回返修</button>
 </view>
 </form>

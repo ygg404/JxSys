@@ -186,13 +186,84 @@ Page({
       groupList : grouplist
     })
   },
-
+  /**
+   *工作类型点击 
+   */
+  workCheckEvent :function(e){
+    console.log(e.currentTarget.id);
+    let ptwork = this.data.ptwork;
+    //获取选中的组id
+    let groupId;
+    let grouplist = this.data.groupList;
+    for (let group of grouplist) {
+      if (group['checked']){
+        groupId = group.id
+      }
+    }
+    for (let group of ptwork.groupList){
+      if (group.id == groupId)
+      for (let outPutWrap of group.outPutWraps){
+        if (outPutWrap.id == e.currentTarget.id){
+          outPutWrap.check = !outPutWrap.check;
+        }
+      }
+    }
+    this.setData({
+      ptwork: ptwork
+    })
+  },
   /**
    * 返回
    */
   returnEvent:function(e){
     wx.navigateBack({
       detla:1
+    })
+  },
+  /**
+   * 难度系数输入
+   */
+  projectRatioEvent:function(e){
+    let groupId = e.currentTarget.id.split('_')[0];
+    let outPutWrapId = e.currentTarget.id.split('_')[1];
+    let ptwork = this.data.ptwork;
+    let allput = 0; //总产值
+    for (let group of ptwork.groupList) {
+      if (group.id == groupId){
+        for (let outPutWrap of group.outPutWraps) {
+          if (outPutWrap.id == outPutWrapId) {
+            outPutWrap.projectRatio = e.detail.value;
+          }
+          allput += outPutWrap.workLoad * outPutWrap.projectRatio * outPutWrap.typeOutput;
+        }
+        group.allPutNum = allput;
+      }
+    }
+    this.setData({
+      ptwork: ptwork
+    })
+  },
+  /**
+   * 工作量输入
+   */
+  workLoadEvent: function (e) {
+    let groupId = e.currentTarget.id.split('_')[0];
+    let outPutWrapId = e.currentTarget.id.split('_')[1];
+    let ptwork = this.data.ptwork;
+    let allput = 0; //总产值
+    for (let group of ptwork.groupList) {
+      if (group.id == groupId){
+        for (let outPutWrap of group.outPutWraps) {
+          if (outPutWrap.id == outPutWrapId) {
+            outPutWrap.workLoad = e.detail.value;
+          }
+          allput += outPutWrap.workLoad * outPutWrap.projectRatio * outPutWrap.typeOutput;
+        }
+        group.allPutNum = allput;
+      }
+    }
+    this.setData({
+      ptwork: ptwork
     })
   },
 })

@@ -106,6 +106,16 @@
   width: 15%;
 }
 
+.th4 input{
+  width: 90%;
+  border-bottom: 1px solid #0ab133
+}
+
+.th5 input{
+  width: 90%;
+  border-bottom: 1px solid #0ab133
+}
+
 .td{
   background: whitesmoke;
   border-bottom: 1px solid #0ab133;

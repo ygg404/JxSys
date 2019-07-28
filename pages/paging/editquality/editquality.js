@@ -208,7 +208,9 @@ Page({
       success: function (res) {
         if (res.statusCode == 201) {
           that.setData({
-            ptwork: res.data
+            ptwork: res.data,
+            qualityScore: res.data.qualityScore,
+            qualityNote: res.data.qualityNote
             // disclosureNote: res.data.disclosureNote,
             // checkSuggestion: res.data.checkSuggestion,
             // dataName: res.data.dataName,
@@ -290,7 +292,38 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
+          if(e.currentTarget.id == 'post'){
+            that.postToQuality()
+          }else{
+            utils.TipModel('提示', res.data.message);
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * 提交质量核算
+   */
+  postToQuality:function(){
+    var that = this;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'project/stage/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectNo: that.data.p_no,
+        projectStage: 5
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
           utils.TipModel('提示', res.data.message);
+          wx.navigateBack({
+            detla:1
+          })
         }
       }
     });
