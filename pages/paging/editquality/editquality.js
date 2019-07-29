@@ -294,7 +294,7 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          if(e.currentTarget.id == 'post'){
+          if(e.detail.target.id == 'post'){
             that.postToQuality()
           }else{
             utils.TipModel('提示', res.data.message);

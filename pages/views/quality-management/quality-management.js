@@ -23,7 +23,7 @@ Page({
       'search': '',
       'p_stage': 1,
       'stageId': 4,
-      'descending': false
+      'descending': true
     },  //分页参数
     has_next: false,  //是否有上下页
     has_pre: false,

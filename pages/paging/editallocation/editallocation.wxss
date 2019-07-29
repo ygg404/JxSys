@@ -253,7 +253,7 @@
 .tr .tdh1{
   width: 35%;
   text-align: left;
-  font-size: 11pt;
+  font-size: 12pt;
   color: grey;
   line-height: 200%;
 }
@@ -261,7 +261,7 @@
 .tr .tdh2{
   width: 65%;
   text-align: left;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 
 .tr .tdh2 input{
@@ -272,7 +272,7 @@
 .tr .tdd1{
   width: 35%;
   text-align: left;
-  font-size: 11pt;
+  font-size: 12pt;
   color: whitesmoke;
   line-height: 200%;
 }
@@ -280,7 +280,7 @@
 .tr .tdd2{
   width: 65%;
   text-align: left;
-  font-size: 11pt;
+  font-size: 12pt;
   color: whitesmoke;
   line-height: 200%;
 }
@@ -292,7 +292,7 @@
 }
 
 .tr .chooseWorkBtn{
-  font-size: 11pt;
+  font-size: 12pt;
   background: #15aef5;
   color: whitesmoke;
   width: 200rpx；

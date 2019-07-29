@@ -41,7 +41,7 @@
 </view>
 
 <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset">
-<view class='box'>
+<view class='box' wx:if='{{!addScheduleShow}}'>
   <view class='spaceAroundCenter'>
     <view class="tr" >
         <text>项目作业信息</text>

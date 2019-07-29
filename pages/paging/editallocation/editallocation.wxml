@@ -1,7 +1,7 @@
 <!--pages/paging/editallocation/editallocation.wxml-->
 <calendar-component dateInfo="{{projectBegunDate}}" wx:if="{{dateShow}}" bindshowEvent="begunDateEvent" bindsetEvent="begunDateEvent"></calendar-component>
 <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset" >
-<view class='box'>
+<view class='box' wx:if="{{!workGroupShow}}">
   <view class='spaceAroundCenter'>
     <view class='tr'>
       项目安排信息 
@@ -9,7 +9,7 @@
     
       <view class='tr' style='margin-top:20rpx;'>
           <view class="tdh1">项目开工时间:</view>
-          <view class="tdh2"><input name='projectBegunDate' style='width:70%;border:1px solid green' 
+          <view class="tdh2"><input name='projectBegunDate' style='width:70%;height:60rpx;border:1px solid green' 
             value='{{projectBegunDate}}' bindtap='begunDateShowEvent' disabled='true' ></input></view>
       </view>
       <!-- 执行短语 -->
@@ -50,11 +50,11 @@
       </view>
       <view class='tr'>
           <view class="tdh1">预计工作量:</view>
-          <view class="tdh2"><input type='digit' name='projectWorkLoad' value='{{projectDetail.projectWorkLoad}}'  ></input></view>
+          <view class="tdh2"><input type='digit' name='projectWorkLoad' value='{{projectDetail.projectWorkLoad}}' bindinput="workLoadInputEvent" ></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">产值预算明细:</view>
-          <view class="tdh2"><input name='projectOutPutNote' value='{{projectDetail.projectOutPutNote}}'  ></input></view>
+          <view class="tdh2"><input name='projectOutPutNote' value='{{projectDetail.projectOutPutNote}}'  bindinput="detialInputEvent"></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">预计产值:</view>
@@ -72,7 +72,7 @@
   </view>
 </view>
 
-<view class='boxinfo'>
+<view class='boxinfo' >
   <view class='spaceAroundCenter'>
     <view class='tr'>
       项目基本信息 

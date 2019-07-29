@@ -52,8 +52,8 @@
                 <view class='td th1'>{{outPutWrap.typeName}}</view>
                 <view class='td th2'>{{outPutWrap.typeUnit}}</view>
                 <view class='td th3'>{{outPutWrap.typeOutput}}</view>
-                <view class='td th4'><input id='{{group.id + "_" + outPutWrap.id}}' value='{{outPutWrap.projectRatio}}' bindinput='projectRatioEvent' disabled='{{!group.checked}}'></input></view>
-                <view class='td th5'><input id='{{group.id + "_" + outPutWrap.id}}' value='{{outPutWrap.workLoad}}' bindinput='workLoadEvent' disabled='{{!group.checked}}'></input></view>
+                <view class='td th4'><input type='digit' id='{{group.id + "_" + outPutWrap.id}}' value='{{outPutWrap.projectRatio}}' bindinput='projectRatioEvent' disabled='{{!group.checked}}'></input></view>
+                <view class='td th5'><input type='digit' id='{{group.id + "_" + outPutWrap.id}}' value='{{outPutWrap.workLoad}}' bindinput='workLoadEvent' disabled='{{!group.checked}}'></input></view>
                 <view class='td th6'>{{outPutWrap.typeOutput*outPutWrap.projectRatio*outPutWrap.workLoad}}</view>
               </view>
             </view>

@@ -405,6 +405,10 @@ Page({
    * 提交至质量检查
    */
   postEvent:function(e){
+    if (this.data.ptwork.projectRate < 90){
+      utils.TipModel('错误','当前进度未达90%，如若已完成，请添加进度并把进度值调为90',0)
+      return;
+    }
     var that = this;
     //提交
     wx.request({

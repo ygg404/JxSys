@@ -221,7 +221,7 @@
 .tr .returnbtn{
   background: #ebb608;
   font-size: 9pt;
-  width: 18%;
+  width: 15%;
   color: whitesmoke;
   height: 65rpx;
 }
@@ -229,7 +229,7 @@
 .tr .savebtn{
   background: #0850eb;
   font-size: 9pt;
-  width: 18%;
+  width: 15%;
   color: whitesmoke;
   height: 65rpx;
 }
@@ -301,7 +301,7 @@
 .tr .returnbtn{
   background: #ebb608;
   font-size: 9pt;
-  width: 22%;
+  width: 18%;
   color: whitesmoke;
   height: 65rpx;
 }
@@ -309,15 +309,15 @@
 .tr .savebtn{
   background: #0850eb;
   font-size: 9pt;
-  width: 22%;
+  width: 18%;
   color: whitesmoke;
   height: 65rpx;
 }
 
-.tr .postbtn{
+.tr .posttobtn{
   background: #0dee20;
   font-size: 9pt;
-  width: 40%;
+  width: 35%;
   color: whitesmoke;
   height: 65rpx;
 }
@@ -325,7 +325,7 @@
 .tr .setbtn{
   background: #0850eb;
   font-size: 9pt;
-  width: 22%;
+  width: 28%;
   color: whitesmoke;
   height:65rpx;
 }

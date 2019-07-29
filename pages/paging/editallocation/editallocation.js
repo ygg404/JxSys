@@ -338,6 +338,26 @@ Page({
 
   },
   /**
+   * 工作量输入
+   */
+  workLoadInputEvent:function(e){
+    let projectDetail = this.data.projectDetail;
+    projectDetail['projectWorkLoad'] = e.detail.value;
+    this.setData({
+      projectDetail: projectDetail
+    })
+  },
+  /**
+   * 产值预算明细
+   */
+  detialInputEvent:function(e){
+    let projectDetail = this.data.projectDetail;
+    projectDetail['projectOutPutNote'] = e.detail.value;
+    this.setData({
+      projectDetail: projectDetail
+    })
+  },
+  /**
    * 执行标准短语
    */
   executeShortChangeEvent:function(e){
