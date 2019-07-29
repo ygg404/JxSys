@@ -58,10 +58,10 @@
 
 .spaceAroundCenter .resbtn{
   background: #f7df06;
-  color: whitesmoke;
+  color: white;
 }
 
 .spaceAroundCenter .editbtn{
   background: #6586e2;
-  color: whitesmoke;
+  color: white;
 }

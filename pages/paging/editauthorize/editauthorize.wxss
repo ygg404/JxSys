@@ -116,7 +116,7 @@
 
 .rtbtn{
   background: #e6ae15;
-  color: whitesmoke;
+  color: white;
   font-size: 10pt;
   line-height: 200%;
   width: 25%;
@@ -124,7 +124,7 @@
 
 .savebtn{
   background: #3fc40b;
-  color: whitesmoke;
+  color: white;
   font-size: 10pt;
   line-height: 200%;
   width: 25%;

@@ -116,7 +116,7 @@
 </form>
 
 
-<view wx:if="{{addScheduleShow}}">
+<view wx:if="{{addScheduleShow}}" >
   <view class='drawer_screen'></view>
     <view class='form'> 
       <view class='tabledetail' >

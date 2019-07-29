@@ -231,7 +231,7 @@
 .tr .addbtn{
   background: #e74c4c;
   font-size: 9pt;
-  width: 25%;
+  width: 27%;
   color: whitesmoke;
   height: 65rpx;
 }
@@ -244,9 +244,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1001;
   background: #000;
-  opacity: 0.2;
+  opacity: 0.3;
   overflow: hidden;
 }
 .form {
@@ -259,18 +259,19 @@
   align-items: center;
   justify-content: space-between;
   padding: 100rpx 0;
-  z-index: 1001;
+  z-index: 1002;
   
 
 } 
 
 .form .tabledetail{
-  background: whitesmoke;
+  background: white;
   display: flex;
   flex-flow: row wrap;
   width: 90%;
   padding:20rpx;
   overflow-y:scroll; 
+  z-index: 1003;
 }
 .tr .tdd1{
   width: 35%;

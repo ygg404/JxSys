@@ -50,7 +50,7 @@
       </view>
       <view class='tr'>
           <view class="tdh1">预计工作量:</view>
-          <view class="tdh2"><input name='projectWorkLoad' value='{{projectDetail.projectWorkLoad}}'  ></input></view>
+          <view class="tdh2"><input type='digit' name='projectWorkLoad' value='{{projectDetail.projectWorkLoad}}'  ></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">产值预算明细:</view>
@@ -58,15 +58,15 @@
       </view>
       <view class='tr'>
           <view class="tdh1">预计产值:</view>
-          <view class="tdh2"><input name='projectOutPut' value='{{projectDetail.projectOutPut}}' bindinput="projectOutPutInputEvent" ></input></view>
+          <view class="tdh2"><input type='digit' name='projectOutPut' value='{{projectDetail.projectOutPut}}' bindinput="projectOutPutInputEvent" ></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">作业工期:</view>
-          <view class="tdh2"><input name='projectWorkDate' value='{{projectDetail.projectWorkDate}}'  ></input></view>
+          <view class="tdh2"><input type='digit' name='projectWorkDate' value='{{projectDetail.projectWorkDate}}'  ></input></view>
       </view>
       <view class='tr'>
           <view class="tdh1">质检工期:</view>
-          <view class="tdh2"><input name='projectQualityDate' value='{{projectDetail.projectQualityDate}}'  ></input></view>
+          <view class="tdh2"><input type='digit' name='projectQualityDate' value='{{projectDetail.projectQualityDate}}'  ></input></view>
       </view>
 
   </view>
@@ -156,13 +156,13 @@
           </view>
           <view class='tr'>
             <view class='tgd'>占比(%):
-            <input id="{{'outputRate' + '_' + group.id}}" disabled='{{!group.checked}}' name='output_rate' value='{{group.output_rate}}' bindinput='rateInputEvent'/></view>
+            <input type='digit' id="{{'outputRate' + '_' + group.id}}" disabled='{{!group.checked}}' name='output_rate' value='{{group.output_rate}}' bindinput='rateInputEvent'/></view>
             <view class='tgd'>产值：
-            <input  id="{{'projectOutput' + '_' + group.id}}" disabled='{{!group.checked}}' name='project_output' value='{{group.project_output}}' bindinput='rateInputEvent'/></view>
+            <input type='digit' id="{{'projectOutput' + '_' + group.id}}" disabled='{{!group.checked}}' name='project_output' value='{{group.project_output}}' bindinput='rateInputEvent'/></view>
             <view class='tgd'>最短工期:
-            <input id="{{'shortDate' + '_' + group.id}}" disabled='{{!group.checked}}' name='shortDate' value='{{group.shortDate}}' bindinput='rateInputEvent'/></view>
+            <input type='digit' id="{{'shortDate' + '_' + group.id}}" disabled='{{!group.checked}}' name='shortDate' value='{{group.shortDate}}' bindinput='rateInputEvent'/></view>
             <view class='tgd'>最迟工期：
-            <input id="{{'lastDate' + '_' + group.id}}" disabled='{{!group.checked}}' name='lastDate' value='{{group.lastDate}}' bindinput='rateInputEvent'/></view>
+            <input type='digit' id="{{'lastDate' + '_' + group.id}}" disabled='{{!group.checked}}' name='lastDate' value='{{group.lastDate}}' bindinput='rateInputEvent'/></view>
           </view>
         </view>
 

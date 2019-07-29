@@ -39,7 +39,7 @@
 .spaceAroundCenter .searchview .addbtn{
   width:66%;
   background: #0ab133;
-  color: whitesmoke;
+  color: white;
 }
 
 .spaceAroundCenter picker{

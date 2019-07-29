@@ -358,7 +358,7 @@
 } 
 
 .form .tabledetail{
-  background: whitesmoke;
+  background: white;
   display: flex;
   flex-flow: row wrap;
   width: 90%;
