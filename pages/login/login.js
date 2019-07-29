@@ -148,7 +148,8 @@ Page({
         if (res.statusCode == 200){
           app.globalData.SignToken = res.data.token;
           //登录成功保存用户密码
-          wx.setStorage({ userAccount: that.data.userAccount, password: that.data.password });
+          wx.setStorageSync("userAccount", that.data.userAccount);
+          wx.setStorageSync("password", that.data.password);
           //获取权限
           that.getPermissions();
           that.getUserId();
