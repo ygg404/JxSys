@@ -115,6 +115,10 @@ Page({
    * 保存
    */
   saveEvent: function(e){
+    if (this.data.examineNote == '') {
+      utils.TipModel('错误', '请填写审定意见', 0);
+      return;
+    }
     let that = this;
     wx.request({
       url: app.globalData.WebUrl + "projectSetUp/",
@@ -137,6 +141,10 @@ Page({
    * 审定完成
    */
   postEvent:function(e){
+    if(this.data.examineNote == ''){
+      utils.TipModel('错误','请填写审定意见',0);
+      return;
+    }
     let that = this;
     wx.request({
       url: app.globalData.WebUrl + "projectSetUp/",
