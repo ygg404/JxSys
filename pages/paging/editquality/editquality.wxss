@@ -330,7 +330,7 @@
   height:65rpx;
 }
 
-/* 选择作业组 */
+/* 退回返修 */
 /*mask*/
 .drawer_screen {
   width: 100%;
@@ -364,4 +364,30 @@
   width: 90%;
   padding:20rpx;
   overflow-y:scroll; 
+}
+
+.form .title{
+  font-size: 18pt;
+  font-weight: 700;
+}
+
+.form textarea{
+  border:1px solid #0ab133;
+  margin-top: 10rpx;
+  width: 100%;
+  height:200rpx;
+}
+
+.tr .postbtn{
+  background: #08beeb;
+  color: whitesmoke;
+  font-size: 11pt;
+  line-height: 200%;
+}
+
+.tr .retbtn{
+  border: none;
+  color: whrgb(28, 131, 228);
+  font-size: 11pt;
+  height: 66rpx;
 }

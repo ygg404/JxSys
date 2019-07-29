@@ -62,7 +62,32 @@
 <view class='tr'>
   <button class='returnbtn' bindtap='returnEvent'>返回</button>
   <button class='savebtn' formType="submit">保存</button>
-  <button class='postbtn' formType="submit" id='post'>提交至质量核算</button>
+  <button class='postbtn' formType="submit" id='post'>提交至核算</button>
   <button class='addbtn' bindtap='addEvent'>退回返修</button>
 </view>
 </form>
+
+
+<view wx:if="{{addBackShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'> 
+    <view class='tabledetail' >
+      <text class='title'>提出返修</text>
+      <view class='spaceAroundCenter' style='width:100%;margin-top:30rpx;'>
+        <view class='searchview'>
+          <picker bindchange="bshortChangeEvent"   value="{{bindex}}" range="{{bNameList}}">
+            <view style='width:200%;'>
+              {{bNameList[bindex]}}
+            </view>
+          </picker>
+          <image src='/images/down.png'></image>
+        </view>
+        <textarea value='{{backNote}}' bindinput='backNoteEvent' placeholder='请填写返修意见'></textarea>
+      </view>
+      <view class='tr'>
+        <button class='retbtn' bindtap='backReturnEvent'>取消</button>
+        <button class='postbtn' bindtap='postBackEvent'>提交</button>
+      </view>
+    </view>
+  </view>
+</view>

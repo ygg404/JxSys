@@ -44,7 +44,7 @@
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
               <view><button class='resbtn' bindtap='changeStageEvent' id="{{project.id}}">修改阶段</button></view>
-              <view><button class='resbtn' bindtap='viewStageEvent' id="{{project.id}}">查看</button></view>
+              <!-- <view><button class='resbtn' bindtap='viewStageEvent' id="{{project.id}}">查看</button></view> -->
             </view>
         </view>
         <view wx:if="{{project.selected}}">

@@ -80,7 +80,7 @@
          <view class="tr" wx:for="{{curPro.backWorkList}}" wx:for-item="detail">
             <view class="tdd tdd1">{{detail.backcreatedtime}}</view>
             <view class="tdd tdd2">{{detail.backNote}}</view>
-            <view class="tdd tdd3">{{detail.note}}</view>
+            <view class="tdd tdd3">{{detail.note == null?'':detail.note}}</view>
          </view>
       <view class="tr">
         <button bindtap='returnDetailEvent'>返回</button>

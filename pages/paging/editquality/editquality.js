@@ -10,6 +10,7 @@ Page({
   data: {
     ptworkSelected:false,
     backSelected:false,
+    addBackShow:false,
     ptwork:{},
     backList:[],  //返修记录
     cshortcutList:[], //质量检查
@@ -21,6 +22,7 @@ Page({
     bshortcutList: [], //返修短语
     bNameList: [],
     bindex: 0,
+    backNote: ''  //提交返修短语
   },
 
   /**
@@ -253,7 +255,7 @@ Page({
     })
   },
   /**
-   * 退回返修
+   * 返回
    */
   returnEvent:function(e){
     wx.navigateBack({
@@ -333,5 +335,99 @@ Page({
     wx.navigateTo({
       url: '../addQualityScore/addQualityScore?p_no=' + this.data.p_no,
     })
+  },
+  /**
+   * 添加退回返修
+   */
+  addEvent:function(e){
+    this.setData({
+      addBackShow:true
+    });
+  },
+  /**
+   * 返修短语更改
+   */
+  bshortChangeEvent:function(e){
+    this.setData({
+      bindex : e.detail.value
+    });
+    let backNote = ''
+    if(e.detail.value != 0){
+      backNote = this.data.bNameList[this.data.bindex];
+    }
+    this.setData({
+      backNote: backNote
+    });
+  },
+  /**
+   * 返修短语填写
+   */
+  backNoteEvent:function(e){
+    this.setData({
+      backNote: e.detail.value
+    });
+  },
+  /**
+   * 返修回退
+   */
+  backReturnEvent:function(e){
+    this.setData({
+      addBackShow: false
+    });
+  },
+  /**
+   * 提交
+   */
+  postBackEvent:function(e){
+    if (this.data.backNote == ''){
+      utils.TipModel('错误', '请填写返修意见',0);
+      return;
+    }
+    var that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "project/back/",
+      method: 'post',
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      data:{
+        backNote: that.data.backNote,
+        groupId: that.data.p_group,
+        projectNo: that.data.p_no
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.postToWork();
+        }
+      }
+    });
+  },
+  /**
+   *提交至项目作业
+   */
+  postToWork:function(e){
+    let groupsId =[];
+    groupsId.push(this.data.p_group);
+    var that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "project/stage/",
+      method: 'post',
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        groupsId: groupsId,
+        projectNo: that.data.p_no,
+        projectStage: 3
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+            utils.TipModel('提示', res.data.message);
+            wx.navigateBack({
+              detla:1
+            })
+        }
+      }
+    });
   }
 })
