@@ -19,10 +19,10 @@ Page({
    */
   onLoad: function (options) {
     //获取存放在本地的用户密码
-    // this.setData({
-    //   userAccount: wx.getStorageSync('userAccount'),
-    //   password: wx.getStorageSync('password')
-    // });
+    this.setData({
+      userAccount: wx.getStorageSync('userAccount'),
+      password: wx.getStorageSync('password')
+    });
 
   },
 
