@@ -446,11 +446,33 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
+          that.postToQuality();
+        }
+      }
+    });  
+  },
+  /**
+   * 提交至质量检查
+   */
+  postToQuality:function(){
+    let that = this;
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'project/stage/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectNo: that.data.curPro['projectNo'],
+        projectStage: 4
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
           utils.TipModel('提示', res.data.message);
           that.setData({
-            backEditShow:false,
-            backShow:false,
-            executes:''
+            backEditShow: false,
+            backShow: false,
+            executes: ''
           })
           that.getProjectsFromApi();
         }
