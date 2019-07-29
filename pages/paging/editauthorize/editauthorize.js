@@ -11,7 +11,7 @@ Page({
     p_no:'',
     ptwork:{},
     ptworkSelected:false,
-    examineNoteEvent: '' //审定意见
+    examineNote: '' //审定意见
   },
 
   /**
