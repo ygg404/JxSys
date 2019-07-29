@@ -95,6 +95,7 @@ Page({
           let totalOutput = 0;
           for (let group of res.data['groupList']) {
             totalOutput += group.outPutNum;
+            group.allPutNum = group.outPutNum;
           }
           that.setData({
             ptwork: res.data,
@@ -219,6 +220,95 @@ Page({
     wx.navigateBack({
       detla:1
     })
+  },
+  /**
+   * 保存
+   */
+  saveEvent:function(e){
+    let that = this;
+    let ptwork = this.data.ptwork;
+    let outPutWrap = [];
+    for (let group of ptwork.groupList){
+      let putWrap = {
+        groupId: group.id,
+        projectOutPut: group.allPutNum
+      }
+      outPutWrap.push(putWrap);
+    }
+    wx.request({
+      url: app.globalData.WebUrl + "project/output/" ,
+      method: 'Post',
+      data:{
+        groupList: ptwork.groupList,
+        outPutWrap: outPutWrap,
+        projectNo:that.data.p_no
+      },
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示', res.data.message);
+        }
+      }
+    });
+  },
+  /**
+   *  提交审定 
+   */
+  postEvent:function(e){
+    let that = this;
+    let ptwork = this.data.ptwork;
+    let outPutWrap = [];
+    for (let group of ptwork.groupList) {
+      let putWrap = {
+        groupId: group.id,
+        projectOutPut: group.allPutNum
+      }
+      outPutWrap.push(putWrap);
+    }
+    wx.request({
+      url: app.globalData.WebUrl + "project/output/",
+      method: 'Post',
+      data: {
+        groupList: ptwork.groupList,
+        outPutWrap: outPutWrap,
+        projectNo: that.data.p_no
+      },
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.postToEdit();
+        }
+      }
+    });
+  },
+  /**
+   * 项目放到审定阶段
+   */
+  postToEdit:function(e){
+    let that = this;
+    wx.request({
+      url: app.globalData.WebUrl + "project/stage/",
+      method: 'Post',
+      data: {
+        projectNo: that.data.p_no,
+        projectStage: 6
+      },
+      header: {
+        'Authorization': "Bearer " + app.globalData.SignToken
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示', res.data.message);
+          wx.navigateBack({
+            detla:1
+          })
+        }
+      }
+    });
   },
   /**
    * 难度系数输入
