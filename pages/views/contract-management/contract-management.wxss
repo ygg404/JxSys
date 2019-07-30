@@ -233,7 +233,7 @@
 .form .tabledetail .tdh1{
   width: 30%;
   color: gray;
-  font-size: 11pt;
+  font-size: 12pt;
   word-break:break-all;
   line-height: 200%;
 }
