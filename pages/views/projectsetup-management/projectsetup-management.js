@@ -692,6 +692,42 @@ Page({
         }
       }
     });
+  },
+
+  /**
+   * 修改启动时间
+   */
+  changeEvent:function(e){
+    var that = this;
+    let cDetail = this.data.contractDetail;
+    //提交
+    wx.request({
+      method: 'POST',
+      url: app.globalData.WebUrl + 'updateProject/',
+      header: {
+        Authorization: "Bearer " + app.globalData.SignToken
+      },
+      data: {
+        projectAuthorize: cDetail.projectAuthorize,
+        projectCharge: cDetail.contractBusiness,
+        projectMoney: cDetail.contractMoney,
+        projectName: cDetail.projectName,
+        projectNo: cDetail['projectNo'],
+        projectNote: cDetail.contractNote,
+        projectProduce: cDetail.projectProduce,
+        projectStageId: 1,
+        projectStartDateTime: that.data.projectStartDateTime,
+        projectType: cDetail.projectType,
+        userName: cDetail.projectUserName,
+        userPhone: cDetail.projectUserPhone
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          utils.TipModel('提示',res.data.message);
+          that.onShow();
+        }
+      }
+    });
   }
 
 })

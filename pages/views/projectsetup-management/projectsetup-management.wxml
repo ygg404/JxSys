@@ -190,6 +190,7 @@
       </view>
       <view class="tr" style='margin-top:20rpx;'>
         <button class='returnbtn' bindtap='returnEvent'>取消</button>
+        <button class='surebtn' bindtap='changeEvent'>修改</button>
         <button class='postbtn' bindtap='postEvent'>提交至项目安排</button>
         <!-- <button class='surebtn' formType="submit">新增</button> -->
       </view>
