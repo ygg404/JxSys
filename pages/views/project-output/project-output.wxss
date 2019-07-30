@@ -128,7 +128,7 @@
   text-align: left;
 }
 .td{
-  font-size: 22rpx;
+  font-size: 25rpx;
   color: black;
   padding: 5px;
   border-bottom: 1px solid #dadada;
