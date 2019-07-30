@@ -36,8 +36,8 @@ App({
     })
   },
   globalData: {
-    userId:'',
-    userAccount:'',
+    // userId:'',
+    // userAccount:'',
     userInfo: null,
     //request域名
     WebUrl: 'http://192.168.0.170:8002/jx/api/',

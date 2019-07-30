@@ -446,7 +446,7 @@ Page({
         projectWorkLoad: e.detail.value.projectWorkLoad,
         projectWorkNote: e.detail.value.projectWorkNote,
         projectWorkRequire: e.detail.value.projectWorkRequire,
-        projectWriter: pDetail['projectWriter'],
+        projectWriter: app.globalData.userInfo.username,
         rateList: pDetail['rateList']
       },
       success: function (res) {
@@ -486,7 +486,7 @@ Page({
         projectWorkLoad: pDetail.projectWorkLoad,
         projectWorkNote: pDetail.projectWorkNote,
         projectWorkRequire: pDetail.projectWorkRequire,
-        projectWriter: pDetail['projectWriter'],
+        projectWriter: app.globalData.userInfo.username,
         rateList: pDetail['rateList']
       },
       success: function (res) {

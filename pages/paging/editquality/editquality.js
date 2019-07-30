@@ -290,7 +290,7 @@ Page({
         projectNo: that.data.p_no,
         qualityNote: e.detail.value.qualityNote,
         qualityScore: e.detail.value.qualityScore,
-        userAccount: app.globalData.userAccount
+        userAccount: app.globalData.userInfo.username
       },
       success: function (res) {
         if (res.statusCode == 200) {

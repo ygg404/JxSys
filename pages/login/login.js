@@ -99,9 +99,9 @@ Page({
 
   },
   /**
-   * 获取用户ID
+   * 获取用户信息
    */
-  getUserId:function(){
+  getUserInfo:function(){
     let that = this;
     wx.request({
       url: app.globalData.WebUrl + 'user/' + that.data.userAccount + "/", //接口地址 
@@ -113,7 +113,8 @@ Page({
         console.log(res.data);
         //获取权限成功
         if (res.statusCode == 201) {
-          app.globalData.userId = res.data['id'];
+          // app.globalData.userId = res.data['id'];
+          app.globalData.userInfo = res.data;
           console.log(app.globalData.userId);
         }
         //获取失败
@@ -152,8 +153,8 @@ Page({
           wx.setStorageSync("password", that.data.password);
           //获取权限
           that.getPermissions();
-          that.getUserId();
-          app.globalData.userAccount = that.data.userAccount;
+          that.getUserInfo();
+          // app.globalData.userAccount = that.data.userAccount;
 
 
         }

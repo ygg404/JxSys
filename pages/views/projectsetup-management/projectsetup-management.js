@@ -630,7 +630,7 @@ Page({
     //提交
     wx.request({
       method: 'POST',
-      url: app.globalData.WebUrl + 'project/' + app.globalData.userId + '/',
+      url: app.globalData.WebUrl + 'project/' + app.globalData.userInfo.id + '/',
       header: {
         Authorization: "Bearer " + app.globalData.SignToken
       },
