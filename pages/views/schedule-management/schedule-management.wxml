@@ -79,7 +79,7 @@
          <view class="tr" wx:for="{{detailList}}" wx:for-item="detail">
             <view class="tdd tdd1">{{detail.scheduleCreateTime}}</view>
             <view class="tdd tdd2">{{detail.projectRate}}</view>
-            <view class="tdd tdd3">{{detail.projectNote}}</view>
+            <view class="tdd tdd3">{{detail.projectNote==null?'':detail.projectNote}}</view>
          </view>
       <view class="tr">
         <button bindtap='returnDetail'>返回</button>
