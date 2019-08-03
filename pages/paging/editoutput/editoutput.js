@@ -94,8 +94,12 @@ Page({
         if (res.statusCode == 200) {
           let totalOutput = 0;
           for (let group of res.data['groupList']) {
-            totalOutput += group.outPutNum;
-            group.allPutNum = group.outPutNum;
+            let allput = 0;
+            for (let outPutWrap of group.outPutWraps) {
+                allput += outPutWrap.workLoad * outPutWrap.projectRatio * outPutWrap.typeOutput;
+            }
+            totalOutput += allput;
+            group.allPutNum = allput;
           }
           that.setData({
             ptwork: res.data,
@@ -257,6 +261,10 @@ Page({
    *  提交审定 
    */
   postEvent:function(e){
+    if (this.data.ptwork.projectStage != '产值核算'){
+      utils.TipModel('错误','该项目不在产值核算阶段，请在项目处理修改项目阶段！',0);
+      return;
+    }
     let that = this;
     let ptwork = this.data.ptwork;
     let outPutWrap = [];

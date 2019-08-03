@@ -138,7 +138,7 @@ Page({
             //获取当前时间
             let now = new Date();
             let diffDay = (beginDate - new Date())/1000/60/60/24;
-            contractInfo['time'] = Math.trunc(diffDay);
+            contractInfo['time'] =Math.abs(Math.trunc(diffDay));
           }
           that.setData({
             has_next: res.data.has_next,  //是否有上下页
