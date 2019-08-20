@@ -40,7 +40,8 @@ App({
     // userAccount:'',
     userInfo: null,
     //request域名
-    WebUrl: 'http://localhost:8002/jx/api/',
+    // WebUrl: 'http://localhost:8002/jx/api/',
+    WebUrl: 'https://web.gdjxch.cn/jx/api/',
     //获取到的Token
     SignToken: '',
     //权限

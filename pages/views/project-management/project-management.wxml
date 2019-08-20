@@ -50,8 +50,8 @@
         <view wx:if="{{project.selected}}">
           <view class='tr detail'><text>委托单位：</text><text>{{project.projectAuthorize}}</text></view>
           <view class='tr detail'><text>业务负责人：</text><text>{{project.contractBusiness}}</text></view>
-          <view class='tr detail'><text>立项人：</text><text>{{project.projectProduce}}</text></view>
-          <view class='tr detail'><text>项目负责人：</text><text>{{project.projectSetUp}}</text></view>
+          <view class='tr detail'><text>立项人：</text><text>{{project.projectUser}}</text></view>
+          <view class='tr detail'><text>项目负责人：</text><text>{{project.projectCharge}}</text></view>
           <view class='tr detail'><text>启动时间：</text><text>{{project.projectStartTime}}</text></view>
           <view class='tr detail'><text>项目阶段：</text><text>{{project.projectStage}}</text></view>
         </view>

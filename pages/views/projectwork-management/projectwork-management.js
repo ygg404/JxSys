@@ -158,6 +158,7 @@ Page({
    * 项目立项列表
    */
   getProjectsFromApi: function () {
+    let account = wx.getStorageSync('userAccount');
     var pagination = this.data.pagination;
     var that = this;
     wx.request({
@@ -173,7 +174,7 @@ Page({
         endDate: pagination.endDate,
         p_stage: pagination.p_stage,
         stageId: pagination.stageId,
-        account: ''
+        account: account
       },
       // 设置请求的 header  
       header: {
