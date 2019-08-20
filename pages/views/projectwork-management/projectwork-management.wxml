@@ -49,6 +49,7 @@
             </view>
         </view>
         <view wx:if="{{project.selected}}">
+          <view class='tr detail'><text>项目负责人：</text><text>{{project.projectCharge}}</text></view>
           <view class='tr detail'><text>委托单位：</text><text>{{project.projectAuthorize}}</text></view>
           <view class='tr detail'><text>项目状态：</text><text>{{project.workStage == 0? "开始" : "暂停"}}</text></view>
           <view class='tr detail'><text>项目类型：</text><text>{{project.projectType}}</text></view>

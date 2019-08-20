@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userAccount:'admin',  //用户
-    password:'123456',      //密码
+    userAccount:'',  //用户
+    password:'',      //密码
     loadingShow:false, //是否显示
     loadtxt:'登录中'
   },
