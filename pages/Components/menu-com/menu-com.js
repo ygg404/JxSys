@@ -91,14 +91,41 @@ Component({
         selected: false,
         visiable: true
       }],
+    //统计报表
+    stcate_list:[{
+        id: 'output-chart',
+        name: '产值统计表',
+        url: '../../views/output-chart/output-chart',
+        selected: false,
+        visiable: true
+      },{
+        id: 'collect-chart',
+        name: '汇总产值统计表',
+        url: '../../views/collect-chart/collect-chart',
+        selected: false,
+        visiable: true
+      },{
+        id: 'service-chart',
+        name: '业务汇总统计表',
+        url: '../../views/service-chart/service-chart',
+        selected: false,
+        visiable: true
+      }
+    ],
+
     mcontent: [],
     pcontent: [],
+    scontent:[],
     //项目管理列表是否展开
     pmopen:false,
     pmImgUrl: "/images/triup.png",
     //项目流程列表是否展开
     ppopen: false,
     ppImgUrl: "/images/triup.png",
+    //统计列表是否展开
+    stopen:false,
+    stImgUrl:"/images/triup.png",
+
     active: true,
     
 
@@ -110,6 +137,7 @@ Component({
   ready: function (options) {
     let pmcate_list = this.data.pmcate_list;
     let ppcate_list = this.data.ppcate_list;
+    let stcate_list = this.data.stcate_list;
     let permissionsList = app.globalData.permissions;
     pmcate_list[0].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('project_stage') != -1);
     pmcate_list[1].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('project_schedule') != -1);
@@ -123,13 +151,18 @@ Component({
     ppcate_list[5].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('adjust_output') != -1);
     ppcate_list[6].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('leader_authorize') != -1);
     ppcate_list[7].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('authorized') != -1);
+    stcate_list[0].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('output_chart') != -1);
+    stcate_list[1].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('all_output_chart') != -1);
+    stcate_list[2].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('all_business') != -1);
     this.setData({
       pmcate_list: pmcate_list,
-      ppcate_list: ppcate_list
+      ppcate_list: ppcate_list,
+      stcate_list: stcate_list
     })
 
     var pmcatelist = this.data.pmcate_list;
     var ppcatelist = this.data.ppcate_list;
+    var stcatelist = this.data.stcate_list;
     for (var pm of pmcatelist) {
       if (pm.id == this.properties.urlId){
         pm.selected = true;
@@ -138,7 +171,7 @@ Component({
           pmImgUrl: '/images/tridown.png',
         });
       }
-    };
+    }
     for (var pp of ppcatelist){
       if (pp.id == this.properties.urlId){
         pp.selected = true;
@@ -148,9 +181,20 @@ Component({
         });
       }
     }
+    for(var st of stcatelist){
+      if (st.id == this.properties.urlId){
+        st.selected = true;
+        this.setData({
+          stopen:true,
+          stImgUrl: '/images/tridown.png'
+        })
+      }
+    }
+
     this.setData({
       mcontent : pmcatelist,
-      pcontent : ppcatelist
+      pcontent : ppcatelist,
+      scontent : stcatelist
     })
   },
 
@@ -242,8 +286,10 @@ Component({
       this.setData({
         pmopen: !_pmopen,
         ppopen:false,
+        stopen:false,
         pmImgUrl: !_pmopen ? '/images/tridown.png' : '/images/triup.png',
-        ppImgUrl: '/images/triup.png'
+        ppImgUrl: '/images/triup.png',
+        stImgUrl: '/images/triup.png'
       });
       console.log(e.target)
     },
@@ -252,10 +298,23 @@ Component({
       this.setData({
         ppopen: !_ppopen,
         pmopen: false,
+        stopen: false,
         pmImgUrl: '/images/triup.png',
-        ppImgUrl: !_ppopen? '/images/tridown.png' : '/images/triup.png'
+        ppImgUrl: !_ppopen? '/images/tridown.png' : '/images/triup.png',
+        stImgUrl: '/images/triup.png'
       });
       console.log(e.target)
+    },
+    listst:function(e){
+      var _stopen = this.data.stopen;
+      this.setData({
+        ppopen: false,
+        pmopen: false,
+        stopen: !_stopen,
+        pmImgUrl: '/images/triup.png',
+        ppImgUrl: '/images/triup.png',
+        stImgUrl: !_stopen ? '/images/tridown.png' : '/images/triup.png'
+      })
     },
     /**
      * 跳转事件

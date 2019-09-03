@@ -47,10 +47,8 @@
             </view>
         </view>
         <view wx:if="{{project.selected}}">
-          <view class='tr detail'><text>距完成天数：</text><text>{{project.time}}</text></view>
           <view class='tr detail'><text>当前进度：</text><text>{{project.projectRate}}%</text></view>
-          <view class='tr detail'><text>实际完成天数：</text><text>{{project.projectActuallyFinishNum}}</text></view>
-          <view class='tr detail'><text>要求总天数：</text><text>{{project.projectCountDays}}</text></view>
+          <view class='tr detail'><text>要求工期:</text><text>{{project.projectWorkDate}}</text></view>
           <view class='tr detail'><text>作业超时天数：</text><text>{{project.wOutTime}}</text></view>
           <view class='tr detail'><text>质检超时天数：</text><text>{{project.qOutTime}}</text></view>
         </view>

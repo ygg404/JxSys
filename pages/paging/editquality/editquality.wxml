@@ -36,20 +36,20 @@
       <text>质量检查信息</text>
     </view>
 
-    <view class='searchview'>
-      <picker bindchange="qshortChangeEvent"   value="{{qindex}}" range="{{qNameList}}">
-        <view style='width:200%;'>
-          {{qNameList[qindex]}}
+    <view class='tr'>
+      <view class='select_box'>
+        <view class='select' catchtap='qshortChangeEvent'>
+            <text class='select_text'>质量综述快捷输入</text>
+            <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
         </view>
-      </picker>
-      <image src='/images/down.png'></image>
+      </view>
     </view>
 
     <view class="tr" >
       <textarea maxlength='-1' placeholder='质量综述' name='qualityNote' value='{{qualityNote}}'></textarea>
     </view>
 
-    <view class='tr'>
+    <view class='tr' wx:if='{{!qShortShow}}'>
       <input placeholder='内容评分' type='number' name='qualityScore' value='{{qualityScore}}' bindinput='qualityScoreEvent'
        style='border-bottom:1px solid green;margin:20rpx;font-size:12pt;'></input>
     </view>
@@ -87,6 +87,29 @@
       <view class='tr'>
         <button class='retbtn' bindtap='backReturnEvent'>取消</button>
         <button class='postbtn' bindtap='postBackEvent'>提交</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 质量综述快捷短语多选 -->
+<view wx:if="{{qShortShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='title'>工作量快捷输入</view>
+      <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="qShortCheckEvent">
+            <label wx:for="{{qshortcutList}}" wx:for-item="qshort" style='display:block;'>
+              <checkbox  value='{{qshort.id}}' checked="{{qshort.checked}}"/>{{qshort.shortNote}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnQshortEvent'>取消</button>
+        <button class='savebtn' bindtap='setQshortEvent'>确认</button>
       </view>
     </view>
   </view>

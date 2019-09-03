@@ -55,9 +55,22 @@ function arrayRemove(arr,delIndex) {
   return temArray;
 }
 
+/**
+ * 时间格式转化 yyyy-mm-dd
+ */
+function formatDate(date) {
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? '0' + m : m;
+  var d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  return y + '-' + m + '-' + d;
+}
+
 module.exports = {
   formatTime: formatTime,
   TipModel: TipModel,
   tableListInit: tableListInit,
-  arrayRemove: arrayRemove
+  arrayRemove: arrayRemove,
+  formatDate: formatDate
 }

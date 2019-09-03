@@ -12,9 +12,9 @@
       <view class='tr detail'><text>联系电话：</text><text>{{ptwork.projectPlan.userPhone}}</text></view>
       <view class='tr detail'><text>委托单位：</text><text>{{ptwork.projectPlan.projectAuthorize}}</text></view>
       <view class='tr detail'><text>委托要求：</text><text>{{ptwork.projectPlan.projectNote}}</text></view>
-      <view class='tr detail'><text>作业内容：</text><text>{{ptwork.projectPlan.projectWorkNote}}</text></view>
-      <view class='tr detail'><text>技术要求：</text><text>{{ptwork.projectPlan.projectWorkRequire}}</text></view>
-      <view class='tr detail'><text>执行标准：</text><text>{{ptwork.projectPlan.projectExecuteStandard}}</text></view>
+      <view class='tr detail'><text style="min-width:65px;">作业内容：</text><text>{{ptwork.projectPlan.projectWorkNote}}</text></view>
+      <view class='tr detail'><text style="min-width:65px;">技术要求：</text><text>{{ptwork.projectPlan.projectWorkRequire}}</text></view>
+      <view class='tr detail'><text style="min-width:65px;">执行标准：</text><text>{{ptwork.projectPlan.projectExecuteStandard}}</text></view>
       <view class='tr detail'><text>项目开工时间：</text><text>{{ptwork.projectBegunDate}}</text></view>
     </view>
     <view class="tr" bindtap='viewScheduleEvent'>
@@ -33,7 +33,7 @@
             <view class='td td1'>{{project.id}}</view>
             <view class="td td2">{{project.scheduleCreateTime}}</view>
             <view class="td td3">{{project.projectRate}}</view>
-            <view class="td td4">{{project.projectNote}}</view>
+            <view class="td td4">{{project.projectNote==null?'':project.projectNote}}</view>
         </view>
       </view>
     </view>
@@ -41,65 +41,65 @@
 </view>
 
 <form style='width:100%;' bindsubmit="formSubmit" bindreset="formReset">
-<view class='box' wx:if='{{!addScheduleShow}}'>
+<view class='box' wx:if='{{!addScheduleShow && !tShortShow && !pShortShow && !iShortShow && !wShortShow && !aShortShow}}'>
   <view class='spaceAroundCenter'>
     <view class="tr" >
         <text>项目作业信息</text>
     </view>
-    <view class='searchview'>
-      <picker bindchange="tshortChangeEvent"   value="{{tindex}}" range="{{tNameList}}">
-        <view style='width:200%;'>
-          {{tNameList[tindex]}}
+    <view class='tr'>
+      <view class='select_box'>
+        <view class='select' catchtap='tshortChangeEvent'>
+            <text class='select_text'>技术交底内容快捷输入</text>
+            <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
         </view>
-      </picker>
-      <image src='/images/down.png'></image>
+      </view>
     </view>
     <view class="tr" >
       <textarea maxlength='-1' placeholder='技术交底内容' name='disclosureNote' value='{{disclosureNote}}'></textarea>
     </view>
-    <view class='searchview'>
-      <picker bindchange="pshortChangeEvent"   value="{{pindex}}" range="{{pNameList}}">
-        <view style='width:200%;'>
-          {{pNameList[pindex]}}
+    <view class='tr'>
+      <view class='select_box'>
+        <view class='select' catchtap='pshortChangeEvent'>
+            <text class='select_text'>过程检查意见快捷输入</text>
+            <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
         </view>
-      </picker>
-      <image src='/images/down.png'></image>
+      </view>
     </view>
     <view class="tr" >
       <textarea maxlength='-1' placeholder='过程检查意见' name='checkSuggestion' value='{{checkSuggestion}}'></textarea>
     </view>
 
-    <view class='searchview'>
-      <picker bindchange="ishortChangeEvent"   value="{{iindex}}" range="{{iNameList}}">
-        <view style='width:200%;'>
-          {{iNameList[iindex]}}
+    <view class='tr'>
+      <view class='select_box'>
+        <view class='select' catchtap='ishortChangeEvent'>
+            <text class='select_text'>上交资料快捷输入</text>
+            <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
         </view>
-      </picker>
-      <image src='/images/down.png'></image>
+      </view>
     </view>
     <view class="tr" >
       <textarea maxlength='-1' placeholder='上交资料' name='dataName' value='{{dataName}}'></textarea>
     </view>
 
-    <view class='searchview'>
-      <picker bindchange="wshortChangeEvent"   value="{{windex}}" range="{{wNameList}}">
-        <view style='width:200%;'>
-          {{wNameList[windex]}}
+    <view class='tr'>
+      <view class='select_box'>
+        <view class='select' catchtap='wshortChangeEvent'>
+            <text class='select_text'>工作小结快捷输入</text>
+            <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
         </view>
-      </picker>
-      <image src='/images/down.png'></image>
+      </view>
     </view>
     <view class="tr" >
       <textarea maxlength='-1' placeholder='工作小结' name='briefSummary' value='{{briefSummary}}'></textarea>
     </view>
 
-    <view class='searchview'>
-      <picker bindchange="ashortChangeEvent"   value="{{aindex}}" range="{{aNameList}}">
-        <view style='width:200%;'>
-          {{aNameList[aindex]}}
+    <view class='tr'>
+      <view class='select_box'>
+        <view class='select' catchtap='ashortChangeEvent'>
+            <text class='select_text'>工作量快捷输入</text>
+            <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
         </view>
-      </picker>
-      <image src='/images/down.png'></image>
+      </view>
     </view>
     <view class="tr" >
       <textarea maxlength='-1' placeholder='工作量' name='workLoad' value='{{workLoad}}'></textarea>
@@ -150,4 +150,120 @@
         </view>
       </view>
     </view>
+</view>
+
+
+<!-- 技术交底快捷短语多选 -->
+<view wx:if="{{tShortShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='title'>技术交底快捷输入</view>
+      <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="tShortCheckEvent">
+            <label wx:for="{{tshortcutList}}" wx:for-item="tshort" style='display:block;'>
+              <checkbox  value='{{tshort.id}}' checked="{{tshort.checked}}"/>{{tshort.shortNote}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnTshortEvent'>取消</button>
+        <button class='savebtn' bindtap='setTshortEvent'>确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 过程检查快捷短语多选 -->
+<view wx:if="{{pShortShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='title'>过程检查快捷输入</view>
+      <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="pShortCheckEvent">
+            <label wx:for="{{pshortcutList}}" wx:for-item="pshort" style='display:block;'>
+              <checkbox  value='{{pshort.id}}' checked="{{pshort.checked}}"/>{{pshort.shortNote}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnPshortEvent'>取消</button>
+        <button class='savebtn' bindtap='setPshortEvent'>确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 资料快捷短语多选 -->
+<view wx:if="{{iShortShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='title'>上交资料快捷输入</view>
+      <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="iShortCheckEvent">
+            <label wx:for="{{ishortcutList}}" wx:for-item="ishort" style='display:block;'>
+              <checkbox  value='{{ishort.id}}' checked="{{ishort.checked}}"/>{{ishort.shortNote}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnIshortEvent'>取消</button>
+        <button class='savebtn' bindtap='setIshortEvent'>确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 工作小结快捷短语多选 -->
+<view wx:if="{{wShortShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='title'>工作小结快捷输入</view>
+      <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="wShortCheckEvent">
+            <label wx:for="{{wshortcutList}}" wx:for-item="wshort" style='display:block;'>
+              <checkbox  value='{{wshort.id}}' checked="{{wshort.checked}}"/>{{wshort.shortNote}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnWshortEvent'>取消</button>
+        <button class='savebtn' bindtap='setWshortEvent'>确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 工作量快捷短语多选 -->
+<view wx:if="{{aShortShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='title'>工作量快捷输入</view>
+      <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="aShortCheckEvent">
+            <label wx:for="{{ashortcutList}}" wx:for-item="ashort" style='display:block;'>
+              <checkbox  value='{{ashort.id}}' checked="{{ashort.checked}}"/>{{ashort.shortNote}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnAshortEvent'>取消</button>
+        <button class='savebtn' bindtap='setAshortEvent'>确认</button>
+      </view>
+    </view>
+  </view>
 </view>

@@ -115,7 +115,7 @@ Page({
         if (res.statusCode == 201) {
           // app.globalData.userId = res.data['id'];
           app.globalData.userInfo = res.data;
-          console.log(app.globalData.userId);
+          console.log(app.globalData.userInfo);
         }
         //获取失败
         else {

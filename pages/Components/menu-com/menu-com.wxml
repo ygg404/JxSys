@@ -18,13 +18,13 @@
           <view class='menutitle'>项目管理</view>
           <image src="{{pmImgUrl}}" class='menutri'></image>
       </view>
-  
       <view class="temp {{pmopen ? 'slidown' : 'slidup'}}">
           <view wx:for="{{mcontent}}" wx:for-item="pmcate" id="{{pmcate.id}}"bindtap='navtoEvent' 
           class="{{pmcate.selected? 'selectItem':''}}" wx:if='{{pmcate.visiable}}'>
               {{pmcate.name}}
           </view>
       </view>
+
       <view class="nav-son" bindtap="listpp">
           <image src='/images/ppico.png' class='menuimg'></image>
           <view>项目流程</view>
@@ -34,6 +34,18 @@
           <view wx:for="{{pcontent}}" wx:for-item="ppcate" id="{{ppcate.id}}"bindtap='navtoEvent'
           class="{{ppcate.selected? 'selectItem':''}}" wx:if='{{ppcate.visiable}}'>
               {{ppcate.name}}
+          </view>
+      </view>
+
+      <view class="nav-son" bindtap="listst">
+          <image src='/images/stico.png' class='menuimg'></image>
+          <view>统计报表</view>
+          <image src="{{stImgUrl}}" class='menutri'></image>
+      </view>
+      <view class="temp {{stopen ? 'slidown' : 'slidup'}}">
+          <view wx:for="{{scontent}}" wx:for-item="stcate" id="{{stcate.id}}"bindtap='navtoEvent'
+          class="{{stcate.selected? 'selectItem':''}}" wx:if='{{stcate.visiable}}'>
+              {{stcate.name}}
           </view>
       </view>
 

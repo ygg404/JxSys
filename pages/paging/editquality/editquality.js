@@ -17,8 +17,7 @@ Page({
     cNameList:[],
     cindex:0,
     qshortcutList: [], //质量综述
-    qNameList: [],
-    qindex: 0,
+    qShortShow: false, 
     bshortcutList: [], //返修短语
     bNameList: [],
     bindex: 0,
@@ -111,7 +110,6 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['质量检查快捷输入'];
           for (let shortcut of res.data) {
             nameList.push(shortcut.shortNote);
           }
@@ -131,13 +129,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['质量综述快捷输入'];
           for (let shortcut of res.data) {
-            nameList.push(shortcut.shortNote);
+            shortcut.checked = false;
           }
           that.setData({
             qshortcutList: res.data,
-            qNameList: nameList
           })
         }
       }
@@ -169,12 +165,52 @@ Page({
    *质量综述 
    */
   qshortChangeEvent:function(e){
-    let qualityNote = e.detail.value == 0 ? '' : this.data.qNameList[e.detail.value];
     this.setData({
-      qindex: e.detail.value,
-      qualityNote: qualityNote
+      qShortShow: true
     })
   },
+  /**
+  * 质量综述快捷输入多选改变
+  */
+  qShortCheckEvent: function (e) {
+    let qList = this.data.qshortcutList;
+    for (let qshort of qList) {
+      if (e.detail.value.indexOf(qshort.id.toString()) != -1) {
+        qshort.checked = true;
+      } else {
+        qshort.checked = false;
+      }
+    }
+    this.setData({
+      qshortcutList: qList
+    })
+  },
+  /**
+     * 质量综述快捷输入取消
+     */
+  returnQshortEvent: function (e) {
+    this.setData({
+      qShortShow: false
+    })
+  },
+  /**
+   *  质量综述快捷输入确定
+   */
+  setQshortEvent: function (e) {
+    let qDetail = this.data.projectDetail;
+    let qualityNote = '';
+    for (let execute of this.data.qshortcutList) {
+      if (execute.checked) {
+        qualityNote += execute.shortNote + ';';
+      }
+    }
+    this.setData({
+      qualityNote: qualityNote,
+      qShortShow: false
+    });
+  },
+
+
   /**
    * 获取返修记录
    */

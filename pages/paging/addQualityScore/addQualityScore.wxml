@@ -30,7 +30,7 @@
       <text class='trgray' style='font-size:11pt;'>质量扣分:{{cgScore}}</text>
     </view>
   </view>
-  <view class='tr'>
+  <view class='tr '>
     <view class='checkcontent1 trgray'> 
       <text>检查内容:</text>
       <text>{{scoreDetail.checkcontent}}</text>
@@ -45,7 +45,7 @@
     </view>
   </view>
 
-  <view class='tr'>
+  <view class='tr trbottom'>
     <view class='score1 trgray'> 
       <text>错漏数量:</text>
     </view>

@@ -41,6 +41,15 @@ function firstLoad(){
   if(permissionsList.indexOf('authorized') != -1){
     return 'audited-management'
   }
+  if (permissionsList.indexOf('output_chart') != -1) {
+    return 'output-chart'
+  }
+  if (permissionsList.indexOf('all_output_chart') != -1) {
+    return 'collect-chart'
+  }
+  if (permissionsList.indexOf('all_business') != -1) {
+    return 'service-chart'
+  }
 }
 
 module.exports = {

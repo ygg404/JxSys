@@ -8,26 +8,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tshortcutList:[],
-    tshortcut: '',//技术交底内容快捷输入
-    tindex:0,
-    tNameList:[],
-    pshortcutList: [],
-    pshortcut: [], //过程快捷输入
-    pindex: 0,
-    pNameList: [],
-    ishortcutList: [],
-    ishortcut: [], //资料快捷输入
-    iindex: 0,
-    iNameList: [],
-    wshortcutList: [],
-    wshortcut: [], //工作小结快捷输入
-    windex: 0,
-    wNameList: [],
-    ashortcutList: [],
-    ashortcut: [], //工作量快捷输入
-    aindex: 0,
-    aNameList: [],
+    tshortcutList: [],//技术交底内容快捷输入
+    tShortShow: false,
+    pshortcutList: [],//过程快捷输入
+    pShortShow: false, 
+    ishortcutList: [],//资料快捷输入
+    iShortShow: false, 
+    wshortcutList: [],//工作小结快捷输入
+    wShortShow: false, 
+    ashortcutList: [],//工作量快捷输入
+    aShortShow: false, 
     p_no:'',
     p_group:'',
     p_name:'',
@@ -145,13 +135,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['技术交底内容快捷输入'];
           for(let shortcut of res.data){
-            nameList.push(shortcut.shortNote);
+            shortcut.checked = false;
           }
           that.setData({
-            tshortcutList : res.data,
-            tNameList: nameList
+            tshortcutList : res.data
           })
         }
       }
@@ -165,13 +153,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['过程检查意见快捷输入'];
           for (let shortcut of res.data) {
-            nameList.push(shortcut.shortNote);
+            shortcut.checked = false;
           }
           that.setData({
-            pshortcutList: res.data,
-            pNameList: nameList
+            pshortcutList: res.data
           })
         }
       }
@@ -185,13 +171,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['上交资料快捷输入'];
           for (let shortcut of res.data) {
-            nameList.push(shortcut.shortNote);
+            shortcut.checked = false;
           }
           that.setData({
-            ishortcutList: res.data,
-            iNameList: nameList
+            ishortcutList: res.data
           })
         }
       }
@@ -205,13 +189,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['工作小结快捷输入'];
           for (let shortcut of res.data) {
-            nameList.push(shortcut.shortNote);
+            shortcut.checked = false;
           }
           that.setData({
-            wshortcutList: res.data,
-            wNameList: nameList
+            wshortcutList: res.data
           })
         }
       }
@@ -225,13 +207,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          let nameList = ['工作量快捷输入'];
           for (let shortcut of res.data) {
-            nameList.push(shortcut.shortNote);
+            shortcut.checked = false;
           }
           that.setData({
-            ashortcutList: res.data,
-            aNameList: nameList
+            ashortcutList: res.data
           })
         }
       }
@@ -241,51 +221,245 @@ Page({
    * 技术交底快捷输入
    */
   tshortChangeEvent:function(e){
-    let disclosureNote = e.detail.value==0?'':this.data.tNameList[e.detail.value];
     this.setData({
-      tindex:e.detail.value,
-      disclosureNote: disclosureNote
+      tShortShow : true
     })
+  },
+  /**
+   * 技术交底快捷输入多选改变
+   */
+  tShortCheckEvent: function(e){
+    let tList = this.data.tshortcutList;
+    for (let tshort of tList) {
+      if (e.detail.value.indexOf(tshort.id.toString()) != -1) {
+        tshort.checked = true;
+      } else {
+        tshort.checked = false;
+      }
+    }
+    this.setData({
+      tshortcutList: tList
+    })
+  },
+  /**
+     * 技术短语快捷输入取消
+     */
+  returnTshortEvent: function (e) {
+    this.setData({
+      tShortShow: false
+    })
+  },
+  /**
+   *  技术短语快捷输入确定
+   */
+  setTshortEvent: function (e) {
+    let pDetail = this.data.projectDetail;
+    let disclosureNote = '';
+    for (let execute of this.data.tshortcutList) {
+      if (execute.checked) {
+        disclosureNote += execute.shortNote + ';';
+      }
+    }
+    this.setData({
+      disclosureNote: disclosureNote,
+      tShortShow: false
+    });
   },
   /**
    * 过程检查意见快捷输入
    */
   pshortChangeEvent: function (e) {
-    let checkSuggestion = e.detail.value == 0 ? '' : this.data.pNameList[e.detail.value];
     this.setData({
-      pindex: e.detail.value,
-      checkSuggestion: checkSuggestion
+      pShortShow : true
     })
   },
+  /**
+     * 过程检查快捷输入多选改变
+     */
+  pShortCheckEvent: function (e) {
+    let pList = this.data.pshortcutList;
+    for (let pshort of pList) {
+      if (e.detail.value.indexOf(pshort.id.toString()) != -1) {
+        pshort.checked = true;
+      } else {
+        pshort.checked = false;
+      }
+    }
+    this.setData({
+      pshortcutList: pList
+    })
+  },
+  /**
+     * 过程检查快捷输入取消
+     */
+  returnPshortEvent: function (e) {
+    this.setData({
+      pShortShow: false
+    })
+  },
+  /**
+   *  过程检查快捷输入确定
+   */
+  setPshortEvent: function (e) {
+    let pDetail = this.data.projectDetail;
+    let checkSuggestion = '';
+    for (let execute of this.data.pshortcutList) {
+      if (execute.checked) {
+        checkSuggestion += execute.shortNote + ';';
+      }
+    }
+    this.setData({
+      checkSuggestion: checkSuggestion,
+      pShortShow: false
+    });
+  },
+
   /**
  * 上交资料快捷输入
  */
   ishortChangeEvent: function (e) {
-    let dataName = e.detail.value == 0 ? '' : this.data.iNameList[e.detail.value];
     this.setData({
-      pindex: e.detail.value,
-      dataName: dataName
+      iShortShow : true
     })
   },
+  /**
+  * 上交资料快捷输入多选改变
+  */
+  iShortCheckEvent: function (e) {
+    let iList = this.data.ishortcutList;
+    for (let ishort of iList) {
+      if (e.detail.value.indexOf(ishort.id.toString()) != -1) {
+        ishort.checked = true;
+      } else {
+        ishort.checked = false;
+      }
+    }
+    this.setData({
+      ishortcutList: iList
+    })
+  },
+  /**
+     * 上交资料快捷输入取消
+     */
+  returnIshortEvent: function (e) {
+    this.setData({
+      iShortShow: false
+    })
+  },
+  /**
+   *  上交资料快捷输入确定
+   */
+  setIshortEvent: function (e) {
+    let iDetail = this.data.projectDetail;
+    let dataName = '';
+    for (let execute of this.data.ishortcutList) {
+      if (execute.checked) {
+        dataName += execute.shortNote + ';';
+      }
+    }
+    this.setData({
+      dataName: dataName,
+      iShortShow: false
+    });
+  },
+
   /**
 * 工作小结快捷输入
 */
   wshortChangeEvent: function (e) {
-    let briefSummary = e.detail.value == 0 ? '' : this.data.wNameList[e.detail.value];
     this.setData({
-      windex: e.detail.value,
-      briefSummary: briefSummary
+      wShortShow : true
     })
   },
+  /**
+  * 工作小结快捷输入多选改变
+  */
+  wShortCheckEvent: function (e) {
+    let wList = this.data.wshortcutList;
+    for (let wshort of wList) {
+      if (e.detail.value.indexOf(wshort.id.toString()) != -1) {
+        wshort.checked = true;
+      } else {
+        wshort.checked = false;
+      }
+    }
+    this.setData({
+      wshortcutList: wList
+    })
+  },
+  /**
+     * 工作小结快捷输入取消
+     */
+  returnWshortEvent: function (e) {
+    this.setData({
+      wShortShow: false
+    })
+  },
+  /**
+   *  工作小结快捷输入确定
+   */
+  setWshortEvent: function (e) {
+    let wDetail = this.data.projectDetail;
+    let briefSummary = '';
+    for (let execute of this.data.wshortcutList) {
+      if (execute.checked) {
+        briefSummary += execute.shortNote + ';';
+      }
+    }
+    this.setData({
+      briefSummary: briefSummary,
+      wShortShow: false
+    });
+  },
+
   /**
 * 工作量快捷输入
 */
   ashortChangeEvent: function (e) {
-    let workLoad = e.detail.value == 0 ? '' : this.data.aNameList[e.detail.value];
     this.setData({
-      aindex: e.detail.value,
-      workLoad: workLoad
+      aShortShow : true
     })
+  },
+
+  /**
+ * 工作量快捷输入多选改变
+ */
+  aShortCheckEvent: function (e) {
+    let aList = this.data.ashortcutList;
+    for (let ashort of aList) {
+      if (e.detail.value.indexOf(ashort.id.toString()) != -1) {
+        ashort.checked = true;
+      } else {
+        ashort.checked = false;
+      }
+    }
+    this.setData({
+      ashortcutList: aList
+    })
+  },
+  /**
+     * 工作量快捷输入取消
+     */
+  returnAshortEvent: function (e) {
+    this.setData({
+      aShortShow: false
+    })
+  },
+  /**
+   *  工作量快捷输入确定
+   */
+  setAshortEvent: function (e) {
+    let aDetail = this.data.projectDetail;
+    let workLoad = '';
+    for (let execute of this.data.ashortcutList) {
+      if (execute.checked) {
+        workLoad += execute.shortNote + ';';
+      }
+    }
+    this.setData({
+      workLoad: workLoad,
+      aShortShow: false
+    });
   },
   /**
    * 获取项目基本信息
@@ -300,6 +474,7 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 201) {
+          res.data.projectBegunDate = res.data.projectBegunDate.replace(" 00:00:00","")
           that.setData({
             ptwork : res.data,
             disclosureNote: res.data.disclosureNote,

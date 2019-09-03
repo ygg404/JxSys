@@ -265,7 +265,7 @@
 }
 
 .tr .tdh2 input{
-  width: 70%;
+  width: 50%;
   border-bottom: 1rpx solid #0ab133;
 }
 
@@ -366,6 +366,12 @@
   overflow-y:scroll; 
 }
 
+.form .tabledetail .title{
+  font-size: 17pt;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
 /* 选择作业分组 */
 .checked{
   color: black;
@@ -382,4 +388,46 @@
 
 .tr .tgd input{
   border-bottom: 1px solid #0ab133;
+}
+
+/* 快捷短语输入样式 */
+.select_box{
+  margin-top: 5rpx;
+  margin-left: 5%;
+  width:90%;
+  height:70%;
+  border-radius: 5rpx;
+  position: relative;
+  border-bottom: 1px solid #0ab133;
+}
+.select_box .select{
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding:10rpx;
+}
+
+.select_box .select .select_text{
+  font-size: 27rpx;
+  color: #777777;
+  line-height: 28rpx;
+  flex: 1;
+}
+
+.select_box .select .select_img{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+}
+
+.checkBox{
+  max-height: 550rpx;
+  overflow-y: scroll;
+  border: 1px solid #0ab133;
+}
+
+.radio-group{
+  border: 1px solid #0ab133;
 }

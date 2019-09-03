@@ -6,6 +6,11 @@
   justify-content: space-between;
 }
 
+.trbottom{
+  padding: 3px;
+  border-bottom: 1px cadetblue solid
+}
+
 .trgray{
   color: gray;
   font-size: 10pt;

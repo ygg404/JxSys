@@ -20,7 +20,9 @@
     "pages/paging/editquality/editquality",
     "pages/paging/editoutput/editoutput",
     "pages/paging/editaudited/editaudited",
-    "pages/paging/addQualityScore/addQualityScore"
+    "pages/paging/addQualityScore/addQualityScore",
+    "pages/views/output-chart/output-chart",
+    "pages/views/collect-chart/collect-chart"
   ],
   "window": {
     "backgroundTextStyle": "light",

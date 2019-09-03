@@ -18,7 +18,7 @@ Page({
     pagination: {
       'page': 1,
       'rowsPerPage': 10,
-      'sortBy': 'id',
+      'sortBy': 'contractNo',
       'startDate': '', //开始日期
       'endDate': '',// 结束日期
       'search': '',
@@ -122,7 +122,7 @@ Page({
         search: pagination.search,
         startDate: pagination.startDate,
         endDate: pagination.endDate,
-        userAccount: ''
+        userAccount: app.globalData.permissions.indexOf('all_permission') != -1?'':wx.getStorageSync('userAccount')
       },
       // 设置请求的 header  
       header: {
