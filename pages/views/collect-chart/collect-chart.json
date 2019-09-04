@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "汇总产值统计表",
+  "usingComponents": {
+    "loading-component": "/pages/Components/loading-com/loading-com",
+    "menu-component": "/pages/Components/menu-com/menu-com",
+    "calendar-component": "/pages/Components/calendar-com/calendar-com"
+  }
+}

@@ -1,0 +1,3 @@
+<!--pages/views/output-chart/output-chart.wxml-->
+<!-- 菜单窗口 -->
+<menu-component urlId="{{urlId}}"></menu-component>

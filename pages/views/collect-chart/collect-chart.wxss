@@ -1,0 +1,105 @@
+/* pages/views/collect-chart/collect-chart.wxss */
+.mycontain{
+  margin-top: 130rpx;
+}
+
+.box{
+  margin:20rpx;
+}
+
+.spaceAroundCenter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 65rpx;
+  font-size: 16pt;
+}
+
+.spaceAroundCenter .inputdate{
+  height: 70rpx;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  border:1px solid rgb(40, 133, 4)
+}
+
+.table{
+  border:1px solid #098305;
+  margin-top: 25rpx;
+  width: 98%;
+  margin-left: 1%;
+}
+
+.tr{
+  text-align: left;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tr .title{
+  width: 100%;
+  text-align: center;
+  font-size: 20pt;
+  font-weight: 700;
+}
+
+.tr .datetitle{
+  width: 100%;
+  text-align: center;
+  font-size: 14pt;
+  font-weight: 500;
+}
+
+.th,.td{
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+  
+}
+
+.th0,.td0{
+  border-bottom: 1px solid #dadada;
+  font-size: 25rpx;
+  width: 3%;
+  padding: 5rpx;
+  color: #0ab133;
+}
+.th0{
+  background-color: #0ab133;
+}
+
+
+.th1,.td1{
+  width: 40%;
+}
+
+.th2,.td2{
+  width: 25%;
+}
+
+.th3,.td3{
+  width: 37%;
+
+}
+
+.th{
+  font-weight: 800;
+  background-color: #0ab133;
+  font-size: 30rpx;
+  color: whitesmoke;
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: left;
+}
+.td{
+  font-size: 28rpx;
+  color: black;
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: left;
+}

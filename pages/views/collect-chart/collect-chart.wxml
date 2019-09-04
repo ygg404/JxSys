@@ -1,0 +1,45 @@
+<!--pages/views/collect-chart/collect-chart.wxml-->
+<!-- 菜单窗口 -->
+<menu-component urlId="{{urlId}}"></menu-component>
+<calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
+
+<view class='mycontain'>
+  <view class='box'>
+    <view class='spaceAroundCenter'>
+      <view style='width:45%;' >
+        <input placeholder="开始日期" disabled='true' value='{{startDate}}' bindtap='setStartDateEvent' class='inputdate'></input>
+      </view>
+      -
+      <view style='width:45%;' >
+        <input placeholder="结束日期" disabled='true' value='{{endDate}}' bindtap='setEndDateEvent' class='inputdate'></input>
+      </view>
+    </view>
+  </view>
+
+  <view class="tr">
+    <view class="title">各部门汇总产值统计表</view>
+  </view>
+  <view class="tr">
+    <view class="datetitle">{{startDate}}至{{endDate}}</view>
+  </view>
+
+  <view class="table">
+    <view class="tr">
+          <view class="th th1">部门名称</view>
+          <view class="th th2">项目数</view>
+          <view class="th th3">产值</view>
+      </view>
+      <view wx:for="{{tableList}}" wx:for-item="project" >
+        <view class="tr">
+            <view class="td td1">{{project.gName}}</view>
+            <view class="td td2">{{project.projectSum}}</view>
+            <view class="td td3">{{project.outPutNum}}</view>
+        </view>
+      </view>
+  </view>
+  <view class="tr" style="border:1px #0ab133 solid;width:98%;margin-left:1%;">
+      <view class="td td1">合计</view>
+      <view class="td td2">{{projectSum}}</view>
+      <view class="td td3">{{outPutNumSum}}</view>
+  </view>
+</view>
