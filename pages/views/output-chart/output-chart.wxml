@@ -1,3 +1,69 @@
 <!--pages/views/output-chart/output-chart.wxml-->
+<wxs module="filters" src="../../../utils/filter.wxs"></wxs>
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
+
+<view class="mycontain">
+  <view class="box">
+    <view class='spaceAroundCenter'>
+      <view class="tip">日 期 选 择:</view>
+      <picker mode="multiSelector" class='datepicker' bindchange="startMultiPickerChange" value="{{multiIndexStart}}" range="{{multiArray}}">
+          <input class='inputdate' value='{{multiArray[0][multiIndexStart[0]]}}-{{multiArray[1][multiIndexStart[1]]}}'
+          placeholder="开始月份"></input>
+      </picker> --
+      <picker mode="multiSelector" class='datepicker' bindchange="endMultiPickerChange" value="{{multiIndexEnd}}" range="{{multiArray}}">
+          <input class='inputdate' value='{{multiArray[0][multiIndexEnd[0]]}}-{{multiArray[1][multiIndexEnd[1]]}}'
+          placeholder="结束月份"></input>
+      </picker>
+    </view>
+
+    <view class='spaceAroundCenter' style="margin-top:20rpx;">
+      <view class="tip">作业组选择:</view>
+      <picker class='select_box' bindchange="workGroupChangeEvent"   value="{{groupIndex}}" range="{{groupNameList}}">
+          <view class='select'>
+              <text class='select_text'>{{groupNameList[groupIndex]}}</text>
+              <image class='select_img' src='/images/down.png'  background-size="contain"></image> 
+          </view>
+        
+      </picker>
+    </view>
+
+    <view class="tr" style="margin-top:20px;">
+      <view class="title">产值统计表</view>
+    </view>
+    <view class="tr">
+      <view class="datetitle">{{outPutTitle}}</view>
+    </view>
+
+    <view class="table">
+      <view class="tr">
+        <view class="th th2">项目名称</view>
+        <view class="th th2">项目类型</view>
+        <view class="th th2">完成时间</view>
+        <view class="th th2">产值</view>
+      </view>
+      <view wx:for="{{tableList}}" wx:for-item="item" wx:if="{{item.planRateList.length > 0}}">
+        <view class="tr">
+          <view class="tdw td1">{{item.gName}}</view>
+        </view>
+        <view wx:for="{{item.planRateList}}" wx:for-item="plan" >
+          <view class="tr">
+            <view class="td td2">{{plan.projectName}}</view>
+            <view class="td td2">{{plan.projectType}}</view>
+            <view class="td td2">{{filters.replaceTime(plan.finishDateTime)}}</view>
+            <view class="td td2" style="text-align:right;">{{filters.toFix(plan.outputNum)}}</view>
+          </view>
+        </view>
+        <view class="tr" style="border-bottom:1px #0ab133 solid;">
+            <view class="tdw td3">{{item.gName}}合计{{item.projectSum}}个项目</view>
+            <view class="tdw td2" style="text-align:right;">{{filters.toFix(item.outPutNum)}}</view>
+          </view>
+      </view>
+      <view class="tr" style="border:1px #0ab133 solid;">
+        <view class="tdw td3">{{item.gName}}合计{{projectSumAll}}个项目</view>
+        <view class="tdw td2" style="text-align:right;">{{filters.toFix(outPutNumAll)}}</view>
+      </view>
+    </view>
+    
+  </view>
+</view>

@@ -22,7 +22,8 @@
     "pages/paging/editaudited/editaudited",
     "pages/paging/addQualityScore/addQualityScore",
     "pages/views/output-chart/output-chart",
-    "pages/views/collect-chart/collect-chart"
+    "pages/views/collect-chart/collect-chart",
+    "pages/views/service-chart/service-chart"
   ],
   "window": {
     "backgroundTextStyle": "light",

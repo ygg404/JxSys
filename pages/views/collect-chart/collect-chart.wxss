@@ -82,7 +82,7 @@
 
 .th3,.td3{
   width: 37%;
-
+  
 }
 
 .th{
@@ -102,4 +102,11 @@
   border-bottom: 1px solid #dadada;
   border-right: 1px solid #dadada;
   text-align: left;
+}
+
+.tablefoot{
+  border:1px #0ab133 solid;
+  width:98%;
+  margin-left:1%;
+  font-weight:700;
 }

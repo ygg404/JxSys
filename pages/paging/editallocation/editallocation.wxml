@@ -219,7 +219,7 @@
   <view class='drawer_screen'></view>
   <view class='form'>
     <view class='tabledetail'>
-      <view class='title'>执行标准快捷输入</view>
+      <view class='title'>作业短语标准快捷输入</view>
       <view class='checkBox'>
         <view class='tr'>
           <checkbox-group bindchange="wShortCheckEvent">
@@ -242,7 +242,7 @@
   <view class='drawer_screen'></view>
   <view class='form'>
     <view class='tabledetail'>
-      <view class='title'>执行标准快捷输入</view>
+      <view class='title'>技术要求标准快捷输入</view>
       <view class='checkBox'>
         <view class='tr'>
           <checkbox-group bindchange="tShortCheckEvent">

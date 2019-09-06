@@ -1,4 +1,5 @@
 <!--pages/views/collect-chart/collect-chart.wxml-->
+<wxs module="filters" src="../../../utils/filter.wxs"></wxs>
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
@@ -33,13 +34,13 @@
         <view class="tr">
             <view class="td td1">{{project.gName}}</view>
             <view class="td td2">{{project.projectSum}}</view>
-            <view class="td td3">{{project.outPutNum}}</view>
+            <view class="td td3" style="text-align:right;">{{filters.toFix(project.outPutNum)}}</view>
         </view>
       </view>
   </view>
-  <view class="tr" style="border:1px #0ab133 solid;width:98%;margin-left:1%;">
+  <view class="tr tablefoot">
       <view class="td td1">合计</view>
       <view class="td td2">{{projectSum}}</view>
-      <view class="td td3">{{outPutNumSum}}</view>
+      <view class="td td3" style="text-align:right;">{{filters.toFix(outPutNumSum)}}</view>
   </view>
 </view>
