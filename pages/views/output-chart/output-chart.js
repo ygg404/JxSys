@@ -188,8 +188,8 @@ Page({
     //结束日期
     let date = new Date(this.data.multiArray[0][this.data.multiIndexEnd[0]] + '-'
                     + this.data.multiArray[1][this.data.multiIndexEnd[1]] + '-01');
-    let endDate = date.setMonth(date.getMonth() + 1);
-    endDate = utils.formatDate(new Date(endDate));  
+    //let endDate = date.setMonth(date.getMonth() + 1);
+    let endDate = utils.formatDate(new Date(date.getFullYear() , date.getMonth()+1 , 0));  
 
     if (this.data.multiIndexStart[0] == this.data.multiIndexEnd[0] &&
          this.data.multiIndexStart[1] == this.data.multiIndexEnd[1]){
