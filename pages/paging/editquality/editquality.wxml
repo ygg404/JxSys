@@ -45,11 +45,11 @@
       </view>
     </view>
 
-    <view class="tr" >
+    <view class="tr" wx:if='{{!qShortShow}}'>
       <textarea maxlength='-1' placeholder='质量综述' name='qualityNote' value='{{qualityNote}}'></textarea>
     </view>
 
-    <view class='tr' wx:if='{{!qShortShow}}'>
+    <view class='tr' >
       <input placeholder='内容评分' type='number' name='qualityScore' value='{{qualityScore}}' bindinput='qualityScoreEvent'
        style='border-bottom:1px solid green;margin:20rpx;font-size:12pt;'></input>
     </view>
@@ -97,7 +97,7 @@
   <view class='drawer_screen'></view>
   <view class='form'>
     <view class='tabledetail'>
-      <view class='title'>工作量快捷输入</view>
+      <view class='title'>质量综述快捷输入</view>
       <view class='checkBox'>
         <view class='tr'>
           <checkbox-group bindchange="qShortCheckEvent">
