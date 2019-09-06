@@ -1,0 +1,61 @@
+<!--pages/views/service-chart/service-chart.wxml-->
+<wxs module="filters" src="../../../utils/filter.wxs"></wxs>
+<!-- 菜单窗口 -->
+<menu-component urlId="{{urlId}}"></menu-component>
+<calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
+
+<view class='mycontain'>
+  <view class='box'>
+    <view class='spaceAroundCenter'>
+      <view style='width:45%;' >
+        <input placeholder="开始日期" disabled='true' value='{{startDate}}' bindtap='setStartDateEvent' class='inputdate'></input>
+      </view>
+      -
+      <view style='width:45%;' >
+        <input placeholder="结束日期" disabled='true' value='{{endDate}}' bindtap='setEndDateEvent' class='inputdate'></input>
+      </view>
+    </view>
+  </view>
+
+  <view class="tr">
+    <view class="title">业务员统计汇总表</view>
+  </view>
+  <view class="tr">
+    <view class="datetitle">{{startDate}}至{{endDate}}</view>
+  </view>
+
+  <view class="table">
+    <view class="tr">
+          <view class="th th2">业务员</view>
+          <view class="th th2">应收</view>
+          <view class="th th2">实收</view>
+          <view class="th th2">未收</view>
+      </view>
+      <view wx:for="{{tableList}}" wx:for-item="business" >
+        <view class="tr">
+          <view class="tdw td1">{{business.projectBusiness}}</view>
+        </view>
+        <view wx:for="{{business.list}}" wx:for-item="project" >
+          <view class="tr">
+              <view class="td td2">{{project.projectName}}</view>
+              <view class="td td2">{{filters.toFix(project.projectMoney)}}</view>
+              <view class="td td2">{{filters.toFix(project.projectGetMoney)}}</view>
+              <view class="td td2">{{filters.toFix(project.projectNotReceipts)}}</view>
+          </view>
+        </view>
+        <view class="tr">
+            <view class="tdw td2">共{{business.projectNum}}个项目</view>
+            <view class="tdw td2">{{filters.toFix(business.projectMoney)}}</view>
+            <view class="tdw td2">{{filters.toFix(business.projectGetMoney)}}</view>
+            <view class="tdw td2">{{filters.toFix(business.projectNotReceipts)}}</view>
+        </view>
+      </view>
+      <view class="tr" style="border:1px green solid;width:99.5%;">
+        <view class="tdw td2">合计{{projectNumAll}}个项目</view>
+            <view class="tdw td2">{{filters.toFix(projectMoneyAll)}}</view>
+            <view class="tdw td2">{{filters.toFix(projectGetMoneyAll)}}</view>
+            <view class="tdw td2">{{filters.toFix(projectNotReceiptsAll)}}</view>
+      </view>
+  </view>
+
+</view>
