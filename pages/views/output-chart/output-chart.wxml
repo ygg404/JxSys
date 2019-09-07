@@ -9,11 +9,11 @@
       <view class="tip">日 期 选 择:</view>
       <picker mode="multiSelector" class='datepicker' bindchange="startMultiPickerChange" value="{{multiIndexStart}}" range="{{multiArray}}">
           <input class='inputdate' value='{{multiArray[0][multiIndexStart[0]]}}-{{multiArray[1][multiIndexStart[1]]}}'
-          placeholder="开始月份"></input>
+          placeholder="开始月份" disabled="true"></input>
       </picker> --
       <picker mode="multiSelector" class='datepicker' bindchange="endMultiPickerChange" value="{{multiIndexEnd}}" range="{{multiArray}}">
           <input class='inputdate' value='{{multiArray[0][multiIndexEnd[0]]}}-{{multiArray[1][multiIndexEnd[1]]}}'
-          placeholder="结束月份"></input>
+          placeholder="结束月份" disabled="true"></input>
       </picker>
     </view>
 

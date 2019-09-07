@@ -141,6 +141,15 @@
   font-size: 9pt;
 }
 
+.td3 .downbtn{
+  line-height: 180%;
+  width: 80%;
+  height: 55rpx;
+  color: whitesmoke;
+  background: #97ec0f;
+  font-size: 9pt;
+}
+
 .th{
   font-weight: 800;
   background-color: #0ab133;

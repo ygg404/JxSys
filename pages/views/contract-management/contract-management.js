@@ -381,13 +381,49 @@ Page({
    * 选择文件
    */
   chooseFile: function(e){
-    wx.chooseFile({
-      count: 1,
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
+    var that = this;
+    wx.chooseImage({
+      count: 1, // 默认9
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 2000
+        }) 
+        wx.uploadFile({
+          url: app.globalData.upContractUrl,
+          filePath: tempFilePaths[0],
+          header: {
+            'Authorization': "Bearer " + app.globalData.SignToken
+          },
+          name: 'file',
+          formData: {
+            'contractNo': that.data.contractDetail.contractNo
+          }, 
+          success:function(res){
+            if(res.statusCode == 200){
+              wx.showToast({
+                title: '上传成功!',
+              });
+              let cDetail = that.data.contractDetail;
+              cDetail['fileName'] = tempFilePaths[0];
+              that.setData({
+                contractDetail: cDetail
+              })
+            }else{
+              wx.showToast({
+                title: '上传失败',
+                image: '/images/warn.png',
+                duration: 2000
+              })
+            }
+          }
+        })
       }
-    });
+    })
 
   },
   /**
@@ -424,8 +460,8 @@ Page({
    */
   editEvent:function(e){
     let cDetail = {};
-    for(let contract of this.data.tableList){
-      if(contract['id'] == e.currentTarget.id){
+    for (let contract of this.data.tableList) {
+      if (contract['id'] == e.currentTarget.id) {
         let projectTypeID = this.data.projectTypes.indexOf(contract['projectType']);
         let businessId = this.data.businessName.indexOf(contract['contractBusiness']);
         this.setData({
@@ -440,6 +476,39 @@ Page({
       }
     }
 
+  },
+  /**
+   *合同下载
+   */
+  downloadEvent:function(e){
+    let cDetail = {};
+    for (let contract of this.data.tableList) {
+      if (contract['id'] == e.currentTarget.id) {
+        wx.showToast({
+          title: '正在下载中...',
+          icon: 'loading',
+          mask: true,
+          duration: 2000
+        }) 
+        wx.downloadFile({
+          url: app.globalData.downContractUrl + contract['contractNo'],
+          header: {
+            'Authorization': "Bearer " + app.globalData.SignToken
+          },
+          success:function(res){
+            wx.saveImageToPhotosAlbum({
+              tempFilePath: res.tempFilePath,
+              success: function (result) {
+                wx.showToast({
+                  title:'下载完成'
+                });
+              }
+            });
+          }
+        });
+        break;
+      }
+    }
   },
   /**
    * 合同类型选择

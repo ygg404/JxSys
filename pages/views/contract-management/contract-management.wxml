@@ -42,6 +42,7 @@
             <view class="td td3">
               <view><button class='resbtn' bindtap='editEvent' id="{{project.id}}">编辑</button></view>
               <view><button class='delbtn' bindtap='delEvent' id="{{project.id}}">删除</button></view>
+              <view wx:if="{{project.fileName!=null}}"><button class='downbtn' bindtap='downloadEvent' id="{{project.id}}">下载</button></view>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
@@ -130,9 +131,9 @@
            value='{{contractAddTime}}' bindtap='contractAddTimeEvent' disabled='true' ></input></view>
       </view>
       <view class='tr'>
-          <!-- <input type='file'>选择文件</input> -->
-          <!-- <button class='filebtn' bindtap='chooseFile'>选择文件</button> -->
+          <button class='filebtn' bindtap='chooseFile'>选择文件</button>
       </view>
+      <view style="font-size:8pt;max-width:100%;">{{contractDetail.fileName==null?'':contractDetail.fileName}}</view>
       <view class="tr" style='margin-top:20rpx;'>
         <button class='returnbtn' bindtap='returnDetail'>取消</button>
         <button class='surebtn' formType="submit">{{btnName}}</button>
