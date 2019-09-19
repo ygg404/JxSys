@@ -56,8 +56,8 @@
 }
  
 .flex-item {
-  /* flex-flow: nowrap;
-  flex-grow: 1;
+
+  /* flex-grow: 1;
   flex-shrink: 1; */
   width: 14.2%;
 }

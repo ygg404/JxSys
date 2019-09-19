@@ -9,16 +9,22 @@
     </view>
 
     <view class="spaceAroundCenter">
-      <view class="flex-item">
-        <view class="item-content" bindtap="doDay" data-key='left'>
+      <view class="flex-item" >
+        <view class="item-content" bindtap="doDay" data-key='left-year'>
           <view class="glyphicon glyphicon-triangle-left">《</view>
         </view>
+        <!-- <view class="item-content" bindtap="doDay" data-key='left-month'>
+          <view class="glyphicon glyphicon-triangle-left" style="margin-left:20px;"> ＜ </view>
+        </view> -->
       </view>
       <view class="flex-item item-content-current-day">
         <view class="item-content">{{currentDate}}</view>
       </view>
       <view class="flex-item">
-        <view class="item-content" bindtap="doDay" data-key="right">
+        <!-- <view class="item-content" bindtap="doDay" data-key='left-month'>
+          <view class="glyphicon glyphicon-triangle-left" style="margin-left:20px;"> ＜ </view>
+        </view> -->
+        <view class="item-content" bindtap="doDay" data-key="right-year">
           <view class="glyphicon glyphicon-triangle-right">》</view>
         </view>
       </view>

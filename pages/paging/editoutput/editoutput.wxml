@@ -21,13 +21,24 @@
     <view class='tr outPutBox'><text>项目产值: </text><text>{{totalOutput}}</text></view>
 </view>
 
-<view class='box'>
+<!-- <view class='box'>
   <view class='checkBox'>
     <view class='tr' wx:for="{{workTypeList}}" wx:for-item="work">
       <label>  
         <checkbox id="{{work.id}}" checked="{{work.checked}}" bindtap='workCheckEvent'/>{{work.typeName}}
       </label>
     </view>
+  </view>
+</view> -->
+<view class='box'>
+  <view class='checkBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="workCheckEvent">
+            <label wx:for="{{workTypeList}}" wx:for-item="work" style='display:block;'>
+              <checkbox  value='{{work.id}}' checked="{{work.checked}}"/>{{work.typeName}}
+            </label>
+          </checkbox-group>
+        </view>
   </view>
 </view>
 

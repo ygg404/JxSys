@@ -358,10 +358,11 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
-          utils.TipModel('提示', res.data.message);
-          wx.navigateBack({
-            detla:1
-          })
+          that.putFinishTime();
+          // utils.TipModel('提示', res.data.message);
+          // wx.navigateBack({
+          //   detla:1
+          // })
         }
       }
     });
@@ -465,5 +466,33 @@ Page({
         }
       }
     });
-  }
+  },
+
+  /**
+   * 提交产值核算后更新时间
+   */
+  putFinishTime: function (e) {
+    var that = this;
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: app.globalData.WebUrl + "projectQuality/time/",
+        method: 'post',
+        header: {
+          'Authorization': "Bearer " + app.globalData.SignToken
+        },
+        data: {
+          groupId: that.groupId,
+          projectNo: that.data.p_no,
+        },
+        success: function (res) {
+          if (res.statusCode == 200 || res.statusCode == 400) {
+            utils.TipModel('提示', res.data.message);
+            wx.navigateBack({
+              detla: 1
+            })
+          }
+        }
+      });
+    })
+  },
 })

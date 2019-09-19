@@ -195,7 +195,7 @@ Page({
    *工作类型点击 
    */
   workCheckEvent :function(e){
-    console.log(e.currentTarget.id);
+    console.log(e.detail.value);
     let ptwork = this.data.ptwork;
     //获取选中的组id
     let groupId;
@@ -208,8 +208,10 @@ Page({
     for (let group of ptwork.groupList){
       if (group.id == groupId)
       for (let outPutWrap of group.outPutWraps){
-        if (outPutWrap.id == e.currentTarget.id){
-          outPutWrap.check = !outPutWrap.check;
+        if ( e.detail.value.indexOf(outPutWrap.id.toString())>=0 ){
+          outPutWrap.check = true;
+        }else{
+          outPutWrap.check = false;
         }
       }
     }

@@ -64,7 +64,7 @@ Component({
       var m = currentObj.getMonth() + 1;
       var d = currentObj.getDate();
       var str = ''
-      if (e.currentTarget.dataset.key == 'left') {
+      if (e.currentTarget.dataset.key == 'left-year') {
         m -= 1
         if (m <= 0) {
           str = (Y - 1) + '/' + 12 + '/' + d
