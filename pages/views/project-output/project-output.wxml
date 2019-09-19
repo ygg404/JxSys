@@ -1,4 +1,5 @@
 <!--pages/views/project-output/project-output.wxml-->
+<wxs module="filters" src="../../../utils/filter.wxs"></wxs>
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
@@ -42,7 +43,7 @@
             <view class='td0'>{{project.selected?'v':'>'}}</view>
             <view class="td td1">{{project.contractNo==null?'':project.contractNo}}</view>
             <view class="td td2">{{project.projectName}}</view>
-            <view class="td td3">{{project.projectStartTime}}</view>
+            <view class="td td3">{{filters.replaceTime(project.projectStartTime)}}</view>
         </view>
         <view wx:if="{{project.selected}}">
           <view class='tr detail'><text>作业组：</text><text>{{project.workName}}</text></view>

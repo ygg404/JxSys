@@ -103,11 +103,11 @@
 }
 
 .th2,.td2{
-  width: 40%;
+  width: 50%;
 }
 
 .th3,.td3{
-  width: 37%;
+  width: 30%;
 
 }
 

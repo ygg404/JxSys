@@ -5,7 +5,7 @@ var filters = {
 }
 
 var replaceTime = function (str) {
-  return str.replace(' 00:00:00', '');
+  return str.substring(0, 10);
 }
 
 module.exports = {

@@ -6,9 +6,9 @@
       <image src="{{ptworkSelected ? '/images/tridown.png' :'/images/triup.png'}}"></image>
     </view>
     <view class="table"   wx:if="{{ptworkSelected}}">
-      <view class='tr detail'><text>项目名称：</text><text>{{ptwork.projectName}}</text></view>
-      <view class='tr detail'><text>作业内容：</text><text>{{ptwork.projectWorkNote}}</text></view>
-      <view class='tr detail'><text>项目负责人：</text><text>{{ptwork.projectCharge}}</text></view>
+      <view class='tr detail'><text style="min-width:80px;">项目名称：</text><text>{{ptwork.projectName}}</text></view>
+      <view class='tr detail'><text style="min-width:80px;">作业内容：</text><text>{{ptwork.projectWorkNote}}</text></view>
+      <view class='tr detail'><text style="min-width:80px;">项目负责人：</text><text>{{ptwork.projectCharge}}</text></view>
     </view>
 
 
@@ -16,9 +16,9 @@
 </view>
 
 <view class='box'>
-    <view class='tr outPutBox'><text>预计工作量: </text><text>{{ptwork.projectWorkLoad}}</text></view>
-    <view class='tr outPutBox'><text>作业工作量: </text><text>{{ptwork.workLoad}}</text></view>
-    <view class='tr outPutBox'><text>项目产值: </text><text>{{totalOutput}}</text></view>
+    <view class='tr outPutBox'><text class="textstyle">预计工作量: </text><text>{{ptwork.projectWorkLoad}}</text></view>
+    <view class='tr outPutBox'><text class="textstyle">作业工作量: </text><text>{{ptwork.workLoad}}</text></view>
+    <view class='tr outPutBox'><text class="textstyle">项目产值: </text><text>{{totalOutput}}</text></view>
 </view>
 
 <!-- <view class='box'>

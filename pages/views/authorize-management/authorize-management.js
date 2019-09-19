@@ -18,8 +18,8 @@ Page({
       'page': 1,
       'rowsPerPage': 10,
       'sortBy': 'id',
-      'startDate': '', //开始日期
-      'endDate': '',// 结束日期
+      'startDate': utils.getLastMonthDate(), //开始日期
+      'endDate': utils.formatDate(new Date()),// 结束日期
       'search': '',
       'p_stage': 1,
       'stageId': 6,

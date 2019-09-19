@@ -102,8 +102,8 @@ Page({
     let curyear = curdate.getFullYear();
     let curmonth = curdate.getMonth();
     this.setData({
-      multiIndexStart: [curyear-2000, curmonth],
-      multiIndexEnd: [curyear - 2000, curmonth]
+      multiIndexStart: [curyear-2000, curmonth-1],
+      multiIndexEnd: [curyear - 2000, curmonth-1]
     })
   },
 

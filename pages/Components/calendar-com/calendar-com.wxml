@@ -1,4 +1,5 @@
 <!--pages/Components/calendar-com/calendar-com.wxml-->
+<wxs module="filters" src="../../../utils/filter.wxs"></wxs>
 <!-- 日历 -->
 <view class='drawer_screen'></view>
 <view class="gradient">

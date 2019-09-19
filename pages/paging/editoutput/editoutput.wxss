@@ -148,6 +148,10 @@
   word-break: normal; 
 }
 
+.outPutBox .textstyle{
+  min-width: 90px;
+}
+
 .checkBox{
   max-height: 380rpx;
   overflow-y: scroll;

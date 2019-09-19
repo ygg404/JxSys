@@ -67,10 +67,23 @@ function formatDate(date) {
   return y + '-' + m + '-' + d;
 }
 
+/**
+ * 获取上个月的一号并返回 时间格式YYYY-MM-DD
+ */
+function getLastMonthDate(){
+  let date = new Date(new Date().setMonth(new Date().getMonth() - 1) );
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? '0' + m : m;
+  return y + '-' + m + '-01';
+
+}
+
 module.exports = {
   formatTime: formatTime,
   TipModel: TipModel,
   tableListInit: tableListInit,
   arrayRemove: arrayRemove,
-  formatDate: formatDate
+  formatDate: formatDate,
+  getLastMonthDate: getLastMonthDate
 }
