@@ -21,15 +21,15 @@
     <view class='tr outPutBox'><text class="textstyle">项目产值: </text><text>{{totalOutput}}</text></view>
 </view>
 
-<!-- <view class='box'>
-  <view class='checkBox'>
-    <view class='tr' wx:for="{{workTypeList}}" wx:for-item="work">
-      <label>  
-        <checkbox id="{{work.id}}" checked="{{work.checked}}" bindtap='workCheckEvent'/>{{work.typeName}}
-      </label>
-    </view>
+<view class='box'>
+  <view class='tr outPutBox'>
+    <text class="textstyle">结算时间: </text>
+    <picker mode="multiSelector" class='dateinput' bindchange="cutDateChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <input class='inputdate' value='{{multiArray[0][multiIndex[0]]}}-{{multiArray[1][multiIndex[1]]}}'
+          placeholder="结算时间" disabled="true"></input>
+      </picker>
   </view>
-</view> -->
+</view>
 <view class='box'>
   <view class='checkBox'>
         <view class='tr'>

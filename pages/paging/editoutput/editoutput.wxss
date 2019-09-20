@@ -152,6 +152,12 @@
   min-width: 90px;
 }
 
+.outPutBox .dateinput{
+  border:1px solid #0ab133;
+  width: 120px; 
+  text-align: center;
+}
+
 .checkBox{
   max-height: 380rpx;
   overflow-y: scroll;

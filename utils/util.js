@@ -68,6 +68,16 @@ function formatDate(date) {
 }
 
 /**
+ * 时间格式转化 yyyy-mm
+ */
+function formatDateYM(date) {
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? '0' + m : m;
+  return y + '-' + m ;
+}
+
+/**
  * 获取上个月的一号并返回 时间格式YYYY-MM-DD
  */
 function getLastMonthDate(){
@@ -85,5 +95,6 @@ module.exports = {
   tableListInit: tableListInit,
   arrayRemove: arrayRemove,
   formatDate: formatDate,
+  formatDateYM: formatDateYM,
   getLastMonthDate: getLastMonthDate
 }
