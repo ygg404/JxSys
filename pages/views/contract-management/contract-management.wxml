@@ -77,7 +77,7 @@
           <view class="tdh1">合同编号:</view>
           <view class="tdh2">{{contractDetail.contractNo}}</view>
       </view>
-      <view class='tr'>
+      <!-- <view class='tr'>
           <view class="tdh1">项目类型:</view>
           <view class="tdh2">
             <picker bindchange="ProTypeChangeEvent"   value="{{projectTypeID}}" range="{{projectTypes}}">
@@ -85,9 +85,18 @@
                 {{projectTypes[projectTypeID]}}
               </view>
               <!-- <icon type='download' ></icon> -->
-            </picker>
+            <!-- </picker>
+          </view> -->
+      <!-- </view> -->
+
+      <view class='tr'>
+          <view class="tdh1">项目类型:</view>
+          <view class="tdh2">
+            <input name="projectType"  value="{{contractDetail.projectType}}" disabled="true"
+                 style='width:80%;border:1px solid green' bindtap="typeShowEvnet"></input>
           </view>
       </view>
+
       <view class='tr'>
           <view class="tdh1">合同金额:</view>
           <view class="tdh2"><input name='contractMoney' value="{{contractDetail.contractMoney}}" type='number'></input></view>
@@ -139,6 +148,28 @@
         <button class='surebtn' formType="submit">{{btnName}}</button>
       </view>
        </form>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{selectTypeShow}}">
+  <view class='drawer_screen' style="z-Index:1002;"></view>
+  <view class='form' style="z-Index:1003;">
+    <view class='tabledetail' >
+      <view class='title'>项目类型选择</view>
+      <view class='checkGroupBox'>
+        <view class='tr'>
+          <checkbox-group bindchange="typeSelectEvent">
+            <label wx:for="{{projectTypesList}}" wx:for-item="ptype" style='display:block;'>
+              <checkbox  value='{{ptype.id}}' checked="{{ptype.checked}}"/>{{ptype.name}}
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnTypeEvent'>取消</button>
+        <button class='surebtn' bindtap='setTypeEvent'>确认</button>
+      </view>
     </view>
   </view>
 </view>

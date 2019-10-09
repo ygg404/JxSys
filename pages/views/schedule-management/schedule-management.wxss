@@ -176,6 +176,7 @@
   margin-top: 40rpx;
 }
 
+
 /* 进度详情 */
 /*mask*/
 .drawer_screen {
@@ -252,7 +253,7 @@
   width: 45%;
 }
 
-.form .tabledetail button{
+.form .tabledetail .btn{
   color: #15aef5;
   width: 150rpx;
   height: 60rpx;
@@ -260,4 +261,66 @@
   margin-left: 70%;
   font-size: 12pt;
   line-height: 185%;
+}
+
+.form .tabledetail .title{
+  font-weight: 700;
+  font-size: 18pt;
+}
+
+.tr .returnbtn{
+  background: #ebb608;
+  font-size: 9pt;
+  width: 15%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .savebtn{
+  background: #0850eb;
+  font-size: 9pt;
+  width: 15%;
+  color: whitesmoke;
+  height: 65rpx;
+}
+
+.tr .inputdate{
+  margin-top: 10px;
+  border: 1px #0ab133 solid;
+  height: 60rpx;
+  width: 120px;
+  text-align: center;
+}
+
+/* .form .tabledetail .tdh1{
+  width: 30%;
+  color: gray;
+  font-size: 12pt;
+  word-break:break-all;
+  line-height: 200%;
+}
+
+.form .tabledetail .tdh2{
+  width: 70%;
+  color: black;
+  font-size: 10pt;
+  line-height: 200%;
+} */
+.form .tabledetail .th1gray{
+  width: 30%;
+  color: gray;
+  font-size: 12pt;
+  line-height: 200%;
+}
+
+.form .tabledetail .tdh2gray{
+  width: 70%;
+  color: gray;
+  font-size: 12pt;
+  line-height: 200%;
+}
+
+.form .tabledetail .tdh2 input{
+  width: 90%;
+  border-bottom:1px solid #0ab133;
 }

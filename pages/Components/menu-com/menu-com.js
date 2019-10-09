@@ -90,6 +90,24 @@ Component({
         url: '../../views/audited-management/audited-management',
         selected: false,
         visiable: true
+      }, {
+        id: 'schedule-management',
+        name: '项目状态',
+        url: '../../views/schedule-management/schedule-management',
+        selected: false,
+        visiable: true
+      }, {
+        id: 'project-output',
+        name: '项目产值',
+        url: '../../views/project-output/project-output',
+        selected: false,
+        visiable: true
+      }, {
+        id: 'recycle-management',
+        name: '项目回收站',
+        url: '../../views/recycle-management/recycle-management',
+        selected: false,
+        visiable: true
       }],
     //统计报表
     stcate_list:[{
@@ -151,6 +169,9 @@ Component({
     ppcate_list[5].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('adjust_output') != -1);
     ppcate_list[6].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('leader_authorize') != -1);
     ppcate_list[7].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('authorized') != -1);
+    ppcate_list[8].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('project_schedule') != -1);
+    ppcate_list[9].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('start_project') != -1);
+    ppcate_list[10].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('get_recycler') != -1);
     stcate_list[0].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('output_chart') != -1);
     stcate_list[1].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('all_output_chart') != -1);
     stcate_list[2].visiable = (permissionsList.indexOf('all_permission') != -1) || (permissionsList.indexOf('all_business') != -1);

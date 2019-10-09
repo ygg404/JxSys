@@ -13,7 +13,7 @@
   <view  class="drawer_attr_box" >
 
     <view class="drawer_content" >
-      <view class="nav-son" bindtap="listpm">
+      <!-- <view class="nav-son" bindtap="listpm">
           <image src='/images/pmico.png' class='menuimg'></image>
           <view class='menutitle'>项目管理</view>
           <image src="{{pmImgUrl}}" class='menutri'></image>
@@ -23,11 +23,11 @@
           class="{{pmcate.selected? 'selectItem':''}}" wx:if='{{pmcate.visiable}}'>
               {{pmcate.name}}
           </view>
-      </view>
+      </view> -->
 
       <view class="nav-son" bindtap="listpp">
           <image src='/images/ppico.png' class='menuimg'></image>
-          <view>项目流程</view>
+          <view>项目管理</view>
           <image src="{{ppImgUrl}}" class='menutri'></image>
       </view>
       <view class="temp {{ppopen ? 'slidown' : 'slidup'}}">

@@ -5,7 +5,7 @@ var app = getApp();
 function firstLoad(){
   let permissionsList = app.globalData.permissions;
   if (permissionsList.indexOf('all_permission') != -1){
-    return 'project-management';
+    return 'contract-management';
   }
   if(permissionsList.indexOf('project_schedule') != -1)
   {

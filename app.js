@@ -43,9 +43,9 @@ App({
     // WebUrl: 'https://web.gdjxch.cn/jx/api/',
     // upContractUrl : 'https://web.gdjxch.cn/jx/api/file/',  //后台上传合同路径
     // downContractUrl: 'https://web.gdjxch.cn/jx/api/download/?contractNo=', //合同下载接口
-    WebUrl: 'http://192.168.0.173:8002/jx/api/',
-    upContractUrl: 'http://192.168.0.173:8002/jx/api/file/',  //后台上传合同路径
-    downContractUrl: 'http://192.168.0.173:8002/jx/api/download/?contractNo=', //合同下载接口
+    WebUrl: 'http://192.168.0.170:8002/jx/api/',
+    upContractUrl: 'http://192.168.0.170:8002/jx/api/file/',  //后台上传合同路径
+    downContractUrl: 'http://192.168.0.170:8002/jx/api/download/?contractNo=', //合同下载接口
     //获取到的Token
     SignToken: '',
     //权限

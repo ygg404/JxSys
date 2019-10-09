@@ -8,7 +8,12 @@ var replaceTime = function (str) {
   return str.substring(0, 10);
 }
 
+var replaceTimeYM = function (str) {
+  return str.substring(0, 7);
+}
+
 module.exports = {
   toFix: filters.toFix, toNumber: filters.toNumber,
   replaceTime: replaceTime,
+  replaceTimeYM: replaceTimeYM
 }

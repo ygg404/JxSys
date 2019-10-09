@@ -21,7 +21,8 @@ Page({
     bshortcutList: [], //返修短语
     bNameList: [],
     bindex: 0,
-    backNote: ''  //提交返修短语
+    backNote: '',  //提交返修短语
+    userAccount: wx.getStorageSync('userAccount')
   },
 
   /**
@@ -110,6 +111,7 @@ Page({
       },
       success: function (res) {
         if (res.statusCode == 200) {
+          let nameList = [];
           for (let shortcut of res.data) {
             nameList.push(shortcut.shortNote);
           }
@@ -326,7 +328,7 @@ Page({
         projectNo: that.data.p_no,
         qualityNote: e.detail.value.qualityNote,
         qualityScore: e.detail.value.qualityScore,
-        userAccount: app.globalData.userInfo.username
+        userAccount: that.data.userAccount
       },
       success: function (res) {
         if (res.statusCode == 200) {
@@ -359,6 +361,7 @@ Page({
       success: function (res) {
         if (res.statusCode == 200) {
           that.putFinishTime();
+          that.addQualityUser();
           // utils.TipModel('提示', res.data.message);
           // wx.navigateBack({
           //   detla:1
@@ -481,7 +484,7 @@ Page({
           'Authorization': "Bearer " + app.globalData.SignToken
         },
         data: {
-          groupId: that.groupId,
+          groupId: that.data.groupId,
           projectNo: that.data.p_no,
         },
         success: function (res) {
@@ -495,4 +498,30 @@ Page({
       });
     })
   },
+  
+  /**
+   * 提交产值核算后更新质量检查表中的提交用户
+   */
+  addQualityUser: function (e) {
+    var that = this;
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: app.globalData.WebUrl + "quality/user/",
+        method: 'post',
+        header: {
+          'Authorization': "Bearer " + app.globalData.SignToken
+        },
+        data: {
+          projectNo: that.data.p_no,
+          userAccount: that.data.userAccount
+        },
+        success: function (res) {
+          if (res.statusCode == 200 || res.statusCode == 400) {
+            ;
+          }
+        }
+      });
+    })
+  },
+
 })

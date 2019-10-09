@@ -13,6 +13,7 @@ Page({
     contractCalendarShow:false, //合同日历
     setStartflag: false, //设置开始日期标志
     addContractShow: false , //合同管理表单
+    selectTypeShow:false,    //项目类型多选0
     btnName:'',
     dateInfo: '',
     pagination: {
@@ -31,12 +32,14 @@ Page({
     contractNo: '', //合同编号
     contractAddTime: '', //日期
     projectTypes: [],  //类型选择
+    projectTypesList: [],
     projectTypeID: 0 ,
     business:[], //业务负责人列表
     businessId:0,
     businessName:[],
     contractDetail: {}, //合同详情
-    typeId: 0 //类型ID
+    typeId: 0, //类型ID
+    projectType: '', //项目类型
   },
 
   /**
@@ -166,7 +169,8 @@ Page({
             ptypeInfo.push(ptype.name);
           }
           that.setData({
-            projectTypes: ptypeInfo
+            projectTypes: ptypeInfo,
+            projectTypesList: res.data
           })
         }
 
@@ -603,7 +607,7 @@ Page({
         contractNote: e.detail.value.contractNote,
         contractUserName: e.detail.value.contractUserName,
         contractUserPhone: e.detail.value.contractUserPhone,
-        projectType: that.data.projectTypes[that.data.projectTypeID],
+        projectType: e.detail.value.projectType,
         typeId: that.data.contractDetail.typeId,
       },
       header: {
@@ -629,6 +633,82 @@ Page({
       complete: function () {
       }
     })
+  },
+
+  /**
+   *项目类型多选 
+   */
+  typeShowEvnet:function(e){
+    let projectTypesList = this.data.projectTypesList;
+    //判断
+    if(this.data.btnName == '添加'){
+      for (let ptype of projectTypesList)ptype.checked = false;
+    }
+    else{
+      if(this.data.contractDetail.projectType != '' && this.data.contractDetail.projectType != null){
+        let ptypeList = this.data.contractDetail.projectType.split(',');
+        for (let ptype of projectTypesList){
+          if(ptypeList.indexOf(ptype.name) != -1){
+            ptype.checked = true;
+          }
+          else{
+            ptype.checked = false;
+          }
+        }
+      }
+    }
+    this.setData({
+      projectTypesList: projectTypesList,
+      selectTypeShow : true
+    })
+
+  },
+  /**
+   * 类型多选改变
+   */
+  typeSelectEvent:function(e){
+    let tList = this.data.projectTypesList;
+    for (let tshort of tList) {
+      if (e.detail.value.indexOf(tshort.id.toString()) != -1) {
+        tshort.checked = true;
+      } else {
+        tshort.checked = false;
+      }
+    }
+    this.setData({
+      projectTypes: tList
+    })
+  },
+  /**
+   * 取消多选
+   */
+  returnTypeEvent:function(e){
+    this.setData({
+      selectTypeShow : false
+    });
+  },
+
+  /**
+   * 项目多选输入确认
+   */
+  setTypeEvent:function(e){
+    let projectType = '';
+    for (let pt of this.data.projectTypesList) {
+      if (pt.checked) {
+        projectType += pt.name + ',';
+      }
+    }
+    if (projectType == null || projectType == '') {
+      utils.TipModel('错误' , '请选择项目类型', 0);
+      return;
+    }
+    projectType = projectType.substring(0 , projectType.length - 1 );
+    let contractDetail = this.data.contractDetail;
+    contractDetail.projectType = projectType;
+    this.setData({
+      contractDetail: contractDetail,
+      selectTypeShow: false
+    });
   }
 
 })

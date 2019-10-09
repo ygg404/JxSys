@@ -292,3 +292,16 @@
   text-align: center;
   align-items: center;
 }
+
+.form .title{
+  font-size: 18pt;
+  font-weight: 700;
+}
+
+.checkGroupBox{
+  max-height: 600rpx;
+  overflow-y: scroll;
+  border: 1px solid #0ab133;
+  width: 100%;
+}
+

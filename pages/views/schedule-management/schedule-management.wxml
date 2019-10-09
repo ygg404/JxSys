@@ -1,4 +1,5 @@
 <!--pages/views/schedule-management/schedule-management.wxml-->
+<wxs module="filters" src="../../../utils/filter.wxs"></wxs>
 <!-- 菜单窗口 -->
 <menu-component urlId="{{urlId}}"></menu-component>
 <calendar-component dateInfo="{{dateInfo}}" wx:if="{{calendarShow}}" bindshowEvent="CalendarEvent" bindsetEvent="CalendarEvent"></calendar-component>
@@ -44,6 +45,8 @@
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
               <button class='resbtn' bindtap='viewScheduleEvent' id="{{project.id}}">查看进度</button>
+              <button class='resbtn' bindtap='editCutTimeEvent' id="{{project.id}}">修改结算时间</button>
+              <button class='resbtn' bindtap='editStageEvent' id="{{project.id}}">修改项目阶段</button>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
@@ -51,6 +54,7 @@
           <view class='tr detail'><text>要求工期:</text><text>{{project.projectWorkDate}}</text></view>
           <view class='tr detail'><text>作业超时天数：</text><text>{{project.wOutTime}}</text></view>
           <view class='tr detail'><text>质检超时天数：</text><text>{{project.qOutTime}}</text></view>
+          <view class='tr detail'><text>结算时间：</text><text>{{filters.replaceTimeYM(project.cDateTime)}}</text></view>
         </view>
       </view>
       <view class="tr">
@@ -80,9 +84,74 @@
             <view class="tdd tdd3">{{detail.projectNote==null?'':detail.projectNote}}</view>
          </view>
       <view class="tr">
-        <button bindtap='returnDetail'>返回</button>
+        <button class="btn" bindtap='returnDetail'>返回</button>
       </view>
     </view>
+  </view>
+</view>
 
+
+<view wx:if="{{ymCutShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail' >
+      <view class='title'>修改结算时间</view>
+      <view class="tr">
+
+        <picker mode="multiSelector" class='datepicker' bindchange="yMpickerChange" value="{{ymIndex}}" range="{{ymArray}}">
+                 <input class='inputdate' value='{{ymArray[0][ymIndex[0]]}}-{{ymArray[1][ymIndex[1]]}}'
+            placeholder="结算时间" disabled="true"></input>
+        </picker>
+      </view>
+      <view class="tr">
+        <button class="returnbtn" bindtap='returnYMEvent'>返回</button>
+        <button class="savebtn" bindtap='setYMEvent'>确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view wx:if="{{stageShow}}">
+  <view class='drawer_screen'></view>
+  <view class='form'>
+    <view class='tabledetail'>
+      <view class='tr'>
+        <text class="title">修改项目</text>
+      </view>
+      <view class='tr' style='margin-top:40rpx;' >
+          <view class="th1gray">合同名称:</view>
+          <view class="tdh2gray">{{contractDetail.projectName}}</view>
+      </view>
+      <view class='tr'>
+          <view class="th1gray">项目编号:</view>
+          <view class="tdh2gray">{{contractDetail.projectNo}}</view>
+      </view>
+      <view class='tr'>
+          <view class="th1gray">项目类型:</view>
+          <view class="tdh2gray">{{contractDetail.projectType}}</view>
+      </view>
+      <view class='tr'>
+          <view class="th1gray">启动时间:</view>
+          <view class="tdh2gray">{{filters.replaceTime(contractDetail.projectStartDateTime)}}</view>
+      </view>
+      <view class='tr'>
+          <view class="th1gray">项目阶段:</view>
+          <view class="tdh2gray" style="color:black;">            
+            <picker bindchange="curStageChangeEvent"   value="{{currentStageId}}" range="{{currentStageList}}">
+              <view style='width:50%;border:1px solid green'>
+                {{currentStageList[currentStageId]}}
+              </view>
+              <!-- <icon type='download' ></icon> -->
+            </picker>
+          </view>
+      </view>
+
+      <view class="tr" style='margin-top:20rpx;'>
+        <button class='returnbtn' bindtap='returnStageEvent'>取消</button>
+        <button class='savebtn' bindtap="saveStageEvent">保存</button>
+      </view>
+
+    </view>
   </view>
 </view>
