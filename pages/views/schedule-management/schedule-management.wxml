@@ -45,12 +45,14 @@
             <view class="td td2">{{project.projectName}}</view>
             <view class="td td3">
               <button class='resbtn' bindtap='viewScheduleEvent' id="{{project.id}}">查看进度</button>
-              <button class='resbtn' bindtap='editCutTimeEvent' id="{{project.id}}">修改结算时间</button>
-              <button class='resbtn' bindtap='editStageEvent' id="{{project.id}}">修改项目阶段</button>
+              <button class='resbtn' bindtap='editCutTimeEvent' id="{{project.id}}">结算时间</button>
+              <button class='resbtn' bindtap='editStageEvent' id="{{project.id}}">项目阶段</button>
             </view>
         </view>
         <view wx:if="{{project.selected}}">
           <view class='tr detail'><text>当前进度：</text><text>{{project.projectRate}}%</text></view>
+          <view class='tr detail'><text>项目负责人：</text><text>{{project.projectCharge}}</text></view>
+          <view class='tr detail'><text>项目阶段：</text><text>{{project.projectStage}}</text></view>
           <view class='tr detail'><text>要求工期:</text><text>{{project.projectWorkDate}}</text></view>
           <view class='tr detail'><text>作业超时天数：</text><text>{{project.wOutTime}}</text></view>
           <view class='tr detail'><text>质检超时天数：</text><text>{{project.qOutTime}}</text></view>

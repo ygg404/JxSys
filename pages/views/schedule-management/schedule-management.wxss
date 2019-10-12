@@ -271,7 +271,7 @@
 .tr .returnbtn{
   background: #ebb608;
   font-size: 9pt;
-  width: 15%;
+  width: 25%;
   color: whitesmoke;
   height: 65rpx;
 }
@@ -279,7 +279,7 @@
 .tr .savebtn{
   background: #0850eb;
   font-size: 9pt;
-  width: 15%;
+  width: 25%;
   color: whitesmoke;
   height: 65rpx;
 }
